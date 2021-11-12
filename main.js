@@ -1,10 +1,10 @@
-var gameEngine = new GameEngine();
+const gameEngine = new GameEngine();
 
-var ASSET_MANAGER = new AssetManager();
+const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.downloadAll(function () {
-	var canvas = document.getElementById('gameWorld');
-	var ctx = canvas.getContext('2d');
+ASSET_MANAGER.downloadAll(() => {
+	const canvas = document.getElementById("gameWorld");
+	const ctx = canvas.getContext("2d");
 
 	gameEngine.init(ctx);
 
