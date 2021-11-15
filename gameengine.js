@@ -1,15 +1,36 @@
 // This game shell was happily modified from Googler Seth Ladd's "Bad Aliens" game and his Google IO talk in 2011
 
 class GameEngine {
-    constructor() {
-        this.entities = [];
-        this.showOutlines = false;
+    constructor(options) {
+        // What you will use to draw
+        // Documentation: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
         this.ctx = null;
+
+        // Context dimensions
+        this.surfaceWidth = null;
+        this.surfaceHeight = null;
+
+        // Everything that will be updated and drawn each frame
+        this.entities = [];
+        // Entities to be added at the end of each update
+        this.entitiesToAdd = [];
+
+        // Information on the input
         this.click = null;
         this.mouse = null;
         this.wheel = null;
-        this.surfaceWidth = null;
-        this.surfaceHeight = null;
+
+        // THE KILL SWITCH
+        this.running = false;
+
+        // Options and the Details
+        this.options = options || {
+            prevent: {
+                contextMenu: true,
+                scrolling: true,
+            },
+            debugging: false,
+        };
     };
 
     init(ctx) {
@@ -21,74 +42,81 @@ class GameEngine {
     };
 
     start() {
-        var that = this;
-        (function gameLoop() {
-            that.loop();
-            requestAnimFrame(gameLoop, that.ctx.canvas);
-        })();
+        this.running = true;
+        const gameLoop = () => {
+            this.loop();
+            if (this.running) {
+                requestAnimFrame(gameLoop, this.ctx.canvas);
+            }
+        };
+        gameLoop();
     };
 
     startInput() {
-        var that = this;
+        const getXandY = e => ({
+            x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
+            y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
+        });
 
-        var getXandY = function (e) {
-            var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-            var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+        this.ctx.canvas.addEventListener("mousemove", e => {
+            if (this.options.debugging) {
+                console.log("MOUSE_MOVE", getXandY(e));
+            }
+            this.mouse = getXandY(e);
+        });
 
-            return { x: x, y: y };
-        }
+        this.ctx.canvas.addEventListener("click", e => {
+            if (this.options.debugging) {
+                console.log("CLICK", getXandY(e));
+            }
+            this.click = getXandY(e);
+        });
 
-        this.ctx.canvas.addEventListener("mousemove", function (e) {
-            //console.log(getXandY(e));
-            that.mouse = getXandY(e);
-        }, false);
+        this.ctx.canvas.addEventListener("wheel", e => {
+            if (this.options.debugging) {
+                console.log("WHEEL", getXandY(e), e.wheelDelta);
+            }
+            if (this.options.prevent.scrolling) {
+                e.preventDefault(); // Prevent Scrolling
+            }
+            this.wheel = e;
+        });
 
-        this.ctx.canvas.addEventListener("click", function (e) {
-            //console.log(getXandY(e));
-            that.click = getXandY(e);
-        }, false);
-
-        this.ctx.canvas.addEventListener("wheel", function (e) {
-            //console.log(getXandY(e));
-            that.wheel = e;
-            //       console.log(e.wheelDelta);
-            e.preventDefault();
-        }, false);
-
-        this.ctx.canvas.addEventListener("contextmenu", function (e) {
-            //console.log(getXandY(e));
-            that.rightclick = getXandY(e);
-            e.preventDefault();
-        }, false);
+        this.ctx.canvas.addEventListener("contextmenu", e => {
+            if (this.options.debugging) {
+                console.log("RIGHT_CLICK", getXandY(e));
+            }
+            if (this.options.prevent.contextMenu) {
+                e.preventDefault(); // Prevent Context Menu
+            }
+            this.rightclick = getXandY(e);
+        });
     };
 
     addEntity(entity) {
-        this.entities.push(entity);
+        this.entitiesToAdd.push(entity);
     };
 
     draw() {
+        // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        for (var i = 0; i < this.entities.length; i++) {
-            this.entities[i].draw(this.ctx);
+
+        // Draw latest things first
+        for (let i = this.entities.length - 1; i >= 0; i--) {
+            this.entities[i].draw(this.ctx, this);
         }
     };
 
     update() {
-        var entitiesCount = this.entities.length;
+        // Update Entities
+        this.entities.forEach(entity => entity.update(this));
 
-        for (var i = 0; i < entitiesCount; i++) {
-            var entity = this.entities[i];
+        // Remove dead things
+        this.entities = this.entities.filter(entity => !entity.removeFromWorld);
 
-            if (!entity.removeFromWorld) {
-                entity.update();
-            }
-        }
-
-        for (var i = this.entities.length - 1; i >= 0; --i) {
-            if (this.entities[i].removeFromWorld) {
-                this.entities.splice(i, 1);
-            }
-        }
+        // Add new things
+        this.entities = this.entities.concat(this.entitiesToAdd);
+        this.entitiesToAdd = [];
     };
 
     loop() {
@@ -96,4 +124,8 @@ class GameEngine {
         this.update();
         this.draw();
     };
+
+    get["deltaTime"]() { return this.clockTick; }
 };
+
+// KV Le was here :)
