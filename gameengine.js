@@ -6,10 +6,6 @@ class GameEngine {
         // Documentation: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
         this.ctx = null;
 
-        // Context dimensions
-        this.surfaceWidth = null;
-        this.surfaceHeight = null;
-
         // Everything that will be updated and drawn each frame
         this.entities = [];
         // Entities to be added at the end of each update
@@ -19,6 +15,7 @@ class GameEngine {
         this.click = null;
         this.mouse = null;
         this.wheel = null;
+        this.keys = {};
 
         // THE KILL SWITCH
         this.running = false;
@@ -35,8 +32,6 @@ class GameEngine {
 
     init(ctx) {
         this.ctx = ctx;
-        this.surfaceWidth = this.ctx.canvas.width;
-        this.surfaceHeight = this.ctx.canvas.height;
         this.startInput();
         this.timer = new Timer();
     };
@@ -91,6 +86,9 @@ class GameEngine {
             }
             this.rightclick = getXandY(e);
         });
+
+        window.addEventListener("keydown", event => this.keys[event.key] = true);
+        window.addEventListener("keyup", event => this.keys[event.key] = false);
     };
 
     addEntity(entity) {
@@ -126,6 +124,8 @@ class GameEngine {
     };
 
     get["deltaTime"]() { return this.clockTick; }
+    get["width"]() { return this.ctx?.canvas?.width || 0; }
+    get["height"]() { return this.ctx?.canvas?.height || 0; }
 };
 
 // KV Le was here :)
