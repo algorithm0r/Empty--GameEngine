@@ -24,13 +24,13 @@ class AssetManager {
             console.log(path);
 
             img.addEventListener("load", () => {
-                console.log("Loaded " + this.src);
+                console.log("Loaded " + img.src);
                 this.successCount++;
                 if (this.isDone()) callback();
             });
 
             img.addEventListener("error", () => {
-                console.log("Error loading " + this.src);
+                console.log("Error loading " + img.src);
                 this.errorCount++;
                 if (this.isDone()) callback();
             });
