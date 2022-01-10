@@ -8,8 +8,6 @@ class GameEngine {
 
         // Everything that will be updated and drawn each frame
         this.entities = [];
-        // Entities to be added at the end of each update
-        this.entitiesToAdd = [];
 
         // Information on the input
         this.click = null;
@@ -92,7 +90,7 @@ class GameEngine {
     };
 
     addEntity(entity) {
-        this.entitiesToAdd.push(entity);
+        this.entities.push(entity);
     };
 
     draw() {
@@ -106,15 +104,21 @@ class GameEngine {
     };
 
     update() {
-        // Update Entities
-        this.entities.forEach(entity => entity.update(this));
+        let entitiesCount = this.entities.length;
 
-        // Remove dead things
-        this.entities = this.entities.filter(entity => !entity.removeFromWorld);
+        for (let i = 0; i < entitiesCount; i++) {
+            let entity = this.entities[i];
 
-        // Add new things
-        this.entities = this.entities.concat(this.entitiesToAdd);
-        this.entitiesToAdd = [];
+            if (!entity.removeFromWorld) {
+                entity.update();
+            }
+        }
+
+        for (let i = this.entities.length - 1; i >= 0; --i) {
+            if (this.entities[i].removeFromWorld) {
+                this.entities.splice(i, 1);
+            }
+        }
     };
 
     loop() {
@@ -123,9 +127,6 @@ class GameEngine {
         this.draw();
     };
 
-    get["deltaTime"]() { return this.clockTick; }
-    get["width"]() { return this.ctx?.canvas?.width || 0; }
-    get["height"]() { return this.ctx?.canvas?.height || 0; }
 };
 
 // KV Le was here :)
