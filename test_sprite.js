@@ -6,7 +6,7 @@ class Test_sprite {
 
         // spritesheet
         this.spritesheet = ASSET_MANAGER.getAsset();
-        this.animation = new Animator(ASSET_MANAGER.getAsset("./sprites/sprite_sheet.png"), 0, 0, 800, 800, 8, 0.12, false, true);
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./sprites/jump/jump_sprite_sheet.png"), 0, 0, 800, 800, 18, 0.12, false, true);
 
 
     };
