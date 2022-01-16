@@ -85,6 +85,65 @@ class GameEngine {
             this.rightclick = getXandY(e);
         });
 
+        this.ctx.canvas.addEventListener("keydown", function (e) {
+            switch (e.code) {
+                case "ArrowLeft":
+                case "KeyA":
+                    that.left = true;
+                    break;
+                case "ArrowRight":
+                case "KeyD":
+                    that.right = true;
+                    break;
+                case "ArrowUp":
+                case "KeyW":
+                    that.up = true;
+                    break;
+                case "ArrowDown":
+                case "KeyS":
+                    that.down = true;
+                    break;
+                case "KeyZ":
+                case "Comma":
+                    that.B = true;
+                    break;
+                case "KeyX":
+                case "Period":
+                    that.A = true;
+                    break;
+            }
+        }, false);
+
+        this.ctx.canvas.addEventListener("keyup", function (e) {
+            switch (e.code) {
+                case "ArrowLeft":
+                case "KeyA":
+                    that.left = false;
+                    break;
+                case "ArrowRight":
+                case "KeyD":
+                    that.right = false;
+                    break;
+                case "ArrowUp":
+                case "KeyW":
+                    that.up = false;
+                    break;
+                case "ArrowDown":
+                case "KeyS":
+                    that.down = false;
+                    break;
+                case "KeyZ":
+                case "Comma":
+                    that.B = false;
+                    break;
+                case "KeyX":
+                case "Period":
+                    that.A = false;
+                    break;
+            }
+        }, false);
+
+
         window.addEventListener("keydown", event => this.keys[event.key] = true);
         window.addEventListener("keyup", event => this.keys[event.key] = false);
     };
