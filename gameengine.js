@@ -13,6 +13,9 @@ class GameEngine {
         this.click = null;
         this.mouse = null;
         this.wheel = null;
+        this.left = false;
+        this.right = false;
+        this.space = false;
         this.keys = {};
 
         // THE KILL SWITCH
@@ -47,6 +50,8 @@ class GameEngine {
     };
 
     startInput() {
+        var that = this;
+
         const getXandY = e => ({
             x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
             y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
@@ -60,6 +65,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("click", e => {
+           
             if (this.options.debugging) {
                 console.log("CLICK", getXandY(e));
             }
@@ -67,6 +73,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("wheel", e => {
+            
             if (this.options.debugging) {
                 console.log("WHEEL", getXandY(e), e.wheelDelta);
             }
@@ -77,6 +84,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("contextmenu", e => {
+          
             if (this.options.debugging) {
                 console.log("RIGHT_CLICK", getXandY(e));
             }
@@ -87,14 +95,17 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("keydown", function (e) {
+       
             switch (e.code) {
                 case "ArrowLeft":
                 case "KeyA":
                     that.left = true;
+                    that.right = false;
                     break;
                 case "ArrowRight":
                 case "KeyD":
                     that.right = true;
+                    that.left = false;
                     break;
                 case "ArrowUp":
                 case "KeyW":
@@ -110,15 +121,22 @@ class GameEngine {
                     break;
                 case "KeyX":
                 case "Period":
+                    console.log('x pressed');
+                    that.space = true;
                     that.A = true;
+                    break;
+                case "Space":
+                    that.space = true;
                     break;
             }
         }, false);
 
         this.ctx.canvas.addEventListener("keyup", function (e) {
+       
             switch (e.code) {
                 case "ArrowLeft":
                 case "KeyA":
+       
                     that.left = false;
                     break;
                 case "ArrowRight":
@@ -140,6 +158,9 @@ class GameEngine {
                 case "KeyX":
                 case "Period":
                     that.A = false;
+                    break;
+                case "Space":
+                    that.space = false;
                     break;
             }
         }, false);
