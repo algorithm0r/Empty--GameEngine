@@ -16,10 +16,10 @@ ASSET_MANAGER.queueDownload("./sprites/duckandslide/duckandslide.png");
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
 	const ctx = canvas.getContext("2d");
+	ctx.imageSmoothingEnabled = true;
 
-	// add a player entity with keyword "washing_machine" 
-	// to indicate player type
-	gameEngine.addEntity(new Player(gameEngine, "washing_machine"));
+	// Adds a default player
+	gameEngine.addEntity(new Player(gameEngine, "default"));
 	gameEngine.init(ctx);
 	gameEngine.start();
 
