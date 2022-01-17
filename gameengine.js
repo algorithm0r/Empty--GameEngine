@@ -39,6 +39,7 @@ class GameEngine {
         const gameLoop = () => {
             this.loop();
             if (this.running) {
+                
                 requestAnimFrame(gameLoop, this.ctx.canvas);
             }
         };
