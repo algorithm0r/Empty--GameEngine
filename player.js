@@ -16,7 +16,7 @@ class Player {
         this.x = 100;
         this.y = 400;
         this.velocity = { x: 6, y: 0 };
-        this.gravity = 10; 
+        this.gravity = 20; 
         this.onGround = true;
         this.jumping = false;
         this.jumpingLeft = false;
@@ -57,7 +57,7 @@ class Player {
             }
             this.jumping = true;
             this.onGround = false;
-            this.velocity.y = -500;
+            this.velocity.y = -800;
         }
         
         if (this.jumping) {
