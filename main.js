@@ -11,6 +11,9 @@ ASSET_MANAGER.queueDownload("./sprites/washing_machine/opening/washing_machine_s
 ASSET_MANAGER.queueDownload("./sprites/washing_machine/walking/washing_machine_walking_sprite_sheet.png");
 ASSET_MANAGER.queueDownload("./sprites/jump/jump_sprite_sheet.png");
 ASSET_MANAGER.queueDownload("./sprites/duckandslide/duckandslide.png");
+ASSET_MANAGER.queueDownload("./Characters/squid/squid_sheet.png");
+ASSET_MANAGER.queueDownload("./Characters/squid_ink/sqink.png");
+
 
 //trigger downloads and add an entity to the canvas
 ASSET_MANAGER.downloadAll(() => {
