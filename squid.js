@@ -20,7 +20,7 @@ class Squid {
     };
 
     setAttack(){
-        this.animator =  new Animator(ASSET_MANAGER.getAsset("./Characters/squid_ink/sqink.png"), 0, 0, 800, 800, 16, 0.1, false, true);
+        this.animator =  new Animator(ASSET_MANAGER.getAsset("./Characters/squid_ink/sqink.png"), 0, 0, 1000, 1000, 16, 0.1, false, true);
     };
 
   
