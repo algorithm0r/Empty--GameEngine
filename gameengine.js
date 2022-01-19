@@ -42,7 +42,7 @@ class GameEngine {
         const gameLoop = () => {
             this.loop();
             if (this.running) {
-                
+
                 requestAnimFrame(gameLoop, this.ctx.canvas);
             }
         };
@@ -65,7 +65,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("click", e => {
-           
+
             if (this.options.debugging) {
                 console.log("CLICK", getXandY(e));
             }
@@ -73,7 +73,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("wheel", e => {
-            
+
             if (this.options.debugging) {
                 console.log("WHEEL", getXandY(e), e.wheelDelta);
             }
@@ -84,7 +84,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("contextmenu", e => {
-          
+
             if (this.options.debugging) {
                 console.log("RIGHT_CLICK", getXandY(e));
             }
@@ -95,7 +95,7 @@ class GameEngine {
         });
 
         this.ctx.canvas.addEventListener("keydown", function (e) {
-       
+
             switch (e.code) {
                 case "ArrowLeft":
                 case "KeyA":
@@ -132,11 +132,11 @@ class GameEngine {
         }, false);
 
         this.ctx.canvas.addEventListener("keyup", function (e) {
-       
+
             switch (e.code) {
                 case "ArrowLeft":
                 case "KeyA":
-       
+
                     that.left = false;
                     break;
                 case "ArrowRight":
@@ -200,6 +200,8 @@ class GameEngine {
                 this.entities.splice(i, 1);
             }
         }
+
+        this.camera.update();
     };
 
     loop() {
