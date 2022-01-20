@@ -30,7 +30,7 @@ const rgba = (r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
  * @param {Number} l Lightness
  * @returns String that can be used as a hsl web color
  */
-const hsl = (h, s, l) => `hsl(${h}, ${s}, ${l})`;
+const hsl = (h, s, l) => `hsl(${h}, ${s}%, ${l}%)`;
 
 /** Creates an alias for requestAnimationFrame for backwards compatibility */
 window.requestAnimFrame = (() => {
