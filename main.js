@@ -13,6 +13,7 @@ ASSET_MANAGER.queueDownload("./sprites/jump/jump_sprite_sheet_200.png");
 ASSET_MANAGER.queueDownload("./sprites/duckandslide/duckandslide.png");
 ASSET_MANAGER.queueDownload("./Characters/squid/squid_sheet.png");
 ASSET_MANAGER.queueDownload("./Characters/squid_ink/sqink.png");
+ASSET_MANAGER.queueDownload("./sprites/cloud.png");
 
 
 //trigger downloads and add an entity to the canvas
@@ -21,9 +22,10 @@ ASSET_MANAGER.downloadAll(() => {
 	const ctx = canvas.getContext("2d");
 	ctx.imageSmoothingEnabled = true;
 
-	// Adds a default player
-	gameEngine.addEntity(new Player(gameEngine, "default"));
+	// // Adds a default player
+	// gameEngine.addEntity(new Player(gameEngine, "default"));
 	gameEngine.init(ctx);
+	new SceneManager(gameEngine);
 	gameEngine.start();
 
 });
