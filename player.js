@@ -43,9 +43,9 @@ class Player {
         this.loadAnimations();
 
         // Assign spritesheets to values for use.
-        this.jumpAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/jump/jump_sprite_sheet_200.png"), 0, 0, 200, 200, 12, 0.12, false, true);
-        this.defaultAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/sprite_sheet.png"), 0, 200, 200, 200, 8, 0.1, false, true);
-        this.washing_machineAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/washing_machine/walking/washing_machine_walking_sprite_sheet.png"), 0, 0, 800, 800, 10, 0.05, false, true);
+        this.jumpAnimation = new Animator(ASSET_MANAGER.getAsset("./assets/characters/storm/jump/jump_sprite_sheet_200.png"), 0, 0, 200, 200, 12, 0.12, false, true);
+        this.defaultAnimation = new Animator(ASSET_MANAGER.getAsset("./assets/characters/storm/sprite_sheet.png"), 0, 200, 200, 200, 8, 0.1, false, true);
+        this.washing_machineAnimation = new Animator(ASSET_MANAGER.getAsset("./assets/characters/washing_machine/washing_machine/walking/washing_machine_walking_sprite_sheet.png"), 0, 0, 800, 800, 10, 0.05, false, true);
         this.animation = this.defaultAnimation;
     };
 
