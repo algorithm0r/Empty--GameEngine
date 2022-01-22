@@ -44,7 +44,7 @@ class Player {
 
         // Assign spritesheets to values for use.
         this.jumpAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/jump/jump_sprite_sheet_200.png"), 0, 0, 200, 200, 12, 0.12, false, true);
-        this.defaultAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/sprite_sheet.png"), 0, 0, 200, 200, 8, 0.1, false, true);
+        this.defaultAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/sprite_sheet.png"), 0, 200, 200, 200, 8, 0.1, false, true);
         this.washing_machineAnimation = new Animator(ASSET_MANAGER.getAsset("./sprites/washing_machine/walking/washing_machine_walking_sprite_sheet.png"), 0, 0, 800, 800, 10, 0.05, false, true);
         this.animation = this.defaultAnimation;
     };
@@ -91,7 +91,7 @@ class Player {
 
 
         // Prevents the animation from falling through the window.
-        if (this.y >= 1000) {
+        if (this.y >= 812) {
             this.onGround = true;
         }
 
