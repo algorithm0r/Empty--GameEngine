@@ -18,15 +18,8 @@ class GameEngine {
         this.space = false;
         this.keys = {};
 
-        // THE KILL SWITCH
-        this.running = false;
-
         // Options and the Details
         this.options = options || {
-            prevent: {
-                contextMenu: true,
-                scrolling: true,
-            },
             debugging: false,
         };
     };
@@ -41,10 +34,12 @@ class GameEngine {
         this.running = true;
         const gameLoop = () => {
             this.loop();
+
             if (this.running) {
 
                 requestAnimFrame(gameLoop, this.ctx.canvas);
-            }
+           
+
         };
         gameLoop();
     };
@@ -56,7 +51,7 @@ class GameEngine {
             x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
             y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
         });
-
+        
         this.ctx.canvas.addEventListener("mousemove", e => {
             if (this.options.debugging) {
                 console.log("MOUSE_MOVE", getXandY(e));
@@ -77,9 +72,7 @@ class GameEngine {
             if (this.options.debugging) {
                 console.log("WHEEL", getXandY(e), e.wheelDelta);
             }
-            if (this.options.prevent.scrolling) {
-                e.preventDefault(); // Prevent Scrolling
-            }
+            e.preventDefault(); // Prevent Scrolling
             this.wheel = e;
         });
 
@@ -88,11 +81,10 @@ class GameEngine {
             if (this.options.debugging) {
                 console.log("RIGHT_CLICK", getXandY(e));
             }
-            if (this.options.prevent.contextMenu) {
-                e.preventDefault(); // Prevent Context Menu
-            }
+            e.preventDefault(); // Prevent Context Menu
             this.rightclick = getXandY(e);
         });
+
 
         this.ctx.canvas.addEventListener("keydown", function (e) {
 
@@ -168,6 +160,10 @@ class GameEngine {
 
         window.addEventListener("keydown", event => this.keys[event.key] = true);
         window.addEventListener("keyup", event => this.keys[event.key] = false);
+
+        this.ctx.canvas.addEventListener("keydown", event => this.keys[event.key] = true);
+        this.ctx.canvas.addEventListener("keyup", event => this.keys[event.key] = false);
+
     };
 
     addEntity(entity) {
