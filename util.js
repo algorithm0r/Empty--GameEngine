@@ -5,7 +5,7 @@ const params = { };
  * @param {Number} n
  * @returns Random Integer Between 0 and n-1
  */
-const randomInt = n => Math.floor(random() * n);
+const randomInt = n => Math.floor(Math.random() * n);
 
 /**
  * @param {Number} r Red Value
@@ -55,5 +55,5 @@ window.requestAnimFrame = (() => {
  * @returns Distance between the two points
  */
 const getDistance = (p1, p2) => {
-    return sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 };
