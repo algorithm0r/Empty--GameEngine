@@ -1,10 +1,16 @@
 class AssetManager {
     constructor() {
-        this.successCount = 0;
-        this.errorCount = 0;
-        this.cache = [];
-        this.downloadQueue = [];
-    };
+        Object.assign(this, {
+            // this.successCount = 0;
+            // this.errorCount = 0;
+            // this.cache = {}; // cache should be Object, not Array
+            // this.downloadQueue = [];
+            successCount: 0,
+            errorCount: 0,
+            downloadQueue: [],
+            cache: {}
+        });
+    }
 
     queueDownload(path) {
         console.log("Queueing " + path);
@@ -16,28 +22,30 @@ class AssetManager {
     };
 
     downloadAll(callback) {
-        if (this.downloadQueue.length === 0) setTimeout(callback, 10);
-        for (let i = 0; i < this.downloadQueue.length; i++) {
+        //if (this.downloadQueue.length === 0) setTimeout(callback, 10);
+       
+        //for (let i = 0; i < this.downloadQueue.length; i++) {
+        for(const path of this.downloadQueue) {
             const img = new Image();
-
-            const path = this.downloadQueue[i];
+            //const path = this.downloadQueue[i];
             console.log(path);
 
             img.addEventListener("load", () => {
                 console.log("Loaded " + img.src);
                 this.successCount++;
-                if (this.isDone()) callback();
+            //    if (this.isDone()) callback();
             });
 
             img.addEventListener("error", () => {
                 console.log("Error loading " + img.src);
                 this.errorCount++;
-                if (this.isDone()) callback();
+            //    if (this.isDone()) callback();
             });
 
-            img.src = path;
+            img.src = path; // triggers download by telling browser where image data exists
             this.cache[path] = img;
         }
+        window.addEventListener("load", callback); // event triggers after all assets have loaded?
     };
 
     getAsset(path) {
