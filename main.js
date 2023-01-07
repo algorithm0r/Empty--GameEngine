@@ -39,8 +39,8 @@ ASSET_MANAGER.downloadAll(() => {
 		new Man({
 			row: row,
 			mode: modesList[i],
-			location: {x:i*32, y:row*32},
-			scale: 4
+			location: {x:i*32*2, y:row*32*2},
+			scale: 2
 		})
 	// 	new Man({row:0, mode:modesList[i]}), // top guy
 	// 	new Man({row:1, mode:"WALK", location:{x:0,y:50}}), // king guy
