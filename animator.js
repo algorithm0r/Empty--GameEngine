@@ -11,7 +11,7 @@ class Animator {
     drawFrame(tick, ctx, x, y) {
 
         this.elapsedTime += tick;
-        
+        if(this.elapsedTime > this.totalTime) this.ElapsedTime -= this.totalTime;
         const frame = this.currentFrame();
         
 
@@ -19,7 +19,7 @@ class Animator {
             this.xStart + this.width * frame, this.yStart,
             this.width, this.height,
             x, y,
-            this.width, this.height);
+            this.width * 4, this.height * 4);
 
 
     };
