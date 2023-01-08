@@ -8,7 +8,7 @@ ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
 	const ctx = canvas.getContext("2d");
 
-	gameEngine.addEntity(new Deathscythewalk());
+	gameEngine.addEntity(new Deathscythewalk(gameEngine));
 
 	gameEngine.init(ctx);
 
