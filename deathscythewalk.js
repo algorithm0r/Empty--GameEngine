@@ -12,7 +12,8 @@ class Deathscythewalk {
 
     };
 
-    draw(ctx){
-        this.animator.drawFrame(this.game.clockTick, ctx, 25, 25);
+    draw(ctx) {
+        //this.animator.drawFrame(this.game.clockTick, ctx, 25, 25);
+        ctx.drawImage(ASSET_MANAGER.getAsset("./deathscythewalk.png"),0,0);
     };
 }
