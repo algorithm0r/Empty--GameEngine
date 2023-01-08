@@ -1,4 +1,4 @@
-const gameEngine = new GameEngine();
+const gameEngine = new gameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
