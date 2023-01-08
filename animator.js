@@ -23,7 +23,7 @@ class Animator {
     };
 
     currentFrame() {
-        return Math.floor(this.elapsedTime / this.framDuration);
+        return Math.floor(this.elapsedTime / this.frameDuration);
     };
 
     isDone() {
