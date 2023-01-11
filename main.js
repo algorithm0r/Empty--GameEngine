@@ -11,4 +11,5 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.start();
 
 	console.log("TEST BRANCH");
+	console.log("also test");
 });
