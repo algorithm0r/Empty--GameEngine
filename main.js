@@ -9,4 +9,6 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.init(ctx);
 
 	gameEngine.start();
+
+	console.log("TEST BRANCH");
 });
