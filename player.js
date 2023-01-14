@@ -67,10 +67,10 @@ class Player {
         this.x += this.velocity.x;
         this.y += this.velocity.y;
 
-        console.log(`State: ${this.state}`);
+        // console.log(`State: ${this.state}`);
     };
 
-    draw(ctx) {
-        this.animations[this.state][this.facing].drawFrame(this.engine.clockTick, ctx, this.x, this.y, 4)
+    draw(ctx, scale) {
+        this.animations[this.state][this.facing].drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale)
     };
 }

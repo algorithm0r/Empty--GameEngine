@@ -11,6 +11,13 @@ ASSET_MANAGER.downloadAll(() => {
 
 	gameEngine.addEntity(new Player(gameEngine, 10, 10));
 
+	for (let i = 0; i < 10; i++) {
+		for (let j = 0; j < 10; j++) {
+			gameEngine.addEntity(new Grass(gameEngine, i * 16 * 4, j * 16 * 4));
+		}
+	}
+
+	
 	gameEngine.init(ctx);
 
 	gameEngine.start();
