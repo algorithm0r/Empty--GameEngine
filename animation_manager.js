@@ -187,7 +187,7 @@ class Animation {
             ctx.strokeRect(dx, dy, dWidth, dHeight);
             ctx.fillText('s:'+frameNum, dx, dy-8); // sprite number
             ctx.fillText('f:'+this.fSequence[this.currFrame], dx +35, dy-8); // animation frame number
-            ctx.fillText('t:'+this.fTiming[this.currFrame], dx +70, dy-8); // animation frame duration (sec)
+            ctx.fillText('t:'+this.fTiming[this.currFrame].toFixed(3), dx +70, dy-8); // animation frame duration (sec)
             ctx.fillText('w:'+dWidth, dx + (dWidth/2)-12 , dy + dHeight+15); // width of sprite frame
             ctx.fillText('h:'+dHeight, dx + dWidth+5, dy + (dHeight/2)+5);  // height of sprite frame
         }
