@@ -9,7 +9,7 @@ ASSET_MANAGER.downloadAll(() => {
 	const ctx = canvas.getContext("2d");
 	ctx.imageSmoothingEnabled = false;
 
-	gameEngine.addEntity(new Waluigi(gameEngine));
+	gameEngine.addEntity(new Waluigi(gameEngine)); // anima_manage_demo
 
 
 	gameEngine.init(ctx);
