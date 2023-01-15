@@ -16,12 +16,12 @@ class PhysicsUtil {
         let yInt1 = line1.yInt;
         let yInt2 = line2.yInt;
 
-        let collision = false;
-        if(slope1 === slope2 && yInt1 != yInt2) return callback(collision);
+        let col = false;
+        if(slope1 === slope2 && yInt1 != yInt2) return callback(col);
         
         let xVal = (yInt1 - yInt2)/(slope2 - slope1);
-        collision = {x: xVal, y: xVal * slope1 + yInt1};
-        return callback(collision);
+        col = {x: xVal, y: xVal * slope1 + yInt1};
+        return callback(col);
     
     }
 
@@ -33,8 +33,8 @@ class PhysicsUtil {
      * @returns the callback function output
      */
     circleCircleCol(circle1, circle2, callback = (dist) => dist <= circle1.radius || dist <= circle2.radius){
-        let dist = distance(circle1.center, circle2.center);
-        return callback(dist);
+        let d = distance(circle1.center, circle2.center);
+        return callback(d);
     }
 
     /**
@@ -65,7 +65,6 @@ class PhysicsUtil {
      * @returns whatever the callback says so :P
      */
     lineCircleCol(line, circle, callback = (collisions) => {return collisions;}) {
-        let that = this;
         let slope = line.slope;
         let yInt = line.yInt;
 
