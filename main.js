@@ -4,7 +4,7 @@ const ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("assets/characters.png");
 
 class Man extends Animator {
-	modeIndex = 0;
+	modeIndex = 0; // current spriteIndex for the sprite frame in the modeSequence
 	static modeSequences = {
 		// mode and the frame sequences necessary
 		"WALK": [0,1,2,3],
@@ -18,9 +18,6 @@ class Man extends Animator {
 	constructor({row=0, mode="RUN", fps=5, scale=1, location={x:0,y:0}}) {
 		super("assets/characters.png", 5, (32*row), 32, 32, 4, fps, scale);
 		Object.assign(this, {location, mode, row});
-		// this.location = location;
-		// this.mode=mode;
-		// this.row=0;
 	}
 	
 	nextSpriteIndex() {
@@ -33,19 +30,16 @@ ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
 	const ctx = canvas.getContext("2d");
 	const modesList = Object.keys(Man.modeSequences);
-	for(let i=0; i < modesList.length; i++) {
+	for(let mode of modesList) {
 		for(let row=0; row < 3; row++) {
-	 [
-		new Man({
-			row: row,
-			mode: modesList[i],
-			location: {x:i*32*2, y:row*32*2},
-			scale: 2
-		})
-	// 	new Man({row:0, mode:modesList[i]}), // top guy
-	// 	new Man({row:1, mode:"WALK", location:{x:0,y:50}}), // king guy
-	// 	new Man({row:2, mode:"WALK", location: {x:0, y: 200}}) // green guy
-	].forEach(c => gameEngine.addEntity(c));
+			[
+				new Man({
+					row: row,
+					mode: mode,
+					location: {x:i*32*2, y:row*32*2},
+					scale: 2
+				})
+			].forEach(c => gameEngine.addEntity(c));
 }}
 	gameEngine.init(ctx);
 	gameEngine.start();
