@@ -34,11 +34,13 @@ class MainCharacter extends Man {
 	
 	}
 	update() {
-		if (gameEngine.keys["d"]) {
+		if (gameEngine.keys["d"]) { // moving right
 			this.location.x += 2;
+			this.mirrored = false;
 		}
-		if (gameEngine.keys["a"]) {
+		if (gameEngine.keys["a"]) { // moving left
 			this.location.x -= 2;
+			this.mirrored = true;
 		}
 		if (gameEngine.keys[" "]) { // initiate jump!
 			// TODO: remove/delete jumpStart and initPosition on landing.
