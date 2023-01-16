@@ -1,14 +1,17 @@
 class AssetManager {
-    constructor() {
+    constructor(assetFolder = "./") {
         this.successCount = 0;
         this.errorCount = 0;
         this.cache = [];
         this.downloadQueue = [];
+        this.assetFolder = assetFolder;
     };
 
-    queueDownload(path) {
-        console.log("Queueing " + path);
-        this.downloadQueue.push(path);
+    queueDownload(...paths) {
+        paths.forEach(elem => {
+            console.log("Queueing " + elem);
+            this.downloadQueue.push(elem);
+        })
     };
 
     isDone() {
@@ -35,7 +38,7 @@ class AssetManager {
                 if (this.isDone()) callback();
             });
 
-            img.src = path;
+            img.src = this.assetFolder + path;
             this.cache[path] = img;
         }
     };
