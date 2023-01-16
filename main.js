@@ -84,7 +84,7 @@ ASSET_MANAGER.downloadAll(() => {
 			location: { x: 0, y: 500 },
 			scale: 2
 		});
-	/*for (let i = 0; i < modesList.length; i++) {
+	for (let i = 0; i < modesList.length; i++) {
 		const mode = modesList[i];
 		for (let row = 0; row < 3; row++) {
 			[
@@ -96,7 +96,7 @@ ASSET_MANAGER.downloadAll(() => {
 				})
 			].forEach(c => gameEngine.addEntity(c));
 		}
-	}*/
+	}
 	gameEngine.addEntity(gameEngine.mainCharacter);
 	gameEngine.init(ctx);
 	gameEngine.start();
