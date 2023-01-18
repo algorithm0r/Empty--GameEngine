@@ -1,12 +1,16 @@
-const gameEngine = new GameEngine();
+﻿const game = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
+ASSET_MANAGER.queueDownload("./img/ship.png");
+
 ASSET_MANAGER.downloadAll(() => {
-	const canvas = document.getElementById("gameWorld");
-	const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("gameWorld");
+    const ctx = canvas.getContext("2d");
 
-	gameEngine.init(ctx);
+    game.addEntity(new Ship(game));
 
-	gameEngine.start();
+    game.init(ctx);
+
+    game.start();
 });
