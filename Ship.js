@@ -1,4 +1,5 @@
 class Ship {
+    //
     constructor(game) {
         this.game = game;
         this.animation = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 0, 47, 60, 4, 0.5);
