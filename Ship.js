@@ -79,6 +79,10 @@ class Ship {
             this.x += 4;
         }
         if (this.x > 1022) this.x = -40;
+        if (this.x < -40) this.x = 1022;
+        if (this.y > 1022) this.y = -40;
+        if (this.y < -40) this.y = 1022;
+        
     };
 
     draw(ctx) {
