@@ -1,7 +1,8 @@
 class Ship {
     //
-    constructor(game) {
-        this.game = game;
+    constructor(game, x, y) {
+        Object.assign(this, {game, x, y});
+        this.game.Ship = this;
         this.animation = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 0, 47, 60, 4, 0.5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
@@ -87,6 +88,6 @@ class Ship {
     };
 
     draw(ctx) {
-        this.animations[this.facing][this.state].drawFrame(game.clockTick, ctx, this.x, this.y);
+        this.animations[this.facing][this.state].drawFrame(this.game.clockTick, ctx, this.x, this.y, PARAMS.SCALE);
     };
 }
