@@ -8,8 +8,8 @@ class Ship {
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.x = 500;
-        this.y = 295;
+        this.x = 0;
+        this.y = 0;
         this.speed = 0;
 
         this.animations = [];
@@ -80,14 +80,14 @@ class Ship {
             this.state = 1;
             this.x += 4;
         }
-        if (this.x > 1022) this.x = -40;
-        if (this.x < -40) this.x = 1022;
-        if (this.y > 1022) this.y = -40;
-        if (this.y < -40) this.y = 1022;
+        // if (this.x > 1022) this.x = -40;
+        // if (this.x < -40) this.x = 1022;
+        // if (this.y > 1022) this.y = -40;
+        // if (this.y < -40) this.y = 1022;
         
     };
 
     draw(ctx) {
-        this.animations[this.facing][this.state].drawFrame(this.game.clockTick, ctx, this.x, this.y, PARAMS.SCALE);
+        this.animations[this.facing][this.state].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, PARAMS.SCALE);
     };
 }

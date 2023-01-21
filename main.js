@@ -9,8 +9,8 @@ ASSET_MANAGER.downloadAll(() => {
     const canvas = document.getElementById("gameWorld");
     const ctx = canvas.getContext("2d");
 
-    PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
-    PARAMS.BLOCKHEIGHT = PARAMS.BITWIDTH * PARAMS.SCALE;
+    PARAMS.TILEWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
+    PARAMS.TILEHEIGHT = PARAMS.BITWIDTH * PARAMS.SCALE;
 
     PARAMS.CANVAS_WIDTH = canvas.width;
     PARAMS.CANVAS_HEIGHT = canvas.height;
