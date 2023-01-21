@@ -2,12 +2,14 @@
 
 const ASSET_MANAGER = new AssetManager();
 
+ASSET_MANAGER.queueDownload("./pixelforest.png");
 ASSET_MANAGER.queueDownload("./img/ship.png");
 
 ASSET_MANAGER.downloadAll(() => {
 
     const canvas = document.getElementById("gameWorld");
     const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
 
     PARAMS.TILEWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
     PARAMS.TILEHEIGHT = PARAMS.BITWIDTH * PARAMS.SCALE;
@@ -16,6 +18,7 @@ ASSET_MANAGER.downloadAll(() => {
     PARAMS.CANVAS_HEIGHT = canvas.height;
 
     game.addEntity(new Ship(game));
+    game.addEntity(new Background(game));
     game.addEntity(new SceneManager(game));
 
     game.init(ctx);

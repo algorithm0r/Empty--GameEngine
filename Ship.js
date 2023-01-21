@@ -12,6 +12,7 @@ class Ship {
         this.y = 0;
         this.speed = 0;
 
+        this.velocity = {x: 0, y: 0};
         this.animations = [];
         this.loadAnimations();
     };
@@ -36,55 +37,76 @@ class Ship {
 
     };
 
+    updateBB() {
+        this.lastBB = this.lastBB;
+        if(this.size === 0 || this.size === 3) {
+            this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEWIDTH);
+        }
+        else {
+            this.BB = new BoundingBox(this.x, this.y,  PARAMS.TILEWIDTH, PARAMS.TILEWIDTH * 2);
+        }
+    };
+
     update() {
-        this.x += this.game.clockTick * this.speed;
-        
+
+        const MOVE = 1;
+
+        const TICK = this.game.clockTick
+
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
+            // this.velocity.y -= MOVE;
             this.y -= 2;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
+            // this.velocity.y += MOVE;
             this.y += 2;
         }
-        else if (game.keys['w'] && !game.keys['s'] && game.keys[' ']) {
-            this.facing = 3;
-            this.state = 1;
-            this.y -= 4;
-        }
-        else if (game.keys['s'] && !game.keys['w'] && game.keys[' ']) {
-            this.facing = 0;
-            this.state = 1;
-            this.y += 4;
-        }
+        // else if (game.keys['w'] && !game.keys['s'] && game.keys[' ']) {
+        //     this.facing = 3;
+        //     this.state = 1;
+        //     this.y -= 4;
+        // }
+        // else if (game.keys['s'] && !game.keys['w'] && game.keys[' ']) {
+        //     this.facing = 0;
+        //     this.state = 1;
+        //     this.y += 4;
+        // }
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
+            // this.velocity.x -= MOVE;
             this.x -= 2;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
+            // this.velocity.x += MOVE;
             this.x += 2;
         }
-        else if (game.keys['a'] && !game.keys['d'] && game.keys[' ']) {
-            this.facing = 1;
-            this.state = 1;
-            this.x -= 4;
-        }
-        else if (game.keys['d'] && !game.keys['a'] && game.keys[' ']) {
-            this.facing = 2;
-            this.state = 1;
-            this.x += 4;
-        }
+        // else if (game.keys['a'] && !game.keys['d'] && game.keys[' ']) {
+        //     this.facing = 1;
+        //     this.state = 1;
+        //     this.x -= 4;
+        // }
+        // else if (game.keys['d'] && !game.keys['a'] && game.keys[' ']) {
+        //     this.facing = 2;
+        //     this.state = 1;
+        //     this.x += 4;
+        // }
         // if (this.x > 1022) this.x = -40;
         // if (this.x < -40) this.x = 1022;
         // if (this.y > 1022) this.y = -40;
         // if (this.y < -40) this.y = 1022;
-        
+
+        //velocity
+        // this.x += this.velocity.x * TICK * 5;
+        // this.y += this.velocity.y * TICK * 5;
+        // this.updateBB();
     };
 
     draw(ctx) {

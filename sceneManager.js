@@ -6,7 +6,7 @@ class SceneManager {
         this.x = 0;
         this.y = 0;
 
-        this.ship = new Ship(this.game, 2 * PARAMS.TILEWIDTH, 2 * PARAMS.TILEHEIGHT);
+        this.ship = new Ship(this.game, 0, 0);
     };
 
     update() {
