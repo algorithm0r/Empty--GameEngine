@@ -1,12 +1,8 @@
 class GameMap {
     constructor(width, height, mapImagePath, colorMappings) {
-        Object.assign(this, {width, height, colorMappings});
+        Object.assign(this, {width, height, mapImagePath, colorMappings});
         
-        this.mapImage = ASSET_MANAGER.getAsset(mapImagePath);
-
-        this.mapText = null;
-        
-        this.defaultTile = null;    // a default tile for use if map file has no mapping for a value/color
+        this.mapImage = ASSET_MANAGER.getAsset(this.mapImagePath);
         
         this.tileMap = [];
         for (let h = 0; h < height; h++) {
@@ -15,6 +11,7 @@ class GameMap {
                 this.tileMap[h].push([]);
             }
         }
+
         this.createMappingsAndLoad();
     }
 
@@ -30,12 +27,24 @@ class GameMap {
             for (let x = 0; x < this.width; x++) {
                 
                 let mapPixel = mapImageCtx.getImageData(x, y, 1, 1).data;
-                console.log(mapPixel);
                 
-                if (this.colorMappings[mapPixel] == 'grass')
-                    this.tileMap[y][x].push(new Grass(gameEngine, x * 16 * 4, y * 16 * 4));
-                else if (this.colorMappings[mapPixel] == 'wall')
-                    this.tileMap[y][x].push(new Wall(gameEngine, x * 16 * 4, y * 16 * 4));
+                let r = Number(mapPixel[0]).toString(16).padStart(2, "0");
+                let g = Number(mapPixel[1]).toString(16).padStart(2, "0");
+                let b = Number(mapPixel[2]).toString(16).padStart(2, "0");
+                let a = Number(mapPixel[3]).toString(16).padStart(2, "0");
+                let rgb = '#' + r + g + b;
+                
+                let tile = null;
+                let tileX = x * 16 * 4;
+                let tileY = y * 16 * 4;
+                let tileColor = this.colorMappings[rgb];
+
+                if (tileColor == 'grass')             tile = new Grass(gameEngine, tileX, tileY);
+                else if (tileColor == 'wall')         tile = new Wall(gameEngine, tileX, tileY);
+                else if (tileColor == 'stoneFloor')   tile = new StoneFloor(gameEngine, tileX, tileY);
+                else                                  tile = new DebugTile(gameEngine, tileX, tileY);
+
+                this.tileMap[y][x].push(tile);
             }
         }
     }

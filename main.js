@@ -5,8 +5,6 @@ const ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("./zeldagb_spritesheet_modified.png");
 ASSET_MANAGER.queueDownload("./testmap.png");
 
-let testMap = null;
-
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
 	const ctx = canvas.getContext("2d");
@@ -14,12 +12,13 @@ ASSET_MANAGER.downloadAll(() => {
 
 	gameEngine.addEntity(new Player(gameEngine, 10, 10));
 
-	testMap = new GameMap(10, 10, "./testmap.png", {
+	let testMap = new GameMap(10, 10, "./testmap.png", {
 		'#00ff00':'grass',
-		'#000000':'wall'
+		'#000000':'wall',
+		'#aaaaaa':'stoneFloor'
 	});
 
-	console.log("adding entities from map in to game engine...");
+	console.log("adding entities from map to game engine...");
 	for (let i = 0; i < testMap.width; i++) {
 		for (let j = 0; j < testMap.height; j++) {
 			gameEngine.addEntity(testMap.tileMap[j][i][0]);
