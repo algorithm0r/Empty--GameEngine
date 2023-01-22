@@ -7,7 +7,7 @@ class Player {
         this.state = 0;     // 0:idle, 1:walking
         this.facing = 1;    // 0:north, 1:south, 2:east, 3:west
         
-        this.playerSpeed = 1;
+        this.playerSpeed = 2;
         this.velocity = {x: 0, y: 0};
 
         this.animations = [];
