@@ -1,78 +1,104 @@
-const gameEngine = new GameEngine();
-
+const GAME_ENGINE = new GameEngine();
 const ASSET_MANAGER = new AssetManager("./assets/");
+const ANIMANAGER = new AnimationManager();
 
-ASSET_MANAGER.queueDownload("running.png", "smash2.png");
+ASSET_MANAGER.queueDownload("running.png", "smash2.png", "stones.png", "waluigi_sprites.png");
 
 ASSET_MANAGER.downloadAll(() => {
-    const canvas = document.getElementById("gameWorld");
-    const ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = false;
+	const canvas = document.getElementById("gameWorld");
+	const ctx = canvas.getContext("2d");
+	ctx.imageSmoothingEnabled = false;
+	new AnimationBuilder(); // <- just to build the sprites & animations into ANIMANAGER
 
-    gameEngine.addEntity(new WaluigiDemo(gameEngine)); // animation_manager Demo
+	GAME_ENGINE.addEntity(new Waluigi());
 
-
-    gameEngine.init(ctx);
-
-    gameEngine.start();
+	GAME_ENGINE.init(ctx);
+	GAME_ENGINE.start();
+	
+	
 });
 
+class Waluigi {
+    constructor() {
+        this.game = GAME_ENGINE;
+        this.anima = ANIMANAGER;
 
+        this.charState = 'standing'
 
-class WaluigiDemo {
-    constructor(game) {
-        this.game = game;
-
-        this.x = 0;
-        this.y = 50;
+        this.x = 100;
+        this.y = 100;
         this.xScale = 2;
         this.yScale = 2;
 
-        this.speed = 150;
-        this.acceleration = 1;
+        this.speed = 120;
 
-        this.timeSpeed = 0.18;
-        this.timeAccel = 1;
-        this.timeArr = [];
-
-        this.animaSpeedPercent = 120; /* <== animation speed as a percentage like 50 % for half speed
-                                           I want ot add a in window slider for this, but that is hard */
-
-        for (let i = 0; i < 8; i++) {
-            this.timeArr[i] = this.timeSpeed;
-            this.timeSpeed *= this.timeAccel;
-        }
-
-        this.anima = new AnimationManager();
-        this.anima.addSpriteSheet('running', ASSET_MANAGER.getAsset("running.png"));
-        this.anima.addSpriteSet('runSet', 'running', 0, 0, 304, 46, [3, 36, 80, 119, 155, 186, 226, 265])
-        this.anima.addAnimation('runAni', 'runSet',
-                            [   0,    1,   2,    3,   4,    5,    6,    7],
-                            [0.18, 0.18, 0.2, 0.22, 0.2, 0.18, 0.18, 0.18].map(x => x * 100 / this.animaSpeedPercent))
-
-        this.anima.addSpriteSheet('smash', ASSET_MANAGER.getAsset("smash2.png"));
-        this.anima.addSpriteSet('smashSet', 'smash', 0, 0, 467, 64, [0, 59, 125, 171, 235, 295, 357, 409])
-
-        // better demo of why I made this :
-        this.anima.addAnimation('smashAni', 'smashSet',
-                    [0, 1, 2, 3, 4, 5, 6, 2, 4, 5, 6, 7],
-                    [0.36, 0.10, 0.10, 0.16, 0.09, 0.25, 0.15, 0.35, 0.09, 0.25, 0.10, 0.10].map(x => x * 100 / this.animaSpeedPercent));
+        this.animaSpeed = 150;
 
     };
+
+    resetAllAnimations() {
+        // this.anima.resetAnimation('smashAni', 'runAni');
+    }
 
     update() {
+        // this.x += this.speed * this.game.clockTick;
+        // this.speed *= this.acceleration;
+        // if (this.x >= 900) {
+        //     this.x = 0;
+        //     this.speed = 150;
+        // }
+        
+
+        // if(this.game.keys.d && !this.game.keys.a) // right and not left
+        //     this.x += this.speed * this.game.clockTick;
+        // if(this.game.keys.a && !this.game.keys.d) // left and not right
+        //     this.x -= this.speed * this.game.clockTick;
+        // // if(this.game.keys.w && !this.game.keys.s) // up and not down
+        // //     this.y -= this.speed * this.game.clockTick;
+        // // if(this.game.keys.s && !this.game.keys.w) // down and not up
+        // //     this.y += this.speed * this.game.clockTick;
+
+    let notAorD = !this.game.keys.d && !this.game.keys.a;
+    let bothAandD = this.game.keys.d && this.game.keys.a;
+
+
+    // if (notAorD || bothAandD) this.anima.animations.get('runAni').reset();  // this.anima.resetAnimation('runAni');
+    // if (!this.game.keys.s) this.anima.animations.get('smashAni').reset();   // this.anima.resetAnimation('smashAni');
+
+    if (this.game.keys.s) { // smashing
+        this.charState = 'smashing';
+    }
+    else if (notAorD || bothAandD) { // not moving nor smashing
+        // prevents running in place when 'a' and 'd' keys are pressed
+        this.charState = 'standing';
+    }
+    else if (this.game.keys.d && !this.game.keys.a) {// moving left 
         this.x += this.speed * this.game.clockTick;
-        this.speed *= this.acceleration;
-        if (this.x >= 900) {
-            this.x = 0;
-            this.speed = 150;
-        }
+        this.charState = 'running';
+    }
+    else if (this.game.keys.a && !this.game.keys.d) { // moving right 
+        this.x -= this.speed * this.game.clockTick;
+        this.charState = 'running';
+    }
+
     };
 
-    draw(ctx) {
-        //ctx.fillText(this.value, 20, 20);
-        this.anima.runAnimation(this.game.clockTick, ctx, 'runAni', this.x, this.y, this.xScale, this.yScale);
-                                                                // only need to pass xScale ↓  for scaling x and y the same amount
-        this.anima.runAnimation(this.game.clockTick, ctx, 'smashAni', 100, 225, this.xScale  ); 
+    draw(ctx) {  // drawSprite(ctx, spriteNum, dx, dy, xScale, yScale = xScale)
+                 // renderAnimation(tick, ctx, dx, dy, xScale, yScale = xScale)
+
+        this.anima.getSpriteSet('ground').tileSprite(ctx, 0, 0, 170, 4, 1, 0.4);
+
+        switch (this.charState) {
+            case "standing":
+                this.anima.getSpriteSet('runSet').drawSprite(ctx, 0, this.x, this.y, this.xScale, this.yScaled); // TODO: replace with standing animation
+                break;
+            case "running":
+                this.anima.animations.get('runAni').renderAnimation(this.game.clockTick, ctx, this.x, this.y, this.xScale, this.yScale)
+                break;
+            case "smashing":
+                this.anima.animations.get('smashAni').renderAnimation(this.game.clockTick, ctx, this.x, this.y, this.xScale, this.yScale)
+                break;
+
+        }
     };
 }
