@@ -11,8 +11,8 @@ const checkCollision = (entity1, entity2, callback = undefined) => {
         console.error("You are passing an entity that has no collider!");
         return null;
     }
-    let type1 = colliderTypes.indexOf(entity1.collider.type);
-    let type2 = colliderTypes.indexOf(entity2.collider.type);
+    let type1 = COLLIDER_TYPES.indexOf(entity1.collider.type);
+    let type2 = COLLIDER_TYPES.indexOf(entity2.collider.type);
     let hasCallback = callback != undefined;
 
     if(type1 == 0){
