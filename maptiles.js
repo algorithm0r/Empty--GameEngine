@@ -6,7 +6,7 @@ class Grass {
         this.animator = new Animator(this.spritesheet, 1, 137, 16, 16, 1, 1);
     };
 
-    update(player) {
+    update() {
 
     };
 
@@ -21,8 +21,8 @@ class Wall {
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
         this.animator = new Animator(this.spritesheet, 18, 137, 16, 16, 1, 1);
     }
-    
-    update(player) {
+
+    update() {
 
     };
 
@@ -37,8 +37,8 @@ class StoneFloor {
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
         this.animator = new Animator(this.spritesheet, 35, 137, 16, 16, 1, 1);
     }
-    
-    update(player) {
+
+    update() {
 
     };
 
@@ -53,8 +53,8 @@ class DebugTile {
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
         this.animator = new Animator(this.spritesheet, 137, 137, 16, 16, 1, 1);
     }
-    
-    update(player) {
+
+    update() {
 
     };
 
