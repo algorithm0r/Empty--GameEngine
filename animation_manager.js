@@ -1,5 +1,5 @@
 // Global Stuff
-const DEBUG = 0;
+const DEBUG = 0; // <--is broken, I bet it was you! shame on you 🤨
 
 // main class
 class AnimationManager {
@@ -111,7 +111,7 @@ class AnimationManager {
      * @param {number[]} fSequence In-order list of sprites in animation 
      * @param {number[] | number} fTiming In-order list of frame durations (milliseconds) pass one number for all same timing
      */
-    addAnimation(id, spriteSetName, fSequence, fTiming, animaSpeed) {
+    addAnimation(id, spriteSetName, fSequence, fTiming, x_offset = 0, y_offset = 0) {
         if (id instanceof Animation && typeof spriteSetName === 'undefined') {
             if (this.animations.has(id.id)) {
                 console.log(`addAnimation: animations.${id.id} has been overridden!`)
@@ -133,7 +133,7 @@ class AnimationManager {
         
 
         const setObj = this.spriteSets.get(spriteSetName); // Animation class constructor wants the SpriteSet object
-        this.animations.set(id, new Animation(id, setObj, fSequence, fTiming));
+        this.animations.set(id, new Animation(id, setObj, fSequence, fTiming, x_offset, y_offset));
 
     }
 }
@@ -204,26 +204,31 @@ class Animation {
      * @param {number[]} fSequence In-order list of sprites in animation 
      * @param {number[]} fTiming In-order list of frame durations (milliseconds)
      */
-    constructor(id, spriteSet, fSequence, fTiming) {
+    constructor(id, spriteSet, fSequence, fTiming, x_offset, y_offset) {
         if (fSequence.length !== fTiming.length)
             throw new Error('Animation: fSequence and fTiming are not same length');
         
-        Object.assign(this, {id, spriteSet, fSequence, fTiming});
-
-        this.adjFTiming = [...this.fTiming];
+        Object.assign(this, {id, spriteSet, fSequence, fTiming, x_offset, y_offset});
         this.fCount = this.fSequence.length;
+        this.init();
+    }
+
+    init() {
+        this.adj_fTiming = [...this.fTiming];
+        this.adj_fSequence = [...this.fSequence];
+        this.adj_x_offset = this.x_offset;
+        this.adj_y_offset = this.y_offset;
 
         this.elapsedTime = 0;
         this.currFrame = 0;
         this.nextFrameAt = this.fTiming[0];
         this.loop = true;
-
     }
 
     reset() {
         this.elapsedTime = 0;
         this.currFrame = 0;
-        this.nextFrameAt = this.fTiming[0];
+        this.nextFrameAt = this.adj_fTiming[0];
     }
 
     setLooping(isLooping) {
@@ -231,24 +236,24 @@ class Animation {
     }
 
     setAnimaSpeed(animationSpeed) {
-        this.adjFTiming = [...this.fTiming];
-        this.adjFTiming.map(x => x * 100 / animationSpeed); // linear speed adjustment
+        this.adj_fTiming = [...this.fTiming];
+        this.adj_fTiming.map(x => x * 100 / animationSpeed); // linear speed adjustment
     }
 
     calcFrame() { // TODO Make code clean again 
         if (this.elapsedTime < this.nextFrameAt) {
-            return this.fSequence[this.currFrame]
+            return this.adj_fSequence[this.currFrame]
         }
         else if (this.currFrame < this.fCount - 1) {
             this.currFrame++;
-            this.nextFrameAt += this.adjFTiming[this.currFrame];
+            this.nextFrameAt += this.adj_fTiming[this.currFrame];
             return this.fSequence[this.currFrame]
         }
         else { // if currFrame is the last frame
             if (this.loop) {
                 this.elapsedTime = 0;
                 this.currFrame = 0;
-                this.nextFrameAt = this.adjFTiming[this.currFrame];
+                this.nextFrameAt = this.adj_fTiming[this.currFrame];
                 return this.fSequence[this.currFrame]
             }
             else { // no loop == repeat the last frame of animation
@@ -259,9 +264,10 @@ class Animation {
 
     }
 
+    
     renderAnimation(tick, ctx, dx, dy, xScale = 1, yScale = xScale) {
         let frameNum = this.calcFrame();
-        this.spriteSet.drawSprite(ctx, frameNum, dx, dy, xScale, yScale)
+        this.spriteSet.drawSprite(ctx, frameNum, dx + this.x_offset, dy + this.y_offset, xScale, yScale)
 
         if (DEBUG >= 1) {
             ctx.lineWidth = 1;
@@ -271,7 +277,7 @@ class Animation {
 
             ctx.fillText('f:'+this.fSequence[this.currFrame], dx+25, dy-5); // animation frame number
 
-            let dur = Math.floor(this.adjFTiming[this.currFrame] * 1000);
+            let dur = Math.floor(this.adj_fTiming[this.currFrame] * 1000);
             ctx.fillText('ms:'+dur, dx+50, dy-5); // animation frame duration in milliseconds
         }
 
