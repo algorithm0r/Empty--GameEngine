@@ -1,5 +1,5 @@
 // Global Stuff
-const DEBUG = 0; // <--is broken, I bet it was you! shame on you 🤨
+const DEBUG = 1; // <--is broken, I bet it was you! shame on you 🤨
 
 // main class
 class AnimationManager {
@@ -120,6 +120,10 @@ class AnimationManager {
             return;
         }
 
+        if (typeof fSequence === 'number') {
+            let count = fSequence; fSequence = [];
+            for (let i = 0; i < count; i++) fSequence[i] = i;
+        }
         if (typeof fTiming === 'number') fTiming = Array(fSequence.length).fill(fTiming);
 
         if (fSequence.length !== fTiming.length) {
@@ -261,11 +265,10 @@ class Animation {
             }
         }
 
-
     }
 
     
-    renderAnimation(tick, ctx, dx, dy, xScale = 1, yScale = xScale) {
+    animate(tick, ctx, dx, dy, xScale = 1, yScale = xScale) {
         let frameNum = this.calcFrame();
         this.spriteSet.drawSprite(ctx, frameNum, dx + this.x_offset, dy + this.y_offset, xScale, yScale)
 

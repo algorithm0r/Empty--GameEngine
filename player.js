@@ -1,15 +1,15 @@
 class Player {
     static MAX_VEL = 1;
-    constructor(engine, x, y) {
-        Object.assign(this, {engine, x, y});
-
-        this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
+    constructor(poop, x, y) {
+        Object.assign(this, {poop, x, y});
+        this.engine = gameEngine;
+        this.anima = ANIMANAGER;
 
         this.state = 0;     // 0:idle, 1:walking
         this.facing = 1;    // 0:north, 1:south, 2:east, 3:west
 
         this.animations = [];
-        this.setupAnimations();
+        //this.setupAnimations();
 
         this.phys2d = {static: false, velocity: {x: 0, y: 0}};
         this.tag = "player";
@@ -133,7 +133,8 @@ class Player {
     }
 
     draw(ctx, scale) {
-        this.animations[this.state][this.facing].drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
+        // this.animations[this.state][this.facing].drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
+        this.anima.animations.get('link_run_south').animate(this.engine.clockTick, ctx, this.x, this.y, scale);
         if(this.colliding) this.drawCollider(ctx);
     };
 }
