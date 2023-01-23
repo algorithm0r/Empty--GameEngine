@@ -12,10 +12,10 @@ class GameMap {
             }
         }
 
-        this.createMappingsAndLoad();
+        this.createTileColorMappingsAndLoad();
     }
 
-    createMappingsAndLoad() {
+    createTileColorMappingsAndLoad() {
         const mapImageCanvas = document.createElement("canvas");
         mapImageCanvas.width = this.width;
         mapImageCanvas.height = this.height;
