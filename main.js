@@ -1,8 +1,8 @@
 const gameEngine = new GameEngine();
+const ASSET_MANAGER = new AssetManager("./assets/");
+const ANIMANAGER = new AnimationManager();
 
-const ASSET_MANAGER = new AssetManager();
-
-ASSET_MANAGER.queueDownload("./zeldagb_spritesheet_modified.png");
+ASSET_MANAGER.queueDownload("overworld_tiles.png");
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
