@@ -2,7 +2,8 @@
 
 const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/pixelforest.png");
+// ASSET_MANAGER.queueDownload("./img/pixelforest.png");
+ASSET_MANAGER.queueDownload("./img/rocksprite.png");
 ASSET_MANAGER.queueDownload("./img/ship.png");
 
 ASSET_MANAGER.downloadAll(() => {
@@ -19,6 +20,7 @@ ASSET_MANAGER.downloadAll(() => {
 
     game.addEntity(new Ship(game));
     // game.addEntity(new Background(game));
+    game.addEntity(new Rock(game));
     game.addEntity(new SceneManager(game));
 
     game.init(ctx);

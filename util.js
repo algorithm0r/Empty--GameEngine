@@ -1,7 +1,8 @@
 /** Global Parameters Object */
 const PARAMS = { 
     SCALE: 1,
-    BITWIDTH: 16
+    BITWIDTH: 16,
+    DEBUG: true
 };
 
 /**

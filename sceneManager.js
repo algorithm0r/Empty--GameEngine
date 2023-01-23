@@ -10,6 +10,7 @@ class SceneManager {
     };
 
     update() {
+        PARAMS.DEBUG = document.getElementById("debug").checked;
         let xmid = PARAMS.CANVAS_WIDTH / 2 - PARAMS.TILEWIDTH / 2;
         let ymid = PARAMS.CANVAS_HEIGHT / 2 - PARAMS.TILEHEIGHT / 2;
         
