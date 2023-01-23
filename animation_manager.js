@@ -1,5 +1,5 @@
 // Global Stuff
-const DEBUG = 1; // <--is broken, I bet it was you! shame on you 🤨
+const DEBUG = 0; // <--is broken, I bet it was you! shame on you 🤨
 
 // main class
 class AnimationManager {
@@ -183,17 +183,39 @@ class SpriteSet {
         }
     }
 
-    tileSprite(ctx, sKey, dx, dy, numHorzTiles, numVertTiles, xScale = 1, yScale = xScale) {
-        let sWidth = this.sWidth_s[sKey];
-        let sHeight =  this.sHeight_s[sKey];
-
-        for (let h = 0; h < numHorzTiles; h++) {
-            for (let v = 0; v < numVertTiles; v++) {
-                let dx_t = dx + h * sWidth * xScale;
-                let dy_t = dy + v * sHeight * yScale;
-                this.drawSprite(ctx, sKey, dx_t, dy_t, xScale, yScale);
+    tileSprite(ctx, spriteIndex, dx, dy, numHorzTiles, numVertTiles, xScale = 1, yScale = xScale) {
+        if (spriteIndex instanceof Array) {
+            let sWidth = this.sWidth_s[spriteIndex[0]];
+            let sHeight =  this.sHeight_s[spriteIndex[0]];
+    
+            for (let h = 0; h < numHorzTiles; h++) {
+                for (let v = 0; v < numVertTiles; v++) {
+                    let dx_t = dx + h * sWidth * xScale;
+                    let dy_t = dy + v * sHeight * yScale;
+                    this.drawSprite(ctx, spriteIndex[v, h], dx_t, dy_t, xScale, yScale);
+                }
             }
+        } else {
+            let sWidth = this.sWidth_s[spriteIndex];
+            let sHeight =  this.sHeight_s[spriteIndex];
+    
+            for (let h = 0; h < numHorzTiles; h++) {
+                for (let v = 0; v < numVertTiles; v++) {
+                    let dx_t = dx + h * sWidth * xScale;
+                    let dy_t = dy + v * sHeight * yScale;
+                    this.drawSprite(ctx, spriteIndex, dx_t, dy_t, xScale, yScale);
+                    }
+                }
         }
+    }
+
+    getSpriteCount() {
+        return this.count;
+    }
+
+    getSpriteDimensions(spriteKey, print = false) {
+        if (print) console.log(`${this.id}[${spriteKey}] --> width: ${sWidth_s[spriteKey]}, height:${sHeight_s[spriteKey]}`)
+        return [sWidth_s[spriteKey], sHeight_s[spriteKey]]
     }
     
 };

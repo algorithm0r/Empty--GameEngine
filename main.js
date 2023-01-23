@@ -11,13 +11,8 @@ ASSET_MANAGER.downloadAll(() => {
 	new AnimationBuilder(); // <- just to build the sprites & animations into ANIMANAGER
 
 
-	gameEngine.addEntity(new Player(gameEngine, 10, 10)); // you don't need to pass gameEngine it can be accessed from anywhere bc it's a global const 
-
-	// for (let i = 0; i < 10; i++) {
-	// 	for (let j = 0; j < 10; j++) {
-	// 		gameEngine.addEntity(new Grass(gameEngine, i * 16 * 4, j * 16 * 4));
-	// 	}
-	// }
+	gameEngine.addEntity(new Player(null, 10, 10)); // you don't need to pass gameEngine it can be accessed from anywhere bc it's a global const 
+	gameEngine.addEntity(new Grass(null));
 
 	
 	gameEngine.init(ctx);

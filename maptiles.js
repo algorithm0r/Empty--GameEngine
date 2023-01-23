@@ -1,9 +1,29 @@
 class Grass {
     
-    constructor(engine, x, y, isSolid=false) {
-        Object.assign(this, {engine, x, y, isSolid});
-        this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
-        this.animator = new Animator(this.spritesheet, 1, 137, 16, 16, 1, 1);
+    constructor(poop, x, y, isSolid=false) {
+        Object.assign(this, {poop, x, y, isSolid});
+        this.engine = gameEngine;
+        this.anima = ANIMANAGER;
+
+        this.tiles = this.anima.getSpriteSet('TILES_grasses');
+        this.x = 0; this.y = 0; this.scale = 1;
+        this. horzTiles = 16; this.vertTiles = 14;
+
+        this.grassMap =
+          [ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 2
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 3
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 4
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 5
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 6
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 7
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 8
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 9
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 10
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 11
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 12
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 13
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ]// 14
     };
 
     update(player) {
@@ -11,7 +31,7 @@ class Grass {
     };
 
     draw(ctx, scale) {
-        this.animator.drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
+        this.tiles.tileSprite(ctx, 1, this.x, this.y, this.horzTiles, this.vertTiles, scale)
     };
 }
 
