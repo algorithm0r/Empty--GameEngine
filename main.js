@@ -3,8 +3,8 @@
 const ASSET_MANAGER = new AssetManager();
 
 // ASSET_MANAGER.queueDownload("./img/pixelforest.png");
-ASSET_MANAGER.queueDownload("./img/rocksprite.png");
-ASSET_MANAGER.queueDownload("./img/ship.png");
+ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Rocks/rocksprite.png");
+ASSET_MANAGER.queueDownload("./assets/player/ship.png");
 
 ASSET_MANAGER.downloadAll(() => {
 

@@ -4,7 +4,7 @@ class Rock {
 
         this.width = 105;
         this.height = 70;
-        this.spritesheet = ASSET_MANAGER.getAsset("./img/rocksprite.png");
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/background/2 Objects/Rocks/rocksprite.png");
         this.rock = new Animator(this.spritesheet, 1, 1, this.width, this.height, 1, 1);
         this.x = 0;
         this.y = 0;
