@@ -27,15 +27,15 @@ class Ship {
             }
         }
 
-        this.animations[0][0] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 0, 47, 54, 4, 0.5);
-        this.animations[1][0] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 75, 47, 40, 4, .5);
-        this.animations[2][0] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 130, 47, 40, 4, .5);
-        this.animations[3][0] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 174, 47, 54, 4, .5);
+        this.animations[0][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 54, 4, 0.5);
+        this.animations[1][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5);
+        this.animations[2][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5);
+        this.animations[3][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5);
 
-        this.animations[0][1] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 0, 47, 60, 4, 0.5);
-        this.animations[1][1] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 75, 47, 40, 4, .5);
-        this.animations[2][1] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 130, 47, 40, 4, .5);
-        this.animations[3][1] = new Animator(ASSET_MANAGER.getAsset("./img/ship.png"), 0, 174, 47, 54, 4, .5);
+        this.animations[0][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
+        this.animations[1][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5);
+        this.animations[2][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5);
+        this.animations[3][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5);
 
     };
 
