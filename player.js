@@ -13,7 +13,6 @@ class Player {
 
         this.phys2d = {static: false, velocity: {x: 0, y: 0}};
         this.tag = "player";
-
     };
 
     setupAnimations() {
