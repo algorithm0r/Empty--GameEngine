@@ -39,10 +39,10 @@ class GameMap {
                 let tileY = y * 16 * 4;
                 let tileColor = this.colorMappings[rgb];
 
-                if (tileColor == 'grass')             tile = new Grass(gameEngine, tileX, tileY);
-                else if (tileColor == 'wall')         tile = new Wall(gameEngine, tileX, tileY);
-                else if (tileColor == 'stoneFloor')   tile = new StoneFloor(gameEngine, tileX, tileY);
-                else                                  tile = new DebugTile(gameEngine, tileX, tileY);
+                if (tileColor == 'grass')           tile = new Grass(tileX, tileY);
+                else if (tileColor == 'stone')      tile = new Stone(tileX, tileY);
+                else if (tileColor == 'sand')       tile = new Sand(tileX, tileY);
+                else                                tile = new Grass(tileX, tileY);
 
                 this.tileMap[y][x].push(tile);
             }
