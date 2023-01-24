@@ -176,8 +176,8 @@ class SpriteSet {
             
             ctx.strokeRect(dx, dy, dWidth, dHeight);
             ctx.fillText('s:'+sKey, dx+2, dy-5); // sprite number
-            ctx.fillText('x:'+Math.floor(dx), dx+2, dy-25); // sprite number
-            ctx.fillText('y:'+Math.floor(dy), dx+2, dy-15); // sprite number
+            ctx.fillText('x:'+Math.floor(dx), dx+2, dy-25); // x orig-cord
+            ctx.fillText('y:'+Math.floor(dy), dx+2, dy-15); // y orig-cord
             ctx.fillText('w:'+dWidth, dx + (dWidth/2)-12 , dy + dHeight+15); // width of sprite
             ctx.fillText('h:'+dHeight, dx + dWidth+5, dy + (dHeight/2)+5);  // height of sprite
         }
@@ -213,9 +213,10 @@ class SpriteSet {
         return this.count;
     }
 
-    getSpriteDimensions(spriteKey, print = false) {
-        if (print) console.log(`${this.id}[${spriteKey}] --> width: ${sWidth_s[spriteKey]}, height:${sHeight_s[spriteKey]}`)
-        return [sWidth_s[spriteKey], sHeight_s[spriteKey]]
+    getSpriteDimensions(spriteKey, log = false) {
+        if (log)
+            console.log(`${this.id}[${spriteKey}] --> width: ${sWidth_s[spriteKey]}, height:${sHeight_s[spriteKey]}`);
+        return [sWidth_s[spriteKey], sHeight_s[spriteKey]];
     }
     
 };
@@ -251,6 +252,10 @@ class Animation {
         this.loop = true;
     }
 
+    getFrameDimensions(log = false) {
+        return spriteSet.getSpriteDimensions(currFrame, log);
+    }
+
     reset() {
         this.elapsedTime = 0;
         this.currFrame = 0;
@@ -268,22 +273,22 @@ class Animation {
 
     calcFrame() { // TODO Make code clean again 
         if (this.elapsedTime < this.nextFrameAt) {
-            return this.adj_fSequence[this.currFrame]
+            return this.adj_fSequence[this.currFrame];
         }
         else if (this.currFrame < this.fCount - 1) {
             this.currFrame++;
             this.nextFrameAt += this.adj_fTiming[this.currFrame];
-            return this.fSequence[this.currFrame]
+            return this.fSequence[this.currFrame];
         }
         else { // if currFrame is the last frame
             if (this.loop) {
                 this.elapsedTime = 0;
                 this.currFrame = 0;
                 this.nextFrameAt = this.adj_fTiming[this.currFrame];
-                return this.fSequence[this.currFrame]
+                return this.fSequence[this.currFrame];
             }
             else { // no loop == repeat the last frame of animation
-                return this.fSequence[this.currFrame]
+                return this.fSequence[this.currFrame];
             }
         }
 
