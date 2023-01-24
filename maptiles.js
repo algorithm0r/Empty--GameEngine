@@ -1,5 +1,5 @@
-class Grass {
-    
+/*
+class ChrisGrass {
     constructor(poop, x, y, isSolid=false) {
         Object.assign(this, {poop, x, y, isSolid});
         this.engine = gameEngine;
@@ -20,7 +20,7 @@ class Grass {
     };
 }
 
-class Wall {
+class GabeWall {
     constructor(engine, x, y){
         Object.assign(this, {engine, x, y});
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
@@ -38,37 +38,57 @@ class Wall {
         this.animator.drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
     };
 }
+*/
 
-class StoneFloor {
-    constructor(engine, x, y){
-        Object.assign(this, {engine, x, y});
-        this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
-        this.animator = new Animator(this.spritesheet, 35, 137, 16, 16, 1, 1);
-        this.tag = "environment";
-    }
+class Grass {
+    constructor(xLoc, yLoc) {
+        Object.assign(this, {xLoc, yLoc});
+
+        this.tiles = ANIMANAGER.getSpriteSet('env_grasses');
+        this.tag = 'environment';        
+    };
 
     update() {
 
     };
 
     draw(ctx, scale) {
-        this.animator.drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
+        this.tiles.drawSprite(ctx, 0, this.xLoc, this.yLoc, scale);
     };
 }
 
-class DebugTile {
-    constructor(engine, x, y){
-        Object.assign(this, {engine, x, y});
-        this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
-        this.animator = new Animator(this.spritesheet, 137, 137, 16, 16, 1, 1);
-        this.tag = "environment";
-    }
+class Stone {
+    constructor(xLoc, yLoc) {
+        Object.assign(this, {xLoc, yLoc});
+
+        this.tiles = ANIMANAGER.getSpriteSet('env_stones');
+        this.phsy2d = {static: true};
+        this.collider = {type: "box", corner: {x: xLoc, y: yLoc}, height: 16, width: 16};
+        this.tag = 'environment';
+    };
 
     update() {
-
+        
     };
 
     draw(ctx, scale) {
-        this.animator.drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
+        this.tiles.drawSprite(ctx, 0, this.xLoc, this.yLoc, scale);
+    }
+}
+
+class Sand {
+    constructor(xLoc, yLoc) {
+        Object.assign(this, {xLoc, yLoc});
+
+        this.tiles = ANIMANAGER.getSpriteSet('env_sands');
+        this.tag = 'environment';
+    };
+
+    update() {
+        
+    };
+
+    draw(ctx, scale) {
+        this.tiles.drawSprite(ctx, 0, this.xLoc, this.yLoc, scale);
     };
 }

@@ -17,16 +17,16 @@ ASSET_MANAGER.downloadAll(() => {
 	gameEngine.addEntity(new Grass(null));
 	let testMap = new GameMap(10, 10, "testmap.png", {
 		'#00ff00':'grass',
-		'#000000':'wall',
-		'#aaaaaa':'stoneFloor'
+		'#000000':'stone',
+		'#ffff00':'sand'
 	});
 
 	console.log("adding entities from map to game engine...");
-	// for (let i = 0; i < testMap.width; i++) {
-	// 	for (let j = 0; j < testMap.height; j++) {
-	// 		gameEngine.addEntity(testMap.tileMap[j][i][0]);
-	// 	}
-	// }
+	for (let i = 0; i < testMap.width; i++) {
+		for (let j = 0; j < testMap.height; j++) {
+	 		gameEngine.addEntity(testMap.tileMap[j][i][0]);
+	 	}
+	}
 	console.log("entities from map added!");
 
 
