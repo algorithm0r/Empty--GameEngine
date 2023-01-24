@@ -53,28 +53,28 @@ class Ship {
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            this.velocity.y -= MOVE;
-            // this.y -= 2;
+            // this.velocity.y -= MOVE;
+                this.y -= 2;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            this.velocity.y += MOVE;
-            // this.y += 2;
+            // this.velocity.y += MOVE;
+            this.y += 2;
         }
 
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            this.velocity.x -= MOVE;
-            // this.x -= 2;
+            // this.velocity.x -= MOVE;
+            this.x -= 2;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            this.velocity.x += MOVE;
-            // this.x += 2;
+            // this.velocity.x += MOVE;
+            this.x += 2;
         }
         // if (this.x > 1022) this.x = -40;
         // if (this.x < -40) this.x = 1022;
@@ -82,8 +82,8 @@ class Ship {
         // if (this.y < -40) this.y = 1022;
 
         //velocity
-        this.x += this.velocity.x * TICK;
-        this.y += this.velocity.y * TICK;
+        // this.x += this.velocity.x * TICK;
+        // this.y += this.velocity.y * TICK;
         this.updateBB();
 
         //collision

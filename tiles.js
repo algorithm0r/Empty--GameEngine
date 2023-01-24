@@ -30,7 +30,7 @@ class Rock {
     };
 
     draw(ctx) {
-        this.rock.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
+        this.rock.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
         
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
