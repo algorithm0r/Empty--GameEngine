@@ -8,6 +8,7 @@ class Grass {
         this.tiles = this.anima.getSpriteSet('TILES_grasses');
         this.x = 0; this.y = 0;
         this.horzTiles = 16; this.vertTiles = 14;
+        this.tag = "environment";
     };
 
     update() {
@@ -20,10 +21,13 @@ class Grass {
 }
 
 class Wall {
-    constructor(engine, x, y, isSolid=true){
-        Object.assign(this, {engine, x, y, isSolid});
+    constructor(engine, x, y){
+        Object.assign(this, {engine, x, y});
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
         this.animator = new Animator(this.spritesheet, 18, 137, 16, 16, 1, 1);
+        this.phsy2d = {static: true};
+        this.collider = {type: "box", corner: {x: x, y: y}, height: 16, width: 16};//size is broken due to no global scale parameter
+        this.tag = "environment";
     }
 
     update() {
@@ -36,10 +40,11 @@ class Wall {
 }
 
 class StoneFloor {
-    constructor(engine, x, y, isSolid=false){
-        Object.assign(this, {engine, x, y, isSolid});
+    constructor(engine, x, y){
+        Object.assign(this, {engine, x, y});
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
         this.animator = new Animator(this.spritesheet, 35, 137, 16, 16, 1, 1);
+        this.tag = "environment";
     }
 
     update() {
@@ -52,10 +57,11 @@ class StoneFloor {
 }
 
 class DebugTile {
-    constructor(engine, x, y, isSolid=true){
-        Object.assign(this, {engine, x, y, isSolid});
+    constructor(engine, x, y){
+        Object.assign(this, {engine, x, y});
         this.spritesheet = ASSET_MANAGER.getAsset("./zeldagb_spritesheet_modified.png");
         this.animator = new Animator(this.spritesheet, 137, 137, 16, 16, 1, 1);
+        this.tag = "environment";
     }
 
     update() {
