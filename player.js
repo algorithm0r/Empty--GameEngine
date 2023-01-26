@@ -23,23 +23,23 @@ class Player {
 
         // idle animations
         // facing north
-        this.animations[0][0] = ANIMANAGER.animations.get('ANIMA_link_idle_north')
+        this.animations[0][0] = ANIMANAGER.getAnimation('ANIMA_link_Idle_north');
         // facing south
-        this.animations[0][1] = ANIMANAGER.animations.get('ANIMA_link_idle_south')
+        this.animations[0][1] = ANIMANAGER.getAnimation('ANIMA_link_Idle_south');
         // facing east
-        this.animations[0][2] = ANIMANAGER.animations.get('ANIMA_link_idle_east')
+        this.animations[0][2] = ANIMANAGER.getAnimation('ANIMA_link_Idle_east');
         // facing west
-        this.animations[0][3] = ANIMANAGER.animations.get('ANIMA_link_idle_west')
+        this.animations[0][3] = ANIMANAGER.getAnimation('ANIMA_link_Idle_west');
 
         //walking animations
         //facing north
-        this.animations[1][0] = ANIMANAGER.animations.get('ANIMA_link_run_north')
+        this.animations[1][0] = ANIMANAGER.getAnimation('ANIMA_link_run_north');
         // facing south
-        this.animations[1][1] = ANIMANAGER.animations.get('ANIMA_link_run_south')
+        this.animations[1][1] = ANIMANAGER.getAnimation('ANIMA_link_run_south');
         // facing east
-        this.animations[1][2] = ANIMANAGER.animations.get('ANIMA_link_run_east')
+        this.animations[1][2] = ANIMANAGER.getAnimation('ANIMA_link_run_east');
         // facing west
-        this.animations[1][3] = ANIMANAGER.animations.get('ANIMA_link_run_west')
+        this.animations[1][3] = ANIMANAGER.getAnimation('ANIMA_link_run_west');
     };
 
     updateState() {
@@ -130,8 +130,7 @@ class Player {
     }
 
     draw(ctx, scale) {
-        // this.animations[this.state][this.facing].drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
-        ANIMANAGER.animations.get('ANIMA_link_run_south').animate(gameEngine.clockTick, ctx, this.x, this.y, scale);
+        this.animations[this.state][this.facing].animate(gameEngine.clockTick, ctx, this.x, this.y, scale);
         if(this.colliding) this.drawCollider(ctx);
     };
 }
