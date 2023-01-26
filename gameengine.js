@@ -19,6 +19,8 @@ class GameEngine {
         this.options = options || {
             debugging: false,
         };
+
+        this.running = false;
     };
 
     init(ctx) {
@@ -109,9 +111,11 @@ class GameEngine {
     };
 
     loop() {
-        this.clockTick = this.timer.tick();
-        this.update();
-        this.draw();
+        if (this.running) {
+            this.clockTick = this.timer.tick();
+            this.update();
+            this.draw();
+        }
     };
 
 };

@@ -2,7 +2,7 @@ const gameEngine = new GameEngine();
 const ASSET_MANAGER = new AssetManager("./assets/");
 const ANIMANAGER = new AnimationManager();
 
-ASSET_MANAGER.queueDownload("testmap.png", "link.png", "overworld_tiles.png")
+ASSET_MANAGER.queueDownload("testmap.png", "testmap_multiroom.png", "link.png", "overworld_tiles.png")
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
@@ -13,24 +13,22 @@ ASSET_MANAGER.downloadAll(() => {
 	new AnimationBuilder(); // <- just to build the sprites & animations into ANIMANAGER
 
 
-	gameEngine.addEntity(new Player(null, 10, 10)); // you don't need to pass gameEngine it can be accessed from anywhere bc it's a global const 
-	gameEngine.addEntity(new Grass(null));
-	let testMap = new GameMap(10, 10, "testmap.png", {
+	gameEngine.addEntity(new Player(canvas.width/2 - 32, canvas.height/2 - 32)); 
+	
+	let roomWidth = 15;
+	let roomHeight = 12;
+	let testMap = new GameMap("testmap_multiroom.png", roomWidth, roomHeight, 16*4, 16*4, {
 		'#00ff00':'grass',
-		'#000000':'stone',
+		'#555555':'stone',
 		'#ffff00':'sand'
 	});
 
-	console.log("adding entities from map to game engine...");
-	for (let i = 0; i < testMap.width; i++) {
-		for (let j = 0; j < testMap.height; j++) {
-	 		gameEngine.addEntity(testMap.tileMap[j][i][0]);
-	 	}
-	}
-	console.log("entities from map added!");
-
-
+	let roomIndexX = 0;
+	let roomIndexY = 0;
+	testMap.loadMapCell(roomIndexX, roomIndexY);
 	
+	testMap.addMapEntitiesToEngine(gameEngine);
+
 	gameEngine.init(ctx);
 
 	gameEngine.start();
