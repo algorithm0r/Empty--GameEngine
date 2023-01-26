@@ -131,7 +131,7 @@ class Player {
 
     draw(ctx, scale) {
         // this.animations[this.state][this.facing].drawFrame(this.engine.clockTick, ctx, this.x, this.y, scale);
-        this.anima.animations.get('ANIMA_link_run_south').animate(this.engine.clockTick, ctx, this.x, this.y, scale);
+        ANIMANAGER.animations.get('ANIMA_link_run_south').animate(gameEngine.clockTick, ctx, this.x, this.y, scale);
         if(this.colliding) this.drawCollider(ctx);
     };
 }
