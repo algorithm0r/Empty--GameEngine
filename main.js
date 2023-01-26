@@ -2,7 +2,7 @@ const gameEngine = new GameEngine();
 const ASSET_MANAGER = new AssetManager("./assets/");
 const ANIMANAGER = new AnimationManager();
 
-ASSET_MANAGER.queueDownload("testmap.png", "testmap_multiroom.png", "link.png", "overworld_tiles.png")
+ASSET_MANAGER.queueDownload("testmap.png", "testmap_multiroom.png", "linkNWSE.png", "overworld_tiles.png")
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");

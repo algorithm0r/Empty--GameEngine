@@ -7,7 +7,7 @@ class Player {
         this.facing = 1;    // 0:north, 1:south, 2:east, 3:west
 
         this.animations = [];
-        //this.setupAnimations();
+        this.setupAnimations();
 
         this.phys2d = {static: false, velocity: {x: 0, y: 0}};
         this.tag = "player";

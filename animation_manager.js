@@ -21,6 +21,7 @@ class AnimationManager {
     addSpriteSheet(id, spriteSheet) {
         // TODO: check for stuff
         this.spriteSheets.set(id, spriteSheet);
+        return this.getSpriteSheet(id);
     }
 
     /**
@@ -35,11 +36,36 @@ class AnimationManager {
      * @param {number} x_offset Optional : offsets the sprite's x position when drawn
      * @param {number} y_offset Optional : offsets the sprite's y position when drawn
      */
-    addSoloSprite(id, spriteSheet, x_orig, y_orig, width, height, x_offset = 0, y_offset = 0) {
+    addSpriteSingle(id, spriteSheet, x_orig, y_orig, width, height, x_offset = 0, y_offset = 0) {
         if (typeof spriteSheet === 'string') spriteSheet = this.spriteSheets.get(spriteSheet); // we need the object
+
         if (this.spriteSets.has(id)) console.log(`addSpriteSet: spriteSets.${id} has been overridden!`);
         this.spriteSets.set(id, new SpriteSet(id, spriteSheet, [x_orig], [y_orig], [width], [height], [x_offset], [y_offset]));
     }
+
+    addSpriteRow(id, spriteSheet, x_orig, y_orig, width, height, count, gaps, x_offsets = 0, y_offset = 0) {
+        if (typeof spriteSheet === 'string') spriteSheet = this.spriteSheets.get(spriteSheet); // we need the object
+
+        if (typeof gaps === 'number') gaps = Array(count).fill(gaps);
+        let xstart = x_orig;
+        let x_origs = Array(count);
+        for (let i = 0; i < count; i ++) {
+            x_origs[i] = xstart; xstart += width + gaps[i];
+        }
+        let y_origs = Array(count).fill(y_orig);
+        let widths = Array(count).fill(width);
+        let heights = Array(count).fill(height);
+
+        if (typeof x_offsets === 'number')
+            x_offsets = Array(count).fill(x_offsets); // x_offsets are all the same
+
+        let y_offsets = Array(count).fill(y_offset); // y_offsets are all the same 
+
+        if (this.spriteSets.has(id)) console.log(`addSpriteSet: spriteSets.${id} has been overridden!`);
+        this.spriteSets.set(id, new SpriteSet(id, spriteSheet, x_origs, y_origs, widths, heights, x_offsets, y_offsets));
+    }
+    // constructor(id, spriteSheet, sx_s, sy_s, sWidth_s, sHeight_s, x_offset_s, y_offset_s)
+
 
     /**
      * Adds a SpriteSet to the collection
@@ -54,18 +80,17 @@ class AnimationManager {
      * @param {number[] | number} y_offsets Optional : offsets each sprite's y position when drawn
      */
     addSpriteSet(id, spriteSheet, x_origs, x_ends, y_origs, y_ends, x_offsets = 0, y_offsets = 0) {
+        if (typeof spriteSheet === 'string') spriteSheet = this.spriteSheets.get(spriteSheet); // we need the object
+
         // we need to determine the number of sprites in the set 
         if (x_origs instanceof Array) var sprtCount = x_origs.length;
         else if (y_origs instanceof Array) var sprtCount = x_origs.length;
         else if (widths instanceof Array) var sprtCount = widths.length;
         else if (heights instanceof Array) var sprtCount = heights.length;
-        else throw new Error('One of {x_origs, y_origs, widths, heights} must be an Array!');
+        else var sprtCount = 1;
 
         let widths = [];
         let heights = [];
-
-        // we need the object
-        if (typeof spriteSheet === 'string') spriteSheet = this.spriteSheets.get(spriteSheet); 
 
         if (typeof x_origs === 'number') x_origs = Array(sprtCount).fill(x_origs); // X origins are all the same
         if (typeof y_origs === 'number') y_origs = Array(sprtCount).fill(y_origs); // y origins are all the same
@@ -112,23 +137,17 @@ class AnimationManager {
      * @param {number[] | number} fTiming In-order list of frame durations (milliseconds) pass one number for all same timing
      */
     addAnimation(id, spriteSetName, fSequence, fTiming, x_offset = 0, y_offset = 0) {
-        if (id instanceof Animation && typeof spriteSetName === 'undefined') {
-            if (this.animations.has(id.id)) {
-                console.log(`addAnimation: animations.${id.id} has been overridden!`)
-            }
-            this.animations.set(id.id, id);
-            return;
-        }
 
         if (typeof fSequence === 'number') {
-            let count = fSequence; fSequence = [];
+            let count = fSequence;
+            fSequence = Array(count);
             for (let i = 0; i < count; i++) fSequence[i] = i;
         }
         if (typeof fTiming === 'number') fTiming = Array(fSequence.length).fill(fTiming);
 
         if (fSequence.length !== fTiming.length) {
             // Willy-Wonka-Wack-Attack: GOOD DAY SIR!
-            throw new Error(`fSequence.length = ${fSequence.length} but fTiming.length = ${fTiming.length}!`);
+            throw new Error(`fSequence.length = ${fSequence.length} but fTiming.length = ${fTiming.length} ... GOOD DAY SIR!`);
         }
         if (this.animations.has(id)) {
             console.log(`addAnimation: animations.${id} has been overridden!`);
@@ -150,6 +169,8 @@ class SpriteSet {
     }
 
     drawSprite(ctx, sKey, dx, dy, xScale = 1, yScale = xScale) {
+        // console.log(`skey: ${sKey}, dx: ${dx}, dy ${dy}, xScale: ${xScale}, yScale: ${yScale}`);
+        // console.log(`sx_s: ${this.sx_s}, sy_s[sKey]: ${this.sy_s}`);
         let sx = this.sx_s[sKey];
         let sy = this.sy_s[sKey];
         let sWidth = this.sWidth_s[sKey];
@@ -293,7 +314,6 @@ class Animation {
         }
 
     }
-
     
     animate(tick, ctx, dx, dy, xScale = 1, yScale = xScale) {
         let frameNum = this.calcFrame();
@@ -314,4 +334,35 @@ class Animation {
         this.elapsedTime += tick;
 
     }
+}
+
+
+////// U T I L I T I E S  ///////
+
+function validInput(inputs, types) {
+    // check that all the element of types are strings
+    // types.forEach(t => {if(!(typeof t === 'string')) throw new Error(`${t} is not a valid type!`)});
+    if (!(types.every(s => typeof s === 'string'))) throw new Error(`${t} is not a valid type!`);
+    let valid = Array(inputs.length).fill(false)
+    for (let i = 0; i < inputs.length; i++) {
+        types.forEach(function (type) {
+            if (capitol(type)) { // if first letter is uppercase ie an Object
+                if (inputs[i] instanceof type) valid[i] = true;
+            } else {
+                if (typeof inputs[i] === type) valid[i] = true; // else it a primitive
+            }
+        })
+    }
+    
+    for (let i = 0; i < inputs.length; i++) {
+        if(!valid[i]) console.log(`Inputs[${i}] is of type: ${typeof inputs[i] === 'object' ? inputs[i].constructor.name : typeof inputs[i]}, which is not a valid type.\nValid types are: ${types}`)
+    }
+}
+// let var1 = 5; let var2 = "Timmy"; let var3 = [1];
+// validInput([var1, var2, var3], ['number', 'string']);
+
+
+
+function capitol(str) {
+    return (str.charAt(0) <= 90 && str.charAt(0) >= 65);
 }
