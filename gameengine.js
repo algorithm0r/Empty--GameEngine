@@ -20,6 +20,8 @@ class GameEngine {
             debugging: false,
         };
 
+        this.gameDisplay = null;
+
         this.running = false;
     };
 
@@ -27,6 +29,8 @@ class GameEngine {
         this.ctx = ctx;
         this.startInput();
         this.timer = new Timer();
+        this.gameDisplay = new GameDisplay();
+        this.gameDisplay.init(ctx);
     };
 
     start() {
@@ -90,6 +94,8 @@ class GameEngine {
         for (let i = this.entities.length - 1; i >= 0; i--) {
             this.entities[i].draw(this.ctx, 4, this);
         }
+
+        this.gameDisplay.draw();
     };
 
     update() {
