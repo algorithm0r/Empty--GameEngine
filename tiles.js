@@ -6,10 +6,10 @@ class Rock {
         this.height = 70;
         this.spritesheet = ASSET_MANAGER.getAsset("./assets/background/2 Objects/Rocks/rocksprite.png");
         this.rock = new Animator(this.spritesheet, 1, 1, this.width, this.height, 1, 1);
-        this.x = 0;
-        this.y = 0;
+        this.x = 100;
+        this.y = 100;
 
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH * 12, PARAMS.TILEHEIGHT * 9);
+        this.BB = new BoundingBox(this.x + 20, this.y + 15, PARAMS.TILEWIDTH * 9, PARAMS.TILEHEIGHT * 7);
 
         // this.game.Rock = this;
 

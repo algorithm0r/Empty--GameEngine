@@ -2,7 +2,6 @@ class Ship {
     //
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
-        this.game.Ship = this;
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
@@ -41,7 +40,7 @@ class Ship {
 
     updateBB() {
         this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x, this.y,  PARAMS.TILEWIDTH * 6, PARAMS.TILEHEIGHT * 7);
+        this.BB = new BoundingBox(this.x + 20, this.y + 20,  PARAMS.TILEWIDTH * 4, PARAMS.TILEHEIGHT * 4);
     };
 
     update() {
@@ -53,28 +52,28 @@ class Ship {
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            // this.velocity.y -= MOVE;
-                this.y -= 2;
+            this.velocity.y -= MOVE;
+            // this.y -= 2;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            // this.velocity.y += MOVE;
-            this.y += 2;
+            this.velocity.y += MOVE;
+            // this.y += 2;
         }
 
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            // this.velocity.x -= MOVE;
-            this.x -= 2;
+            this.velocity.x -= MOVE;
+            // this.x -= 2;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            // this.velocity.x += MOVE;
-            this.x += 2;
+            this.velocity.x += MOVE;
+            // this.x += 2;
         }
         // if (this.x > 1022) this.x = -40;
         // if (this.x < -40) this.x = 1022;
@@ -82,8 +81,8 @@ class Ship {
         // if (this.y < -40) this.y = 1022;
 
         //velocity
-        // this.x += this.velocity.x * TICK;
-        // this.y += this.velocity.y * TICK;
+        this.x += this.velocity.x * TICK;
+        this.y += this.velocity.y * TICK;
         this.updateBB();
 
         //collision
@@ -93,6 +92,9 @@ class Ship {
                 if(entity instanceof Rock) {
                     if(that.BB.collide(entity.BB)) {
                         if(that.velocity.x > 0) that.velocity.x = 0;
+                        if(that.velocity.y > 0) that.velocity.y = 0;
+                        if(that.velocity.x < 0) that.velocity.x = 0;
+                        if(that.velocity.y < 0) that.velocity.y = 0;
                     }
                     that.updateBB();
                 }
