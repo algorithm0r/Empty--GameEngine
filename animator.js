@@ -8,6 +8,8 @@ class Animator {
 			spriteIndex: 0,
 			location: {x: 0, y: 0},
 		});
+		this.width = sWidth * scale;
+		this.height = sHeight * scale;
 	 };
 	 mirrored = false;
 
@@ -36,10 +38,10 @@ class Animator {
 		}
 		//ctx.drawImage(this.sheet, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 		ctx.drawImage(this.sheet,
-			targetx, this.sy, 									// starting x, starting y in sprite sheet
-			this.sWidth, this.sHeight, 							// size in sprite sheet
-			destX, this.location.y, 					// desired location in canvas
-			this.sWidth*this.scale, this.sHeight*this.scale,	// desired size in canvas
+			targetx, this.sy, 				// starting x, starting y in sprite sheet
+			this.sWidth, this.sHeight, 		// size in sprite sheet
+			destX, this.location.y, 		// desired location in canvas
+			this.width, this.height,		// desired size in canvas
 		);
 		ctx.restore();
 	 };
