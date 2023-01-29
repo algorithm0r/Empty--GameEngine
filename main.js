@@ -55,8 +55,6 @@ class MainCharacter extends Animator {
 			const g = 2 * h / (t_h ** 2); // acceleration due to gravity.
 
 			this.location.y = 0.5 * g * t ** 2 + v_0 * t + this.jumpInitPosition.y;
-			//console.log({g:g, t:t, v_0:v_0, init:this.jumpInitPosition.y});
-			//console.log(this.location.y);
 		}
 		if (this.location.y > 600) { // bottom of map @ ctx size y=768
 			this.jumpInitPosition = this.jumpStart = undefined;
