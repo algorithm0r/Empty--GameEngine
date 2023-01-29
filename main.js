@@ -60,7 +60,7 @@ class MainCharacter extends Animator {
 		}
 		if (this.location.y > 600) { // bottom of map @ ctx size y=768
 			this.jumpInitPosition = this.jumpStart = undefined;
-			//console.log("jump complete @" + this.location.y);
+			
 			this.location.y = 600;
 			this.mode = "RUN";
 			this.modeIndex = 0;
@@ -79,19 +79,6 @@ ASSET_MANAGER.downloadAll(() => {
 			location: { x: 0, y: 500 },
 			scale: 2
 		});
-	// for (let i = 0; i < modesList.length; i++) {
-	// 	const mode = modesList[i];
-	// 	for (let row = 0; row < 3; row++) {
-	// 		[
-	// 			new MainCharacter({
-	// 				row: row,
-	// 				mode: mode,
-	// 				location: { x: i * 32 * 2, y: row * 32 * 2 },
-	// 				scale: 2
-	// 			})
-	// 		].forEach(c => gameEngine.addEntity(c));
-	// 	}
-	// }
 	gameEngine.addEntity(gameEngine.mainCharacter);
 	gameEngine.init(ctx);
 	gameEngine.start();
