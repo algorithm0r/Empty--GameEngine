@@ -9,6 +9,13 @@ class SceneManager {
         this.ship = new Ship(this.game);
         this.game.addEntity(this.ship);
         this.game.addEntity(new Rock(this.game));
+        this.game.addEntity(new EnemyShip(this.game));
+    };
+
+    clearEntities() {
+        this.game.entities.forEach(entity => {
+            entity.removeFromWorld = true;
+        });
     };
 
     update() {
@@ -18,7 +25,7 @@ class SceneManager {
         
         this.x = this.ship.x - xmid;
         this.y = this.ship.y - ymid;
-    }
+    };
 
     draw(ctx) {
 

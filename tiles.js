@@ -11,6 +11,11 @@ class Rock {
 
         this.BB = new BoundingBox(this.x + 20, this.y + 15, PARAMS.TILEWIDTH * 9, PARAMS.TILEHEIGHT * 7);
 
+        this.leftBB = new BoundingBox(this.x, this.y, (PARAMS.TILEWIDTH * 9) / 2, PARAMS.TILEHEIGHT * 7);
+        this.rightBB = new BoundingBox(this.x + (PARAMS.TILEWIDTH * 9) / 2, this.y, (PARAMS.TILEWIDTH * 9) / 2, PARAMS.TILEHEIGHT * 7);
+        this.topBB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH * 7, (PARAMS.TILEHEIGHT * 9) / 2);
+        this.botBB = new BoundingBox(this.x, this.y + (PARAMS.TILEHEIGHT * 7) / 2, PARAMS.TILEWIDTH * 9, (PARAMS.TILEHEIGHT * 7) / 2);
+
         // this.game.Rock = this;
 
         // this.rocks = [];
