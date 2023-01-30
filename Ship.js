@@ -2,6 +2,7 @@ class Ship {
     //
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
+        this.game.player = this;
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
@@ -17,6 +18,9 @@ class Ship {
         this.velocity = {x: 0, y: 0};
         this.animations = [];
         this.loadAnimations();
+
+        this.translate = { x: this.width * PARAMS.PIXELSCALER, y: this.width * PARAMS.PIXELSCALER };
+        this.canvasOffset = { x: -14 * PARAMS.PIXELSCALER, y: -6 * PARAMS.PIXELSCALER };
     };
 
     loadAnimations() {
@@ -43,6 +47,27 @@ class Ship {
         this.lastBB = this.BB;
         this.BB = new BoundingBox(this.x + 20, this.y + 20,  PARAMS.TILEWIDTH * 4, PARAMS.TILEHEIGHT * 4);
     };
+
+    fire() {
+        this.angleOffset = {
+            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
+            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
+        };
+        if (this.game.mouse != null) {
+
+
+            this.source = { x: this.x + this.translate.x + this.canvasOffset.x + PARAMS.PIXELSCALER / 2, y: this.y + this.translate.y + this.canvasOffset.y + PARAMS.PIXELSCALER / 2 };
+            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
+
+            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
+            //console.log(this.angle);
+           
+        }
+
+        this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
+       //this.game.addEntity(new CannonBall(this.game, this.source.x + this.game.camera.x, this.source.y + this.game.camera.y, this.angle));
+    }
 
     update() {
 
@@ -76,6 +101,26 @@ class Ship {
             this.velocity.x += MOVE;
             // this.x += MOVE * TICK;
         }
+/*
+        if (game.click) {
+            this.fire();
+        }
+        
+        this.angleOffset = {
+            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
+            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
+        };
+        if (this.game.mouse != null) {
+
+
+            this.source = { x: this.x + this.translate.x + this.canvasOffset.x + PARAMS.PIXELSCALER / 2, y: this.y + this.translate.y + this.canvasOffset.y + PARAMS.PIXELSCALER / 2 };
+            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
+
+            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
+           
+        }
+        */
         // if (this.x > 1022) this.x = -40;
         // if (this.x < -40) this.x = 1022;
         // if (this.y > 1022) this.y = -40;

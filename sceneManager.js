@@ -8,6 +8,7 @@ class SceneManager {
 
         this.ship = new Ship(this.game);
         this.game.addEntity(this.ship);
+        
         this.game.addEntity(new Rock(this.game));
         this.game.addEntity(new EnemyShip(this.game));
     };

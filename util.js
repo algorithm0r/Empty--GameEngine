@@ -2,7 +2,9 @@
 const PARAMS = { 
     SCALE: 1,
     BITWIDTH: 16,
-    DEBUG: true
+    DEBUG: true,
+    PIXELSCALER: 3,
+    TIMESCALE: 140
 };
 
 /**
