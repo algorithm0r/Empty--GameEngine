@@ -1,0 +1,8 @@
+* Puzzle platformer
+** ability to set gravity to up/down/left/right
+** blocks that fall, and blocks that stick
+** collision
+*** between blocks
+*** between blocks and player
+*** player can fall/jump
+** 

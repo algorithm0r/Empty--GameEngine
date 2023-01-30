@@ -26,7 +26,7 @@ class Animator {
 		}
 	 };
 	 // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
-	 draw(ctx=this.ctx) {
+	 draw(ctx=gameEngine.ctx) {
 		this.ctx = ctx;
 		let targetx = this.sx+(this.sWidth*(this.spriteIndex)); // sprite source location
 		ctx.save();

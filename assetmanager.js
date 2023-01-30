@@ -24,10 +24,15 @@ class AssetManager {
     downloadAll(callback) {
         //if (this.downloadQueue.length === 0) setTimeout(callback, 10);
        
-        //for (let i = 0; i < this.downloadQueue.length; i++) {
         for(const path of this.downloadQueue) {
+            this.getAsset(path);
+        }
+        window.addEventListener("load", callback); // event triggers after all assets have loaded?
+    };
+
+    getAsset(path) {
+        if(!this.cache[path]) {
             const img = new Image();
-            //const path = this.downloadQueue[i];
             console.log(path);
 
             img.addEventListener("load", () => {
@@ -45,10 +50,6 @@ class AssetManager {
             img.src = path; // triggers download by telling browser where image data exists
             this.cache[path] = img;
         }
-        window.addEventListener("load", callback); // event triggers after all assets have loaded?
-    };
-
-    getAsset(path) {
         return this.cache[path];
     };
 };
