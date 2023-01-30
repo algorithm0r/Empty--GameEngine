@@ -9,10 +9,15 @@ class GameEngine {
         this.entities = [];
 
         // Information on the input
-        this.click = null;
+        this.click = false;
         this.mouse = null;
+        this.mousedown = null;
+        this.mouseup = null;
         this.wheel = null;
         this.keys = {};
+
+        this.player = null;
+        this.projectile = null;
 
         // Options and the Details
         this.options = options || {
@@ -36,6 +41,7 @@ class GameEngine {
     };
 
     startInput() {
+        var that = this;
         const getXandY = e => ({
             x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
             y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
@@ -45,6 +51,7 @@ class GameEngine {
             if (this.options.debugging) {
                 console.log("MOUSE_MOVE", getXandY(e));
             }
+            //console.log(getXandY(e));
             this.mouse = getXandY(e);
         });
 
@@ -71,6 +78,32 @@ class GameEngine {
             this.rightclick = getXandY(e);
         });
 
+
+        this.ctx.canvas.addEventListener("mousedown", function (e) {
+            //Left mouse button
+            if (e.which == 1) {
+                this.click = true;
+                that.player.fire();
+                
+        console.log(that.projectile.x + " " + that.projectile.y);
+    
+            }
+            else {
+                //that.interact = true;
+                this.click = true;
+            }
+        }, false);
+
+        this.ctx.canvas.addEventListener("mouseup", function (e) {
+            //Left mouse button
+            if (e.which == 1) {
+                this.click = false;
+            }
+        }, false);
+            
+            
+        
+        
         this.ctx.canvas.addEventListener("keydown", event => this.keys[event.key] = true);
         this.ctx.canvas.addEventListener("keyup", event => this.keys[event.key] = false);
     };
