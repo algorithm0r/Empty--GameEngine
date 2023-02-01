@@ -11,24 +11,12 @@ class Rock {
 
         this.BB = new BoundingBox(this.x + 20, this.y + 15, PARAMS.TILEWIDTH * 9, PARAMS.TILEHEIGHT * 7);
 
-        this.leftBB = new BoundingBox(this.x, this.y, (PARAMS.TILEWIDTH * 9) / 2, PARAMS.TILEHEIGHT * 7);
-        this.rightBB = new BoundingBox(this.x + (PARAMS.TILEWIDTH * 9) / 2, this.y, (PARAMS.TILEWIDTH * 9) / 2, PARAMS.TILEHEIGHT * 7);
-        this.topBB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH * 7, (PARAMS.TILEHEIGHT * 9) / 2);
-        this.botBB = new BoundingBox(this.x, this.y + (PARAMS.TILEHEIGHT * 7) / 2, PARAMS.TILEWIDTH * 9, (PARAMS.TILEHEIGHT * 7) / 2);
+        this.leftBB = new BoundingBox(this.x + 20, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
+        this.rightBB = new BoundingBox(this.x + 164, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
+        this.topBB = new BoundingBox(this.x + 20, this.y + 14, PARAMS.TILEWIDTH * 9, 0);
+        this.bottomBB = new BoundingBox(this.x + 20, this.y + 127,PARAMS.TILEWIDTH * 9, 0);
 
-        // this.game.Rock = this;
-
-        // this.rocks = [];
-        // this.loadRock();
     };
-
-    // loadRock() {
-    //     for(var i = 0; i < 1; i++) {
-    //         this.rocks.push([]);
-    //     }
-
-    //     this.rocks[0] = new Animator(this.spritesheet, 1, 1, this.width, this.height, 1, 1);
-    // };
 
     update() {
         
@@ -40,6 +28,18 @@ class Rock {
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
+            
+            ctx.strokeStyle = 'Blue';
+            ctx.strokeRect(this.leftBB.x  - this.game.camera.x, this.leftBB.y - this.game.camera.y, this.leftBB.width, this.leftBB.height);
+
+            ctx.strokeStyle = 'Green';
+            ctx.strokeRect(this.rightBB.x  - this.game.camera.x, this.rightBB.y - this.game.camera.y, this.rightBB.width, this.rightBB.height);
+
+            ctx.strokeStyle = 'Purple';
+            ctx.strokeRect(this.topBB.x  - this.game.camera.x, this.topBB.y - this.game.camera.y, this.topBB.width, this.topBB.height);
+
+            ctx.strokeStyle = 'Black';
+            ctx.strokeRect(this.bottomBB.x  - this.game.camera.x, this.bottomBB.y - this.game.camera.y, this.bottomBB.width, this.bottomBB.height);
         }
     }
 }

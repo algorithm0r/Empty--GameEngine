@@ -71,35 +71,35 @@ class Ship {
 
     update() {
 
-        const MOVE = 3;
+        const MOVE = 300;
 
         const TICK = this.game.clockTick
 
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            this.velocity.y -= MOVE;
-            // this.y -= MOVE * TICK;
+            // this.velocity.y -= MOVE;
+            this.y -= MOVE * TICK;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            this.velocity.y += MOVE;
-            // this.y += MOVE * TICK;
+            // this.velocity.y += MOVE;
+            this.y += MOVE * TICK;
         }
 
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            this.velocity.x -= MOVE;
-            // this.x -= MOVE * TICK;
+            // this.velocity.x -= MOVE;
+            this.x -= MOVE * TICK;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            this.velocity.x += MOVE;
-            // this.x += MOVE * TICK;
+            // this.velocity.x += MOVE;
+            this.x += MOVE * TICK;
         }
 /*
         if (game.click) {
@@ -121,14 +121,7 @@ class Ship {
            
         }
         */
-        // if (this.x > 1022) this.x = -40;
-        // if (this.x < -40) this.x = 1022;
-        // if (this.y > 1022) this.y = -40;
-        // if (this.y < -40) this.y = 1022;
 
-        //velocity
-        this.x += this.velocity.x * TICK;
-        this.y += this.velocity.y * TICK;
         this.updateBB();
 
         //collision
@@ -137,17 +130,16 @@ class Ship {
             if(entity.BB && that.BB.collide(entity.BB)) {
                 if(entity instanceof Rock) {
                     if(that.BB.collide(entity.BB)) {
-                        console.log("collided with rock");
-                        // temporary collision
-                        if(that.velocity.x > 0) that.velocity.x = 0;
-                        if(that.velocity.y > 0) that.velocity.y = 0;
-                        if(that.velocity.x < 0) that.velocity.x = 0;
-                        if(that.velocity.y < 0) that.velocity.y = 0;
-
-                        // if(that.x > 0) that.x -= MOVE * TICK;
-                        // if(that.y > 0) that.y -= MOVE * TICK;
-                        // if(that.x < 0) that.x += MOVE * TICK;
-                        // if(that.y < 0) that.y += MOVE * TICK;
+                        console.log("collided with rock");  
+                         if (that.lastBB.collide(entity.leftBB)) {
+                            that.x -= MOVE * TICK;
+                        } else if (that.lastBB.collide(entity.rightBB)) {
+                            that.x += MOVE * TICK;
+                        } else if (that.lastBB.collide(entity.topBB)) {
+                            that.y -= MOVE * TICK;
+                        } else {
+                            that.y += MOVE * TICK;
+                        }
                     }
                     that.updateBB();
                 }
