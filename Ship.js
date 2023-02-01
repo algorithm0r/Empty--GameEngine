@@ -2,6 +2,10 @@ class Ship {
     //
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
+
+        this.health = 100;
+        this.damage = 15;
+
         this.game.player = this;
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
 
@@ -145,7 +149,8 @@ class Ship {
                 }
                 if(entity instanceof EnemyShip) {
                     console.log("collided with enemy");
-                    this.dead = true;
+                    that.health -= entity.damage;
+                    console.log(that.health);
                 }
             }
         });

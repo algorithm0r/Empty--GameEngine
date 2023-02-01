@@ -2,6 +2,9 @@ class EnemyShip {
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
 
+        this.health = 50;
+        this.damage = 10;
+
         this.width = 70;
         this.height = 50;
         this.enemyship = new Animator(ASSET_MANAGER.getAsset("./assets/player/mobshipw.png"), 1, 1, this.width, this.height, 1, 1);
@@ -15,7 +18,7 @@ class EnemyShip {
         this.speed = 0;
         this.dead = false;
 
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH * 9, PARAMS.TILEHEIGHT * 3);
+        this.BB = new BoundingBox(this.x + 10, this.y + 10, PARAMS.TILEWIDTH * 7, PARAMS.TILEHEIGHT * 2);
     };
 
     update() {
@@ -24,6 +27,9 @@ class EnemyShip {
 
     draw(ctx) {
         this.enemyship.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
+        if(this.dead === true) {
+            this.removeFromWorld = true;
+        }
 
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
