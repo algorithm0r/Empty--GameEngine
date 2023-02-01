@@ -125,7 +125,7 @@ class Ship {
            
         }
         */
-
+//
         this.updateBB();
 
         //collision
