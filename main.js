@@ -2,8 +2,9 @@
 
 const ASSET_MANAGER = new AssetManager();
 
-// ASSET_MANAGER.queueDownload("./img/pixelforest.png");
 ASSET_MANAGER.queueDownload("./assets/player/mobshipw.png");
+ASSET_MANAGER.queueDownload("./assets/enemies/slime.png");
+
 ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Rocks/rocksprite.png");
 ASSET_MANAGER.queueDownload("./assets/player/ship.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/cannonball.png");
@@ -20,9 +21,6 @@ ASSET_MANAGER.downloadAll(() => {
     PARAMS.CANVAS_WIDTH = canvas.width;
     PARAMS.CANVAS_HEIGHT = canvas.height;
 
-    // game.addEntity(new Ship(game));
-    // game.addEntity(new Background(game));
-    // game.addEntity(new Rock(game));
     game.addEntity(new SceneManager(game));
 
     game.init(ctx);

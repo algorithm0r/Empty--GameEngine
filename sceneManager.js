@@ -11,6 +11,7 @@ class SceneManager {
         
         this.game.addEntity(new Rock(this.game));
         this.game.addEntity(new EnemyShip(this.game));
+        this.game.addEntity(new Slime(this.game));
     };
 
     clearEntities() {

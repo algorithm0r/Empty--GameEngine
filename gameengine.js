@@ -18,6 +18,7 @@ class GameEngine {
 
         this.player = null;
         this.projectile = null;
+        this.playerLocation = {x: PARAMS.CANVAS_WIDTH / 2, y: PARAMS.CANVAS_HEIGHT / 2};
 
         // Options and the Details
         this.options = options || {
