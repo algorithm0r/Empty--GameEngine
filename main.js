@@ -4,10 +4,11 @@ const ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./assets/player/mobshipw.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/slime.png");
-
+ASSET_MANAGER.queueDownload("./assets/items/coin.png");
 ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Rocks/rocksprite.png");
 ASSET_MANAGER.queueDownload("./assets/player/ship.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/cannonball.png");
+
 
 ASSET_MANAGER.downloadAll(() => {
 

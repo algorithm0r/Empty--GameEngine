@@ -11,7 +11,8 @@ class Animator {
 
         if (this.elapsedTime > this.totalTime) this.elapsedTime -= this.totalTime;
 
-        const frame = this.currentFrame();
+        let frame = this.currentFrame();
+        if(this.reverse) frame = this.frameCount - frame - 1;
 
         ctx.drawImage(this.spritesheet,
             this.xStart + this.width * frame, this.yStart,

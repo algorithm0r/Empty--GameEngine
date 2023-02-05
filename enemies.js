@@ -13,9 +13,6 @@ class EnemyShip {
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.x = -200;
-        this.y = -250;
-
         this.speed = 0;
         this.dead = false;
         this.healthbar = new Healthbar(this);
@@ -31,6 +28,7 @@ class EnemyShip {
         this.enemyship.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
         if(this.dead === true) {
             this.removeFromWorld = true;
+            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10));
         }
 
         if(PARAMS.DEBUG) {
