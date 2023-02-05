@@ -14,7 +14,7 @@ class SceneManager {
         
         //Temp entities
         this.game.addEntity(new Rock(this.game, 100, 100));
-        this.game.addEntity(new EnemyShip(this.game, -200, -250));
+        this.game.addEntity(new EnemyShip(this.game, -200, -250, this.ship));
         this.game.addEntity(new Slime(this.game));
         this.game.addEntity(new Coin(this.game, -200, 0, this.ship));
     };
@@ -27,8 +27,8 @@ class SceneManager {
 
     update() {
         PARAMS.DEBUG = document.getElementById("debug").checked;
-        let xmid = PARAMS.CANVAS_WIDTH / 2 - 47;
-        let ymid = PARAMS.CANVAS_HEIGHT / 2 - 60;
+        let xmid = PARAMS.CANVAS_WIDTH / 2 - PARAMS.TILEWIDTH * 2;
+        let ymid = PARAMS.CANVAS_HEIGHT / 2 - PARAMS.TILEHEIGHT * 2;
         
         this.x = this.ship.x - xmid;
         this.y = this.ship.y - ymid;

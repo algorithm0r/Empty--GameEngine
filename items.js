@@ -8,32 +8,54 @@ class Coin {
         this.velocity = {x: 0, y: 0};
         this.acceleration = 100000;
 
+        this.speed = 100;
+
         this.attraction = new Gravitate(this.player, this.game, this);
 
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/items/coin.png"), 0, 3, 16, 16, 1, .5, true, true);
 
-        this.BB = new BoundingBox(this.x + 13, this.y + 12, PARAMS.TILEWIDTH / 2, PARAMS.TILEHEIGHT / 2);
+        this.updateBB();
     };
 
     collideRadius(other) {
         return getDistance(this, other) < this.visualRadius + other.visualRadius + 8;
     };
 
+    updateBB() {
+        this.BB = new BoundingBox(this.x + 13, this.y + 12, PARAMS.TILEWIDTH / 2, PARAMS.TILEHEIGHT / 2);
+    };
+
     update() {
+
+        const TICK = game.clockTick;
+
+        let playerX = game.playerLocation.x;
+        let playerY = game.playerLocation.y;
+
+        let dx = this.x - playerX;
+        let dy = this.y - playerY;
+
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if(distance != 0 && this.collideRadius(this.player)) {
+            dx /= distance;
+            dy /= distance;
+
+            this.x -= dx * this.speed * TICK;
+            this.y -= dy * this.speed * TICK;
+        }
+
+        this.updateBB();
+
+        //collision
         let that = this;
         this.game.entities.forEach(entity => {
             if(entity instanceof Ship) {
-                if(that.collideRadius(entity)) {
-                    console.log("coin collided with ship radius");
-                    // that.attraction.gravitate();
-                }
-
                 if(that.BB.collide(entity.BB)) {
                     that.removeFromWorld = true;
                 }
             }
-
-        })
+        });
     };
 
     draw(ctx) {

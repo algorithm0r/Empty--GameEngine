@@ -1,6 +1,6 @@
 class EnemyShip {
-    constructor(game, x, y) {
-        Object.assign(this, {game, x, y});
+    constructor(game, x, y, player) {
+        Object.assign(this, {game, x, y, player});
 
         this.health = 50;
         this.maxHealth = 50;
@@ -13,22 +13,44 @@ class EnemyShip {
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.speed = 0;
+        this.speed = 50;
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
+        this.updateBB();
+    };
+
+    updateBB() {
         this.BB = new BoundingBox(this.x + 10, this.y + 10, PARAMS.TILEWIDTH * 7, PARAMS.TILEHEIGHT * 2);
     };
 
     update() {
+        const TICK = game.clockTick;
 
+        let playerX = game.playerLocation.x;
+        let playerY = game.playerLocation.y;
+
+        let dx = this.x - playerX;
+        let dy = this.y - playerY;
+
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if(distance != 0) {
+            dx /= distance;
+            dy /= distance;
+
+            this.x -= dx * this.speed * TICK;
+            this.y -= dy * this.speed * TICK;
+        }
+
+        this.updateBB();
     };
 
     draw(ctx) {
         this.enemyship.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10));
+            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player));
         }
 
         if(PARAMS.DEBUG) {

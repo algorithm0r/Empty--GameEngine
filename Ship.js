@@ -12,8 +12,7 @@ class Ship {
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.circlex = (this.x + 45);
-        this.circley = (this.y + 50);
+
 
         this.speed = 0;
         this.dead = false;
@@ -26,7 +25,10 @@ class Ship {
         this.translate = { x: this.width * PARAMS.PIXELSCALER, y: this.width * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: -14 * PARAMS.PIXELSCALER, y: -6 * PARAMS.PIXELSCALER };
 
-        this.visualRadius = 135;
+        this.visualRadius = 50;
+        this.circlex = (this.x + 45);
+        this.circley = (this.y + 50);
+
         this.healthbar = new Healthbar(this);
 
     };
@@ -158,6 +160,9 @@ class Ship {
                 }
             }
         });
+
+        this.game.playerLocation.x = this.x;
+        this.game.playerLocation.y = this.y;
     };
 
     draw(ctx) {
@@ -170,7 +175,7 @@ class Ship {
             //Visual Radius
             ctx.beginPath();
             ctx.strokeStyle = 'Green';
-            ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
+            ctx.arc(this.circlex - this.game.camera.x, this.circley - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
         }
