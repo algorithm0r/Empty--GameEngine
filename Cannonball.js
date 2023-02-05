@@ -20,7 +20,7 @@ class CannonBall {
         this.frameWidth = 17;
         this.frameHeight = 17;
 
-        this.angle = Math.PI;
+        this.angle = angle ;
 
         this.positionx = this.x - this.game.camera.x;
         this.positiony = this.y - this.game.camera.y;
@@ -46,7 +46,7 @@ class CannonBall {
 
             return {dx: dx, dy:dy}
         
-        }
+        } 
         var normalCannonDirection = cannonAim(this, game);
         var dx = normalCannonDirection.dx;
         var dy = normalCannonDirection.dy; */
@@ -62,13 +62,14 @@ class CannonBall {
 
         const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
 
-        this.x += this.SPEED * TICKSCALE * Math.cos(this.angle);
-        this.y += this.SPEED * TICKSCALE * Math.sin(this.angle);
+        var unitx = Math.cos(this.angle);
+        var unity = Math.sin(this.angle);
+
+        this.x += this.SPEED * TICKSCALE * unitx;
+        this.y += this.SPEED * TICKSCALE * unity;
 
         this.positionx = this.x - this.game.camera.x;
         this.positiony = this.y - this.game.camera.y;
-
-        //console.log((this.x - this.game.camera.x) + " " + (this.y - this.game.camera.y))
 
        
         if (this.positionx < 0 || this.positiony < 0 || this.positionx > PARAMS.CANVAS_WIDTH || this.positiony > PARAMS.CANVAS_HEIGHT) {
