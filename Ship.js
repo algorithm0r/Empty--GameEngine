@@ -18,8 +18,8 @@ class Ship {
         this.animations = [];
         this.loadAnimations();
 
-        this.translate = { x: this.width * PARAMS.PIXELSCALER, y: this.width * PARAMS.PIXELSCALER };
-        this.canvasOffset = { x: -14 * PARAMS.PIXELSCALER, y: -6 * PARAMS.PIXELSCALER };
+        this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
+        this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
     };
 
     loadAnimations() {
@@ -54,13 +54,17 @@ class Ship {
         };
         if (this.game.mouse != null) {
 
-
-            this.source = { x: this.x + this.translate.x + this.canvasOffset.x + PARAMS.PIXELSCALER / 2, y: this.y + this.translate.y + this.canvasOffset.y + PARAMS.PIXELSCALER / 2 };
+            this.source = { x: this.x - this.game.camera.x, y: this.y -this.game.camera.y};
+            console.log(this.translate);
+            console.log(this.canvasOffset);
+            console.log(this.source);
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            console.log(this.destination);
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
-
+            console.log(this.angle);
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-            //console.log(this.angle);
+            console.log(this.angle);
+
            
         }
 
