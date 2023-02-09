@@ -6,6 +6,7 @@ class SceneManager {
         this.x = 0;
         this.y = 0;
         this.gold = 0;
+        this.time = 0;
 
         this.gameOver = false;
 
@@ -13,10 +14,9 @@ class SceneManager {
         this.game.addEntity(this.ship);
         
         //Temp entities
-        this.game.addEntity(new Rock(this.game, 100, 100));
         this.game.addEntity(new EnemyShip(this.game, -200, -250, this.ship));
-        this.game.addEntity(new Slime(this.game));
-        this.game.addEntity(new Coin(this.game, -200, 0, this.ship));
+
+        this.game.addEntity(new Rock(this.game, 100, 100));
     };
 
     clearEntities() {
@@ -35,6 +35,26 @@ class SceneManager {
     };
 
     draw(ctx) {
-
+         this.timer = function() {
+            let date = new Date();
+            let sec = date.getSeconds();
+            let min = date.getMinutes();
+            ctx.font = '50px ""';
+            ctx.fillStyle = "White";
+            ctx.fillText("Time: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), PARAMS.TILEWIDTH * 48, PARAMS.TILEHEIGHT * 3);
+        };
+        setInterval(this.timer, 1000);
+        this.timer();
+        ctx.font = '50px ""';
+        ctx.fillStyle = "White";
+        ctx.fillText("Gold: " + this.gold, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 6);
+        ctx.fillText("HP: ", PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 3);
+        if(this.ship.health > 0) {
+            let ratio = this.ship.health / this.ship.maxHealth;
+            ctx.strokeStyle = "Black";
+            ctx.fillStyle = ratio < 0.3 ? "Red" : ratio < 0.6 ? "Yellow" : "Green";
+            ctx.fillRect((this.ship.x - this.game.camera.x) / 5, (this.ship.y - this.game.camera.y) / 12.75, this.ship.width * ratio * 5, PARAMS.TILEHEIGHT);
+            ctx.strokeRect((this.ship.x - this.game.camera.x) / 5, (this.ship.y - this.game.camera.y) / 12.75, this.ship.width * 5, PARAMS.TILEHEIGHT);
+        }
     };
 }

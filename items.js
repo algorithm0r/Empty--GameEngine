@@ -1,6 +1,6 @@
 class Coin {
-    constructor(game, x, y, player) {
-        Object.assign(this,{game, x, y, player});
+    constructor(game, x, y, player, value) {
+        Object.assign(this,{game, x, y, player, value});
 
         this.visualRadius = 100;
         this.circlex = this.x + (PARAMS.TILEWIDTH / 2);

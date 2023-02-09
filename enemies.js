@@ -5,6 +5,7 @@ class EnemyShip {
         this.health = 50;
         this.maxHealth = 50;
         this.damage = 10;
+        this.goldVal = 200;
 
         this.width = 70;
         this.height = 50;
@@ -21,6 +22,7 @@ class EnemyShip {
     };
 
     updateBB() {
+        this.lastBB = this.BB;
         this.BB = new BoundingBox(this.x + 10, this.y + 10, PARAMS.TILEWIDTH * 7, PARAMS.TILEHEIGHT * 2);
     };
 
@@ -44,13 +46,34 @@ class EnemyShip {
         }
 
         this.updateBB();
+        
+        var that = this;
+        this.game.entities.forEach(entity => {
+            if(entity.BB && that.BB.collide(entity.BB)) {
+                if(entity instanceof Rock) {
+                    if(that.BB.collide(entity.BB)) {
+                        console.log("collided with rock");  
+                         if (that.lastBB.collide(entity.leftBB)) {
+                            that.x -= this.speed * TICK;
+                        } else if (that.lastBB.collide(entity.rightBB)) {
+                            that.x += this.speed * TICK;
+                        } else if (that.lastBB.collide(entity.topBB)) {
+                            that.y -= this.speed * TICK;
+                        } else {
+                            that.y += this.speed * TICK;
+                        }
+                    }
+                    that.updateBB();
+                }
+            }
+        });
     };
 
     draw(ctx) {
         this.enemyship.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player));
+            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
         }
 
         if(PARAMS.DEBUG) {

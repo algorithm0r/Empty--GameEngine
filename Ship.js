@@ -3,11 +3,15 @@ class Ship {
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
 
-        this.health = 100;
+        this.health = 150;
+        this.maxHealth = 150;
         this.damage = 15;
+        this.invulnerabilityFrame = 0.8;
 
+        this.width = 47;
+        this.height = 60;
         this.game.player = this;
-        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, this.width, this.height, 4, 0.5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
@@ -15,6 +19,7 @@ class Ship {
 
 
         this.speed = 0;
+        this.lastDT = Date.now();
         this.dead = false;
 
         this.updateBB();
@@ -28,8 +33,6 @@ class Ship {
         this.visualRadius = 50;
         this.circlex = (this.x + 45);
         this.circley = (this.y + 50);
-
-        this.healthbar = new Healthbar(this);
 
     };
 
@@ -159,8 +162,15 @@ class Ship {
                 }
                 if(entity instanceof EnemyShip) {
                     console.log("collided with enemy");
-                    that.health -= entity.damage;
-                    console.log(that.health);
+                    if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
+                        this.lastDT = Date.now();
+                        that.health -= entity.damage;
+                        console.log(that.health);
+                    }
+                }
+                if(entity instanceof Coin) {
+                    that.game.camera.gold += entity.value;
+                    console.log(that.game.camera.gold);
                 }
             }
         });
@@ -183,8 +193,6 @@ class Ship {
             ctx.stroke();
             ctx.closePath();
         }
-
-        this.healthbar.draw(ctx);
 
         if(this.dead === true) {
             this.game.camera.clearEntities();
