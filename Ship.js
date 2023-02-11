@@ -148,14 +148,14 @@ class Ship {
                 if(entity instanceof Rock) {
                     if(that.BB.collide(entity.BB)) {
                         console.log("collided with rock");  
-                         if (that.lastBB.collide(entity.leftBB)) {
-                            that.x -= MOVE * TICK;
-                        } else if (that.lastBB.collide(entity.rightBB)) {
-                            that.x += MOVE * TICK;
-                        } else if (that.lastBB.collide(entity.topBB)) {
-                            that.y -= MOVE * TICK;
-                        } else {
-                            that.y += MOVE * TICK;
+                         if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
+                            that.x -= that.lastBB.right - entity.BB.left;
+                        } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
+                            that.x += entity.BB.right - that.lastBB.left;
+                        } else if (that.lastBB.bottom - PARAMS.TILEHEIGHT <= entity.BB.top) { //ship bottom side collides with entity top
+                            that.y -= that.lastBB.bottom - entity.BB.top;
+                        } else if (that.lastBB.top + PARAMS.TILEHEIGHT >= entity.BB.bottom) { //ship top side collides with entity bottom
+                            that.y += entity.BB.bottom - that.lastBB.top;
                         }
                     }
                     that.updateBB();
@@ -189,7 +189,7 @@ class Ship {
             //Visual Radius
             ctx.beginPath();
             ctx.strokeStyle = 'Green';
-            ctx.arc(this.circlex - this.game.camera.x, this.circley - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
+            ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
         }
