@@ -26,6 +26,17 @@ class SceneManager {
     };
 
     update() {
+        if (this.timer === undefined) {
+            this.timer = 0;
+        } else {
+            this.timer += this.game.clockTick;
+        }
+
+        if (this.timer > 2) {
+            this.time += 1;
+            this.timer = undefined;
+        }
+
         PARAMS.DEBUG = document.getElementById("debug").checked;
         let xmid = PARAMS.CANVAS_WIDTH / 2 - PARAMS.TILEWIDTH * 2;
         let ymid = PARAMS.CANVAS_HEIGHT / 2 - PARAMS.TILEHEIGHT * 2;
@@ -35,19 +46,10 @@ class SceneManager {
     };
 
     draw(ctx) {
-         this.timer = function() {
-            let date = new Date();
-            let sec = date.getSeconds();
-            let min = date.getMinutes();
-            ctx.font = '50px ""';
-            ctx.fillStyle = "White";
-            ctx.fillText("Time: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), PARAMS.TILEWIDTH * 48, PARAMS.TILEHEIGHT * 3);
-        };
-        setInterval(this.timer, 1000);
-        this.timer();
         ctx.font = '50px ""';
         ctx.fillStyle = "White";
         ctx.fillText("Gold: " + this.gold, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 6);
+        ctx.fillText("Time: " + this.time, PARAMS.TILEWIDTH * 51, PARAMS.TILEHEIGHT * 3)
         ctx.fillText("HP: ", PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 3);
         if(this.ship.health > 0) {
             let ratio = this.ship.health / this.ship.maxHealth;
