@@ -7,23 +7,45 @@ class EnemyShip {
         this.damage = 10;
         this.goldVal = 200;
 
-        this.width = 70;
-        this.height = 50;
-        this.enemyship = new Animator(ASSET_MANAGER.getAsset("./assets/player/mobshipw.png"), 1, 1, this.width, this.height, 1, 1, false, true);
+        this.width = 106;
+        this.height = 80;
+        this.enemyship = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 0, this.width, this.height, 4, .5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
+        this.animations = [];
+        
 
-        this.speed = getRandomInt(50, 150);
+        this.speed = getRandomInt(30, 60);
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
         this.updateBB();
+        this.loadAnimations();
     };
+
+    loadAnimations() {
+        for (var i = 0; i < 4; i++) {//4 directions
+            this.animations.push([]);
+        }
+
+        this.animations[0] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 0, 106, 80, 4, 0.5);
+        this.animations[1] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 115, 106, 45, 4, .5);
+        this.animations[2] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 210, 106, 45, 4, .5);
+        this.animations[3] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 295, 106, 80, 4 , .5);
+    }
 
     updateBB() {
         this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x + 10, this.y + 10, PARAMS.TILEWIDTH * 7, PARAMS.TILEHEIGHT * 2);
+        if ((this.facing == 0) || (this.facing == 3)) {
+            this.BB = new BoundingBox(this.x + 53, this.y + 40, this.height, this.width);
+        }
+        else if (this.facing == 1) {
+            this.BB = new BoundingBox(this.x, this.y + 13, 1.25 * this.width, this.height);
+        }
+        else if (this.facing == 2) {
+            this.BB = new BoundingBox(this.x + 55, this.y + 13, 1.25 * this.width, this.height);
+        }
     };
 
     update() {
@@ -46,6 +68,20 @@ class EnemyShip {
         }
         console.log(this.speed);
         this.updateBB();
+
+        if(this.x < this.game.player.x) {
+            this.facing = 2
+        }
+        if(this.y < this.game.player.y) {
+            this.facing = 0
+        }
+        else if(this.x > this.game.player.x) {
+            this.facing = 1
+        }
+        else if(this.y > this.game.player.y) {
+            this.facing = 3
+        }
+        
 
         //enemy collision
         var that = this;
@@ -71,7 +107,8 @@ class EnemyShip {
     };
 
     draw(ctx) {
-        this.enemyship.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
+        this.animations[this.facing].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, PARAMS.SCALE);
+        //this.enemyship.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
         if(this.dead === true) {
             this.removeFromWorld = true;
             this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
@@ -83,47 +120,4 @@ class EnemyShip {
         }
         this.healthbar.draw(ctx);
     };
-}
-
-class Slime {
-    constructor(game, x, y) {
-        Object.assign(this, {game, x, y});
-
-        this.health = 20;
-        this.maxHealth = 20;
-        this.damage = 5;
-
-        this.width = 30;
-        this.height = 30;
-        this.x = -300;
-        this.y = -350;
-        this.speed = 0;
-
-        this.facing = 0;
-        this.state = 0;
-        this.dead = false;
-        
-        this.slime = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/slime.png"), -3, 6, 30, 30, 9, 0.2, false, true);
-        
-        this.animations = [];
-        this.loadAnimations();
-
-        this.game.Slime = this;
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
-    
-    };
-
-    loadAnimations() {
-
-        this.animations[0] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/slime.png"), 6, 36, 14, 18, 9, 0.2, false, true);
-        this.animations[1] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/slime.png"), 215, 22, 14, 18, 9, 0.2, true, true);
-    };
-
-    update() {
-
-    };
-
-    draw(ctx) {
-        // this.slime.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
-    }
 }

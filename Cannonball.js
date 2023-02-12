@@ -5,7 +5,7 @@ class CannonBall {
 
         //var dist = distance(this, this.target);
         this.maxSpeed = 5;
-        this.SPEED = 1;
+        this.SPEED = 2.5;
         this.damage = 15;
 
         this.game.projectile = this;
