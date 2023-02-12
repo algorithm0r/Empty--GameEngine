@@ -55,22 +55,23 @@ class Ship {
         if (this.game.mouse != null) {
 
             this.source = { x: this.x - this.game.camera.x, y: this.y -this.game.camera.y};
-            console.log(this.translate);
-            console.log(this.canvasOffset);
-            console.log(this.source);
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
-            console.log(this.destination);
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
-            console.log(this.angle);
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-            console.log(this.angle);
+
 
            
         }
-
-        this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
+        if(game.keys['1'])  { 
+            this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
        //this.game.addEntity(new CannonBall(this.game, this.source.x + this.game.camera.x, this.source.y + this.game.camera.y, this.angle));
+        }
+        else if(game.keys['2']) {
+            this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+        }
     }
+
+
 
     update() {
 
