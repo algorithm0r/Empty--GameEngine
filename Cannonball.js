@@ -30,7 +30,6 @@ class CannonBall {
 
         this.cache = [];
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png"), 0, 0, 17, 17, 1, 1, 0);
-        this.BoundingBox = new BoundingBox(this, 50, 50, 17, 17);
 
      /*   const cannonAim = function cannonAim(thisEntity, game){
             var playerX = game.player.x;
@@ -52,8 +51,12 @@ class CannonBall {
         var dx = normalCannonDirection.dx;
         var dy = normalCannonDirection.dy; */
 
-        this.update();
+        this.updateBB();
     }
+
+    updateBB() {
+        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
+    };
     
     update() {
 
@@ -73,9 +76,24 @@ class CannonBall {
             this.removeFromWorld = true;
         }
 
-        //this.BoundingBox.update();
+        this.updateBB();
+        
+        var that = this;
+        this.game.entities.forEach(entity => {
+            if(entity instanceof EnemyShip) {
+                if(that.BB.collide(entity.BB)) {
+                    console.log("cannonball hit enemy");
+                    entity.health -= that.damage;
+                    console.log(entity.health);
+                    that.removeFromWorld = true;
+                    if(entity.health <= 0) {
+                        entity.dead = true;
+                    }
+                }
+            }
+        })
+    };
 
-    }
     draw(ctx) {
 
         //this.animation.drawFrame(this.game.clockTick, ctx, this.positionx, this.positiony);
@@ -85,9 +103,12 @@ class CannonBall {
         //works
         ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
 
-       //kinda works 
-       //ctx.drawImage(this.spritesheet, this.positionx - this.RADIUS, this.positiony - this.RADIUS, this.RADIUS * 1, this.RADIUS * 1);
-
+        //kinda works 
+        //ctx.drawImage(this.spritesheet, this.positionx - this.RADIUS, this.positiony - this.RADIUS, this.RADIUS * 1, this.RADIUS * 1);
+        if(PARAMS.DEBUG) {
+            ctx.strokeStyle = 'Red';
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
+        }
     }
 
  }
