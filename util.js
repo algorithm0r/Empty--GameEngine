@@ -67,3 +67,7 @@ const getDistance = (p1, p2) => {
 const timeCount = (t1, t2) => {
     return Math.abs(t1 - t2) / 1000;
 }
+
+const getRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

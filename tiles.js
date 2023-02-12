@@ -9,10 +9,10 @@ class Rock {
 
         this.BB = new BoundingBox(this.x + 20, this.y + 15, PARAMS.TILEWIDTH * 9, PARAMS.TILEHEIGHT * 7);
 
-        this.leftBB = new BoundingBox(this.x + 20, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
-        this.rightBB = new BoundingBox(this.x + 164, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
-        this.topBB = new BoundingBox(this.x + 20, this.y + 13, PARAMS.TILEWIDTH * 9, 0);
-        this.bottomBB = new BoundingBox(this.x + 20, this.y + 127,PARAMS.TILEWIDTH * 9, 0);
+        // this.leftBB = new BoundingBox(this.x + 20, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
+        // this.rightBB = new BoundingBox(this.x + 164, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
+        // this.topBB = new BoundingBox(this.x + 20, this.y + 13, PARAMS.TILEWIDTH * 9, 0);
+        // this.bottomBB = new BoundingBox(this.x + 20, this.y + 127,PARAMS.TILEWIDTH * 9, 0);
 
     };
 
@@ -27,17 +27,17 @@ class Rock {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
             
-            ctx.strokeStyle = 'Blue';
-            ctx.strokeRect(this.leftBB.x  - this.game.camera.x, this.leftBB.y - this.game.camera.y, this.leftBB.width, this.leftBB.height);
+            // ctx.strokeStyle = 'Blue';
+            // ctx.strokeRect(this.leftBB.x  - this.game.camera.x, this.leftBB.y - this.game.camera.y, this.leftBB.width, this.leftBB.height);
 
-            ctx.strokeStyle = 'Green';
-            ctx.strokeRect(this.rightBB.x  - this.game.camera.x, this.rightBB.y - this.game.camera.y, this.rightBB.width, this.rightBB.height);
+            // ctx.strokeStyle = 'Green';
+            // ctx.strokeRect(this.rightBB.x  - this.game.camera.x, this.rightBB.y - this.game.camera.y, this.rightBB.width, this.rightBB.height);
 
-            ctx.strokeStyle = 'Purple';
-            ctx.strokeRect(this.topBB.x  - this.game.camera.x, this.topBB.y - this.game.camera.y, this.topBB.width, this.topBB.height);
+            // ctx.strokeStyle = 'Purple';
+            // ctx.strokeRect(this.topBB.x  - this.game.camera.x, this.topBB.y - this.game.camera.y, this.topBB.width, this.topBB.height);
 
-            ctx.strokeStyle = 'Black';
-            ctx.strokeRect(this.bottomBB.x  - this.game.camera.x, this.bottomBB.y - this.game.camera.y, this.bottomBB.width, this.bottomBB.height);
+            // ctx.strokeStyle = 'Black';
+            // ctx.strokeRect(this.bottomBB.x  - this.game.camera.x, this.bottomBB.y - this.game.camera.y, this.bottomBB.width, this.bottomBB.height);
         }
     };
 }

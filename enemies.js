@@ -14,7 +14,7 @@ class EnemyShip {
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.speed = 50;
+        this.speed = getRandomInt(50, 150);
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
@@ -27,10 +27,10 @@ class EnemyShip {
     };
 
     update() {
-        const TICK = game.clockTick;
+        const TICK = this.game.clockTick;
 
-        let playerX = game.playerLocation.x;
-        let playerY = game.playerLocation.y;
+        let playerX = this.game.playerLocation.x;
+        let playerY = this.game.playerLocation.y;
 
         let dx = this.x - playerX;
         let dy = this.y - playerY;
@@ -44,23 +44,24 @@ class EnemyShip {
             this.x -= dx * this.speed * TICK;
             this.y -= dy * this.speed * TICK;
         }
-
+        console.log(this.speed);
         this.updateBB();
-        
+
+        //enemy collision
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
                 if(entity instanceof Rock) {
                     if(that.BB.collide(entity.BB)) {
                         console.log("collided with rock");  
-                         if (that.lastBB.collide(entity.leftBB)) {
-                            that.x -= this.speed * TICK;
-                        } else if (that.lastBB.collide(entity.rightBB)) {
-                            that.x += this.speed * TICK;
-                        } else if (that.lastBB.collide(entity.topBB)) {
-                            that.y -= this.speed * TICK;
-                        } else {
-                            that.y += this.speed * TICK;
+                         if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
+                            that.x -= that.lastBB.right - entity.BB.left;
+                        } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
+                            that.x += entity.BB.right - that.lastBB.left;
+                        } else if (that.lastBB.bottom - PARAMS.TILEHEIGHT <= entity.BB.top) { //ship bottom side collides with entity top
+                            that.y -= that.lastBB.bottom - entity.BB.top;
+                        } else if (that.lastBB.top + PARAMS.TILEHEIGHT >= entity.BB.bottom) { //ship top side collides with entity bottom
+                            that.y += entity.BB.bottom - that.lastBB.top;
                         }
                     }
                     that.updateBB();
