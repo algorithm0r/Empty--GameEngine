@@ -62,11 +62,11 @@ class Ship {
 
            
         }
-        if(game.keys['1'])  { 
+        
             this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
        //this.game.addEntity(new CannonBall(this.game, this.source.x + this.game.camera.x, this.source.y + this.game.camera.y, this.angle));
-        }
-        else if(game.keys['2']) {
+      
+        if(game.keys['2']) {
             this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
         }
     }
@@ -105,34 +105,7 @@ class Ship {
             // this.velocity.x += MOVE;
             this.x += 2;
         }
-/*
-        if (game.click) {
-            this.fire();
-        }
-        
-        this.angleOffset = {
-            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
-            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
-        };
-        if (this.game.mouse != null) {
 
-
-            this.source = { x: this.x + this.translate.x + this.canvasOffset.x + PARAMS.PIXELSCALER / 2, y: this.y + this.translate.y + this.canvasOffset.y + PARAMS.PIXELSCALER / 2 };
-            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
-            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
-
-            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-           
-        }
-        */
-        // if (this.x > 1022) this.x = -40;
-        // if (this.x < -40) this.x = 1022;
-        // if (this.y > 1022) this.y = -40;
-        // if (this.y < -40) this.y = 1022;
-
-        //velocity
-        // this.x += this.velocity.x * TICK;
-        // this.y += this.velocity.y * TICK;
         this.updateBB();
 
         //collision
@@ -141,12 +114,36 @@ class Ship {
             if(entity.BB && that.BB.collide(entity.BB)) {
                 if(entity instanceof Rock) {
                     if(that.BB.collide(entity.BB)) {
-                        if(that.velocity.x > 0) that.velocity.x = 0;
+                        console.log("collided with rock");  
+                         if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
+                            that.x -= that.lastBB.right - entity.BB.left;
+                        } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
+                            that.x += entity.BB.right - that.lastBB.left;
+                        } else if (that.lastBB.bottom - PARAMS.TILEHEIGHT <= entity.BB.top) { //ship bottom side collides with entity top
+                            that.y -= that.lastBB.bottom - entity.BB.top;
+                        } else if (that.lastBB.top + PARAMS.TILEHEIGHT >= entity.BB.bottom) { //ship top side collides with entity bottom
+                            that.y += entity.BB.bottom - that.lastBB.top;
+                        }
                     }
                     that.updateBB();
                 }
+                if(entity instanceof EnemyShip) {
+                    console.log("collided with enemy");
+                    if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
+                        this.lastDT = Date.now();
+                        that.health -= entity.damage;
+                        console.log(that.health);
+                    }
+                }
+                if(entity instanceof Coin) {
+                    that.game.camera.gold += entity.value;
+                    console.log(that.game.camera.gold);
+                }
             }
         });
+
+        this.game.playerLocation.x = this.x;
+        this.game.playerLocation.y = this.y;
     };
 
     draw(ctx) {

@@ -8,6 +8,8 @@ class SceneManager {
         this.gold = 0;
         this.time = 0;
 
+        this.spawntimer = 0;
+
         this.gameOver = false;
 
         this.ship = new Ship(this.game, this.x, this.y);
@@ -35,6 +37,14 @@ class SceneManager {
         if (this.timer > 2) {
             this.time += 1;
             this.timer = undefined;
+        }
+
+        this.spawntimer += this.game.clockTick;
+        if(this.spawntimer >= 20) {
+            this.spawnx = getRandomInt(500, -500);
+            this.spawny = getRandomInt(500, -500);
+            this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
+            this.spawntimer = 0;
         }
 
         PARAMS.DEBUG = document.getElementById("debug").checked;
