@@ -16,8 +16,6 @@ class SceneManager {
         this.game.addEntity(this.ship);
         
         //Temp entities
-        this.game.addEntity(new EnemyShip(this.game, -200, -250, this.ship));
-
         this.game.addEntity(new Rock(this.game, 100, 100));
     };
 

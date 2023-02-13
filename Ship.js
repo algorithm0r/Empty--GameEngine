@@ -8,14 +8,16 @@ class Ship {
         this.damage = 15;
         this.invulnerabilityFrame = 0.8;
 
+        this.width = 47;
+        this.height = 60;
         this.game.player = this;
-        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, this.width, this.height, 4, 0.5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.x = 0;
-        this.y = 0;
+
+
         this.speed = 0;
         this.lastDT = Date.now();
         this.dead = false;
@@ -84,7 +86,7 @@ class Ship {
 
     update() {
 
-        const MOVE = 1;
+        const MOVE = 300;
 
         const TICK = this.game.clockTick
 
@@ -92,13 +94,13 @@ class Ship {
             this.facing = 3;
             this.state = 0;
             // this.velocity.y -= MOVE;
-                this.y -= 2;
+            this.y -= MOVE * TICK;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
             // this.velocity.y += MOVE;
-            this.y += 2;
+            this.y += MOVE * TICK;
         }
 
         //determine horizontal
@@ -106,13 +108,13 @@ class Ship {
             this.facing = 1;
             this.state = 0;
             // this.velocity.x -= MOVE;
-            this.x -= 2;
+            this.x -= MOVE * TICK;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
             // this.velocity.x += MOVE;
-            this.x += 2;
+            this.x += MOVE * TICK;
         }
 
         this.updateBB();
@@ -161,12 +163,18 @@ class Ship {
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
-        
+           
+            //Visual Radius
             ctx.beginPath();
             ctx.strokeStyle = 'Green';
             ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
+        }
+
+        if(this.dead === true) {
+            this.game.camera.clearEntities();
+            this.game.addEntity(new GameOver(this.game));
         }
     };
 }
