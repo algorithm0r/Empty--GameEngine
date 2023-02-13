@@ -23,42 +23,15 @@ class Ship {
         this.dead = false;
 
         this.updateBB();
-
+        
         this.animations = [];
         this.loadAnimations();
 
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
 
-        this.visualRadius = 50;
-        this.circlex = (this.x + 45);
-        this.circley = (this.y + 50);
-
-    };
-
-    loadAnimations() {
-        for (var i = 0; i < 4; i++) {//4 directions
-            this.animations.push([]);
-            for (var j = 0; j < 2; j++) {//2 states
-                this.animations[i].push([]);
-            }
-        }
-
-        this.animations[0][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 54, 4, 0.5, false, true);
-        this.animations[1][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5, true, true);
-        this.animations[2][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5, false, true);
-        this.animations[3][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5, false, true);
-
-        this.animations[0][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5, false, true);
-        this.animations[1][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5, true, true);
-        this.animations[2][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5, false, true);
-        this.animations[3][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5, false, true);
-
-    };
-
-    updateBB() {
-        this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x + 20, this.y + 40,  PARAMS.TILEWIDTH * 3, PARAMS.TILEHEIGHT * 2);
+        // this.visualRadius = 50;
+        
     };
 
     loadAnimations() {
@@ -93,7 +66,7 @@ class Ship {
         };
         if (this.game.mouse != null) {
 
-            this.source = { x: this.x - this.game.camera.x, y: this.y -this.game.camera.y};
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;

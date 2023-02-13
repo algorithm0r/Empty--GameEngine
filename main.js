@@ -10,6 +10,7 @@ ASSET_MANAGER.queueDownload("./assets/player/ship.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/cannonball.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/fireball.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster.png");
+ASSET_MANAGER.queueDownload("./assets/enemies/monster1.png");
 
 
 ASSET_MANAGER.downloadAll(() => {
