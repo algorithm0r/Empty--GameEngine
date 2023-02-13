@@ -28,10 +28,14 @@ class Fireball {
         const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
 
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/fireball.png"), 0, 0, 17, 17, 1, 1, 0);
-        this.BoundingBox = new BoundingBox(this, 50, 50, 17, 17);
+        //this.BoundingBox = new BoundingBox(this, 50, 50, 17, 17);
 
-        this.update();
+        this.updateBB();
     }
+
+    updateBB() {
+        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
+    };
     
     update() {
 
@@ -55,7 +59,11 @@ class Fireball {
     draw(ctx) {
 
         ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
-
+       
+        if(PARAMS.DEBUG) {
+            ctx.strokeStyle = 'Red';
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
+        }
     }
 
  }

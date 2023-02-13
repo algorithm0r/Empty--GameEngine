@@ -6,7 +6,7 @@ class CannonBall {
         //var dist = distance(this, this.target);
         this.maxSpeed = 5;
         this.SPEED = 2.5;
-        this.damage = 15;
+        this.damage = 10;
 
         this.game.projectile = this;
        
@@ -30,26 +30,6 @@ class CannonBall {
 
         this.cache = [];
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png"), 0, 0, 17, 17, 1, 1, 0);
-
-     /*   const cannonAim = function cannonAim(thisEntity, game){
-            var playerX = game.player.x;
-            var playerY = game.player.y;
-            
-            var dx = thisEntity.x - playerX;
-            var dy = thisEntity.y - playerY;
-        
-            var distance = Math.sqrt(dx * dx + dy * dy);
-            var step = thisEntity.speed/1000;
-            
-            dx /= distance;
-            dy /= distance;
-
-            return {dx: dx, dy:dy}
-        
-        } 
-        var normalCannonDirection = cannonAim(this, game);
-        var dx = normalCannonDirection.dx;
-        var dy = normalCannonDirection.dy; */
 
         this.updateBB();
     }

@@ -2,6 +2,12 @@ class Ship {
     //
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
+
+        this.health = 150;
+        this.maxHealth = 150;
+        this.damage = 15;
+        this.invulnerabilityFrame = 0.8;
+
         this.game.player = this;
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
 
@@ -11,15 +17,18 @@ class Ship {
         this.x = 0;
         this.y = 0;
         this.speed = 0;
+        this.lastDT = Date.now();
+        this.dead = false;
 
         this.updateBB();
-
-        this.velocity = {x: 0, y: 0};
+        
         this.animations = [];
         this.loadAnimations();
 
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
+
+        
     };
 
     loadAnimations() {
@@ -54,7 +63,7 @@ class Ship {
         };
         if (this.game.mouse != null) {
 
-            this.source = { x: this.x - this.game.camera.x, y: this.y -this.game.camera.y};
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
@@ -152,6 +161,12 @@ class Ship {
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
+        
+            ctx.beginPath();
+            ctx.strokeStyle = 'Green';
+            ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath();
         }
     };
 }

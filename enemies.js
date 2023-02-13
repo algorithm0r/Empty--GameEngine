@@ -9,14 +9,14 @@ class EnemyShip {
 
         this.width = 106;
         this.height = 80;
-        this.enemyship = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 0, this.width, this.height, 4, .5);
+        this.enemyship = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster1.png"), 0, 0, this.width, this.height, 4, .5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
         this.animations = [];
         
 
-        this.speed = getRandomInt(30, 60);
+        this.speed = getRandomInt(10, 100);
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
@@ -29,22 +29,22 @@ class EnemyShip {
             this.animations.push([]);
         }
 
-        this.animations[0] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 0, 106, 80, 4, 0.5);
-        this.animations[1] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 115, 106, 45, 4, .5);
-        this.animations[2] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 210, 106, 45, 4, .5);
-        this.animations[3] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster.png"), 0, 295, 106, 80, 4 , .5);
+        this.animations[0] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster1.png"), 0, 10, 112, 80, 4, 0.4);
+        this.animations[1] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster1.png"), 0, 115, 112, 45, 4, .3);
+        this.animations[2] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster1.png"), 0, 210, 112, 45, 4, .3);
+        this.animations[3] = new Animator(ASSET_MANAGER.getAsset("./assets/enemies/monster1.png"), 0, 295, 112, 80, 4 , .4);
     }
 
     updateBB() {
         this.lastBB = this.BB;
         if ((this.facing == 0) || (this.facing == 3)) {
-            this.BB = new BoundingBox(this.x + 53, this.y + 40, this.height, this.width);
+            this.BB = new BoundingBox(this.x + 70, this.y + 20, this.height, this.width);
         }
         else if (this.facing == 1) {
-            this.BB = new BoundingBox(this.x, this.y + 13, 1.25 * this.width, this.height);
+            this.BB = new BoundingBox(this.x + 10, this.y + 13, 1.25 * this.width, this.height);
         }
         else if (this.facing == 2) {
-            this.BB = new BoundingBox(this.x + 55, this.y + 13, 1.25 * this.width, this.height);
+            this.BB = new BoundingBox(this.x + 70, this.y + 13, 1.25 * this.width, this.height);
         }
     };
 
@@ -69,18 +69,63 @@ class EnemyShip {
         console.log(this.speed);
         this.updateBB();
 
-        if(this.x < this.game.player.x) {
-            this.facing = 2
+        this.diffX = Math.abs(this.x - this.game.player.x); 
+        this.diffY = Math.abs(this.y - this.game.player.y); 
+
+        this.lessX = this.x < this.game.player.x;
+        this.lessY = this.y < this.game.player.y;
+        this.greatX = this.x > this.game.player.x;
+        this.greatY = this.y > this.game.player.y;
+
+        if(this.lessX) { //enemy to the left of player, then face right
+            this.facing = 2;
         }
-        if(this.y < this.game.player.y) {
-            this.facing = 0
+        //if enemy left and above player and more up than left, face down
+        if(this.lessX && this.greatY && this.diffX < this.diffY) {
+            this.facing = 0;
         }
-        else if(this.x > this.game.player.x) {
-            this.facing = 1
+        //if enemy left and below player and more below than left, face up
+        if(this.lessX && this.lessY && this.diffX < this.diffY) {
+            this.facing = 3;
         }
-        else if(this.y > this.game.player.y) {
-            this.facing = 3
+
+        if(this.greatX) { //if enemy right of player, face left
+            this.facing = 1;
         }
+        // if enemy right and above player and more up than left, face down
+        if(this.greatX && this.greatY && this.diffX < this.diffY) {
+            this.facing = 0;
+        }
+        //if enemy right and below player and more below than left, face up
+        if(this.greatX && this.lessY && this.diffX < this.diffY) {
+            this.facing = 3;
+        }
+
+        if(this.lessY) { // if enemy below player, face up
+            this.facing = 0;
+        }
+        // if enemy below and right of player and more right than below, face left
+        if(this.lessY && this.greatX && this.diffX > this.diffY) {
+            this.facing = 1;
+        }
+        // if enemy below and left of player and more left than below, face right
+        if(this.lessY && this.lessX && this.diffX > this.diffY) {
+            this.facing = 2;
+        }
+
+        if(this.greatY) { // if enemy above player, face down
+            this.facing = 3;
+        }
+        // if enemy above and right of player and more right than below, face left
+        if(this.greatY && this.greatX && this.diffX > this.diffY) {
+            this.facing = 1;
+        }
+        // if enemy above and left of player and more left than below, face right
+        if(this.greatY && this.lessX && this.diffX > this.diffY) {
+            this.facing = 2;
+        }
+
+       
         
 
         //enemy collision

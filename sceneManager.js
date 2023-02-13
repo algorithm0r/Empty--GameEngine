@@ -40,12 +40,47 @@ class SceneManager {
         }
 
         this.spawntimer += this.game.clockTick;
-        if(this.spawntimer >= 20) {
-            this.spawnx = getRandomInt(500, -500);
-            this.spawny = getRandomInt(500, -500);
-            this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
-            this.spawntimer = 0;
+        if(this.time < 60){ 
+            if(this.spawntimer >= 5) {
+                this.spawnx = getRandomInt(500, -500);
+                this.spawny = getRandomInt(500, -500);
+                this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
+                this.spawntimer = 0;
+            }
+        }   
+        else if(this.time > 60 && this.time < 120) {
+            if(this.spawntimer >= 4) {
+                this.spawnx = getRandomInt(500, -500);
+                this.spawny = getRandomInt(500, -500);
+                this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
+                this.spawntimer = 0;
+            }
         }
+        else if(this.time > 120 && this.time < 180) {
+            if(this.spawntimer >= 3) {
+                this.spawnx = getRandomInt(500, -500);
+                this.spawny = getRandomInt(500, -500);
+                this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
+                this.spawntimer = 0;
+            }
+        }
+        else if(this.time > 180 && this.time < 240) {
+            if(this.spawntimer >= 2) {
+                this.spawnx = getRandomInt(500, -500);
+                this.spawny = getRandomInt(500, -500);
+                this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
+                this.spawntimer = 0;
+            }
+        }
+        else if(this.time > 240) {
+            if(this.spawntimer >= 1) {
+                this.spawnx = getRandomInt(500, -500);
+                this.spawny = getRandomInt(500, -500);
+                this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.ship));
+                this.spawntimer = 0;
+            }
+        }
+        
 
         PARAMS.DEBUG = document.getElementById("debug").checked;
         let xmid = PARAMS.CANVAS_WIDTH / 2 - PARAMS.TILEWIDTH * 2;
