@@ -62,7 +62,6 @@ class CannonBall {
         this.game.entities.forEach(entity => {
             if(entity instanceof EnemyShip) {
                 if(that.BB.collide(entity.BB)) {
-                    console.log("cannonball hit enemy");
                     entity.health -= that.damage;
                     console.log(entity.health);
                     that.removeFromWorld = true;

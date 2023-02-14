@@ -66,7 +66,6 @@ class EnemyShip {
             this.x -= dx * this.speed * TICK;
             this.y -= dy * this.speed * TICK;
         }
-        console.log(this.speed);
         this.updateBB();
 
         this.diffX = Math.abs(this.x - this.game.player.x); 

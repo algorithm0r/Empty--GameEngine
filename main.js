@@ -25,9 +25,10 @@ ASSET_MANAGER.downloadAll(() => {
     PARAMS.CANVAS_WIDTH = canvas.width;
     PARAMS.CANVAS_HEIGHT = canvas.height;
 
-    game.addEntity(new SceneManager(game));
 
     game.init(ctx);
-
+    this.scene = new SceneManager(game);
+    game.addEntity(scene);
+    this.scene.loadTitle();
     game.start();
 });
