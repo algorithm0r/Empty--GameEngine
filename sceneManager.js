@@ -15,8 +15,13 @@ class SceneManager {
         
         //Temp entities
         this.game.addEntity(new EnemyShip(this.game, -200, -250, this.ship));
+        this.game.addEntity(new EnemyShip(this.game, -200, -450, this.ship));
 
         this.game.addEntity(new Rock(this.game, 100, 100));
+        this.game.addEntity(new Rock(this.game, 400, 400));  
+        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
+        this.game.addEntity(new WorldObject(this.game,path,-200,-200,true,70, 70,1));
+        this.game.addEntity(new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,90, 90,1));
     };
 
     clearEntities() {
