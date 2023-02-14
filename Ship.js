@@ -23,17 +23,15 @@ class Ship {
         this.dead = false;
 
         this.updateBB();
-
+        
         this.animations = [];
         this.loadAnimations();
 
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
 
-        this.visualRadius = 50;
-        this.circlex = (this.x + 45);
-        this.circley = (this.y + 50);
-
+        // this.visualRadius = 50;
+        
     };
 
     loadAnimations() {
@@ -44,21 +42,21 @@ class Ship {
             }
         }
 
-        this.animations[0][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 54, 4, 0.5, false, true);
-        this.animations[1][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5, true, true);
-        this.animations[2][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5, false, true);
-        this.animations[3][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5, false, true);
+        this.animations[0][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 54, 4, 0.5);
+        this.animations[1][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5);
+        this.animations[2][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5);
+        this.animations[3][0] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5);
 
-        this.animations[0][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5, false, true);
-        this.animations[1][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5, true, true);
-        this.animations[2][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5, false, true);
-        this.animations[3][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5, false, true);
+        this.animations[0][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
+        this.animations[1][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 75, 47, 40, 4, .5);
+        this.animations[2][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 130, 47, 40, 4, .5);
+        this.animations[3][1] = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 174, 47, 54, 4, .5);
 
     };
 
     updateBB() {
         this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x + 20, this.y + 40,  PARAMS.TILEWIDTH * 3, PARAMS.TILEHEIGHT * 2);
+        this.BB = new BoundingBox(this.x, this.y,  PARAMS.TILEWIDTH * 6, PARAMS.TILEHEIGHT * 7);
     };
 
     fire() {
@@ -68,23 +66,24 @@ class Ship {
         };
         if (this.game.mouse != null) {
 
-            this.source = { x: this.x - this.game.camera.x, y: this.y -this.game.camera.y};
-            console.log(this.translate);
-            console.log(this.canvasOffset);
-            console.log(this.source);
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
-            console.log(this.destination);
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
-            console.log(this.angle);
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-            console.log(this.angle);
+
 
            
         }
-
-        this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
+        
+            this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
        //this.game.addEntity(new CannonBall(this.game, this.source.x + this.game.camera.x, this.source.y + this.game.camera.y, this.angle));
+      
+        if(game.keys['2']) {
+            this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+        }
     }
+
+
 
     update() {
 
@@ -118,27 +117,7 @@ class Ship {
             // this.velocity.x += MOVE;
             this.x += MOVE * TICK;
         }
-/*
-        if (game.click) {
-            this.fire();
-        }
-        
-        this.angleOffset = {
-            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
-            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
-        };
-        if (this.game.mouse != null) {
 
-
-            this.source = { x: this.x + this.translate.x + this.canvasOffset.x + PARAMS.PIXELSCALER / 2, y: this.y + this.translate.y + this.canvasOffset.y + PARAMS.PIXELSCALER / 2 };
-            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
-            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
-
-            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-           
-        }
-        */
-//
         this.updateBB();
 
         //collision
@@ -190,7 +169,7 @@ class Ship {
             //Visual Radius
             ctx.beginPath();
             ctx.strokeStyle = 'Green';
-            ctx.arc(this.circlex - this.game.camera.x, this.circley - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
+            ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
         }
@@ -199,6 +178,5 @@ class Ship {
             this.game.camera.clearEntities();
             this.game.addEntity(new GameOver(this.game));
         }
-
     };
 }

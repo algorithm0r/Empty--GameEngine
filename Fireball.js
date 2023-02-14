@@ -1,14 +1,14 @@
-class CannonBall {
+class Fireball {
     constructor(game, x, y, angle) {
         Object.assign(this, { game, x, y, angle});
-        this.spritesheet = ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png");
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/projectiles/fireball.png");
 
         //var dist = distance(this, this.target);
         this.maxSpeed = 5;
-        this.SPEED = 2.5;
-        this.damage = 10;
+        this.SPEED = 1;
+        this.damage = 15;
 
-        this.game.projectile = this;
+        //this.game.projectile = this;
        
         this.height = this.RADIUS * 2;
         this.width = this.RADIUS * 2;
@@ -25,11 +25,10 @@ class CannonBall {
         this.positionx = this.x - this.game.camera.x;
         this.positiony = this.y - this.game.camera.y;
 
-        this.velocity = { x: 0, y: 0 };
         const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
 
-        this.cache = [];
-        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png"), 0, 0, 17, 17, 1, 1, 0);
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/fireball.png"), 0, 0, 17, 17, 1, 1, 0);
+        //this.BoundingBox = new BoundingBox(this, 50, 50, 17, 17);
 
         this.updateBB();
     }
@@ -56,35 +55,11 @@ class CannonBall {
             this.removeFromWorld = true;
         }
 
-        this.updateBB();
-        
-        var that = this;
-        this.game.entities.forEach(entity => {
-            if(entity instanceof EnemyShip) {
-                if(that.BB.collide(entity.BB)) {
-                    console.log("cannonball hit enemy");
-                    entity.health -= that.damage;
-                    console.log(entity.health);
-                    that.removeFromWorld = true;
-                    if(entity.health <= 0) {
-                        entity.dead = true;
-                    }
-                }
-            }
-        })
-    };
-
+    }
     draw(ctx) {
 
-        //this.animation.drawFrame(this.game.clockTick, ctx, this.positionx, this.positiony);
-        //ctx.drawImage(this.spritesheet, this.x + this.width, this.y + this.height, this.width, this.height, this.positionx, this.positiony, 
-            //this.width * this.imagescale, this.height * this.imagescale);
-
-        //works
         ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
-
-        //kinda works 
-        //ctx.drawImage(this.spritesheet, this.positionx - this.RADIUS, this.positiony - this.RADIUS, this.RADIUS * 1, this.RADIUS * 1);
+       
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);

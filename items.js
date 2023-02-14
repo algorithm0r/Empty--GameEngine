@@ -3,14 +3,10 @@ class Coin {
         Object.assign(this,{game, x, y, player, value});
 
         this.visualRadius = 100;
-        this.circlex = this.x + (PARAMS.TILEWIDTH / 2);
-        this.circley = this.y + (PARAMS.TILEHEIGHT / 2);
         this.velocity = {x: 0, y: 0};
         this.acceleration = 100000;
 
         this.speed = 100;
-
-        this.attraction = new Gravitate(this.player, this.game, this);
 
         this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/items/coin.png"), 0, 3, 16, 16, 1, .5, true, true);
 
@@ -27,17 +23,17 @@ class Coin {
 
     update() {
 
-        const TICK = game.clockTick;
+        const TICK = this.game.clockTick;
 
-        let playerX = game.playerLocation.x;
-        let playerY = game.playerLocation.y;
+        let playerX = this.game.playerLocation.x;
+        let playerY = this.game.playerLocation.y;
 
         let dx = this.x - playerX;
         let dy = this.y - playerY;
 
         let distance = Math.sqrt(dx * dx + dy * dy);
 
-        if(distance != 0 && this.collideRadius(this.player)) {
+        if(this.collideRadius(this.player)) {
             dx /= distance;
             dy /= distance;
 
@@ -69,7 +65,7 @@ class Coin {
             //Visual Radius
             ctx.beginPath();
             ctx.strokeStyle = 'Green';
-            ctx.arc(this.circlex - this.game.camera.x, this.circley - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
+            ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
         }
