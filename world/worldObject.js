@@ -9,8 +9,8 @@ class WorldObject {
         this.x = x;
         this.y = y;
         this.collideable = collideable;
-        this.height = this.img.height * 2;
-        this.width = this.img.width * 2;
+        this.height = this.img.height * scale;
+        this.width = this.img.width * scale;
         
         
         this.WorldObject = new Animator(this.img, 0, 0, this.img.width, this.img.height, 1, 1);
