@@ -148,6 +148,8 @@ class GameEngine {
         this.clockTick = this.timer.tick();
         this.update();
         this.draw();
+
+        this.click = null;
     };
 
 };

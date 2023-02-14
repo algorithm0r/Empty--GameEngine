@@ -36,11 +36,26 @@ class SceneManager {
         this.game.stage = "title";
         this.clearEntities();
         this.game.addEntity(new Title(this.game));
+
+        this.gold = 0;
+        this.time = 0;
+        this.ship = new Ship(this.game, 0, 0);
+        // this.game.addEntity(this.ship);
+        
+        this.hud = new Hud(this.game, this.ship, 0, 0);
+        //Temp entities
+        this.rock = new Rock(this.game, 100, 100);
+        // this.game.addEntity(this.rock);
+
+        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
+        this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
+        this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
     };
 
     loadMap() {
         this.clearEntities();
         this.game.camera = this;
+        this.gameOver = false;
 
         this.x = 0;
         this.y = 0;

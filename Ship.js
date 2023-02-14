@@ -144,12 +144,15 @@ class Ship {
                     if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
                         this.lastDT = Date.now();
                         that.health -= entity.damage;
-                        console.log(that.health);
+                        if(that.health <= 0) {
+                            // this.dead = true;
+                            // this.game.gameOver = true;
+                            this.game.camera.loadGameover();
+                        }
                     }
                 }
                 if(entity instanceof Coin) {
                     that.game.camera.gold += entity.value;
-                    console.log(that.game.camera.gold);
                 }
             }
         });
@@ -174,9 +177,9 @@ class Ship {
             ctx.closePath();
         }
 
-        if(this.dead === true) {
-            this.game.camera.clearEntities();
-            this.game.addEntity(new GameOver(this.game));
-        }
+        // if(this.dead === true) {
+        //     this.game.camera.clearEntities();
+        //     this.game.camera.loadGameover();
+        // }
     };
 }
