@@ -124,7 +124,7 @@ class Ship {
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
-                if(entity instanceof Rock) {
+                if(entity instanceof Rock || entity instanceof WorldObject) {
                     if(that.BB.collide(entity.BB)) {
                         console.log("collided with rock");  
                          if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
@@ -153,6 +153,7 @@ class Ship {
                 }
             }
         });
+
 
         this.game.playerLocation.x = this.x;
         this.game.playerLocation.y = this.y;

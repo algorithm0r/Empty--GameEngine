@@ -20,6 +20,10 @@ class SceneManager {
         //Temp entities
         this.rock = new Rock(this.game, 100, 100);
         // this.game.addEntity(this.rock);
+
+        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
+        this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
+        this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
     };
 
     clearEntities() {
@@ -46,6 +50,8 @@ class SceneManager {
         this.game.addEntity(this.hud);
 
         this.game.addEntity(this.rock);
+        this.game.addEntity(this.rock2);
+        this.game.addEntity(this.tile);
         
 
         this.update();
