@@ -9,6 +9,8 @@ ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Rocks/rocksprite.png"
 ASSET_MANAGER.queueDownload("./assets/player/ship.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/cannonball.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/fireball.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/harpoon.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster1.png");
 

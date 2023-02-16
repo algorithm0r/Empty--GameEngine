@@ -20,6 +20,16 @@ class Ship {
         this.lastDT = Date.now();
         this.dead = false;
 
+        this.chooseattack = null;
+        this.fireattack = false;
+        this.cannonattack = true;
+        this.harpoonattack = false;
+        this.moving = false;
+
+        this.elapsedtime = 0;
+        this.firerate = 1;
+        this.cntr = 0;
+
         this.updateBB();
         
         this.animations = [];
@@ -57,6 +67,23 @@ class Ship {
     };
 
     fire() {
+        if (this.fireattack) {
+            this.firefire(); 
+        }
+        if (this.cannonattack) {
+            this.firecannon(); 
+            //this.cntr++;
+            //console.log("cntr " + this.cntr)
+        }
+        if (this.harpoonattack) {
+            this.fireharpoon();
+        }
+        
+        this.chooseattack;
+        
+    }
+
+    firecannon() {
         this.angleOffset = {
             x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
             y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
@@ -67,17 +94,46 @@ class Ship {
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-
-
-           
         }
         
-            this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
-       //this.game.addEntity(new CannonBall(this.game, this.source.x + this.game.camera.x, this.source.y + this.game.camera.y, this.angle));
+        this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
       
-        if(game.keys['2']) {
-            this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+      
+        //if(game.keys['2']) {
+            //this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+        //}
+    }
+
+    firefire() {
+        this.angleOffset = {
+            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
+            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
+        };
+        if (this.game.mouse != null) {
+
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
+            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
+            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
         }
+
+        this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+    }
+
+    fireharpoon() {
+        this.angleOffset = {
+            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
+            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
+        };
+        if (this.game.mouse != null) {
+
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
+            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
+            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
+        }
+
+        this.game.addEntity(new Harpoon(this.game, this.x + 40, this.y + 50, this.angle));
     }
 
 
@@ -88,32 +144,63 @@ class Ship {
 
         const TICK = this.game.clockTick
 
+        if(!game.keys['1'] && !game.keys['2'] && !game.keys['3'])
+        {
+            //do nothing
+        }
+        
+        else if(game.keys['1'] && !game.keys['2']) {
+            //this.chooseattack = this.firefire();
+            this.fireattack = true;
+            this.cannonattack = false;
+            this.harpoonattack = false;
+        }
+        
+        else if (game.keys['2'] &&  !game.keys['3']) {
+            //this.chooseattack = this.firecannon();
+            this.fireattack = false;
+            this.cannonattack = false;
+            this.harpoonattack = true;
+        }
+        else if (game.keys['3'] && !game.keys['1'] ) {
+            //this.chooseattack = this.firecannon();
+            this.fireattack = false;
+            this.cannonattack = true;
+            this.harpoonattack = false;
+        }
+
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            // this.velocity.y -= MOVE;
-                this.y -= 2;
+            this.y -= 2;
+            this.fireattack;
+            this.cannonattack;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            // this.velocity.y += MOVE;
             this.y += 2;
+            this.fireattack;
+            this.cannonattack;
         }
 
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            // this.velocity.x -= MOVE;
             this.x -= 2;
+            this.fireattack;
+            this.cannonattack;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            // this.velocity.x += MOVE;
             this.x += 2;
+            this.fireattack;
+            this.cannonattack;
         }
+        
+
 
         this.updateBB();
 
@@ -136,8 +223,8 @@ class Ship {
                     }
                     that.updateBB();
                 }
-                if(entity instanceof EnemyShip) {
-                    console.log("collided with enemy");
+                if(entity instanceof Monster1 || entity instanceof Slime) {
+                    console.log("collided with monster");
                     if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
                         this.lastDT = Date.now();
                         that.health -= entity.damage;

@@ -16,6 +16,15 @@ class GameEngine {
         this.wheel = null;
         this.keys = {};
 
+        this.W = false;
+        this.A = false;
+        this.S = false;
+        this.D = false;
+
+        this.E = false;
+        this.Digit1 = false;
+        this.Digit2 = false;
+
         this.player = null;
         this.projectile = null;
         this.playerLocation = {x: PARAMS.CANVAS_WIDTH / 2, y: PARAMS.CANVAS_HEIGHT / 2};
@@ -101,8 +110,13 @@ class GameEngine {
                 this.click = false;
             }
         }, false);
-        
-        
+
+        this.ctx.canvas.addEventListener("keydown", event => this.keys['1'] = true);
+        this.ctx.canvas.addEventListener("keydown", event => this.keys['2'] = true);
+        this.ctx.canvas.addEventListener("keydown", event => this.keys['3'] = true);
+        //this.ctx.canvas.addEventListener("keyup", event => this.keys['1'] = true);
+        //this.ctx.canvas.addEventListener("keyup", event => this.keys['2'] = true);
+
         this.ctx.canvas.addEventListener("keydown", event => this.keys[event.key] = true);
         this.ctx.canvas.addEventListener("keyup", event => this.keys[event.key] = false);
         

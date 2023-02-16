@@ -60,7 +60,7 @@ class CannonBall {
         
         var that = this;
         this.game.entities.forEach(entity => {
-            if(entity instanceof EnemyShip) {
+            if(entity instanceof Monster1 || entity instanceof Slime) {
                 if(that.BB.collide(entity.BB)) {
                     console.log("cannonball hit enemy");
                     entity.health -= that.damage;
@@ -75,16 +75,8 @@ class CannonBall {
     };
 
     draw(ctx) {
-
-        //this.animation.drawFrame(this.game.clockTick, ctx, this.positionx, this.positiony);
-        //ctx.drawImage(this.spritesheet, this.x + this.width, this.y + this.height, this.width, this.height, this.positionx, this.positiony, 
-            //this.width * this.imagescale, this.height * this.imagescale);
-
-        //works
         ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
 
-        //kinda works 
-        //ctx.drawImage(this.spritesheet, this.positionx - this.RADIUS, this.positiony - this.RADIUS, this.RADIUS * 1, this.RADIUS * 1);
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
