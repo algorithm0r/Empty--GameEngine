@@ -8,14 +8,16 @@ class Ship {
         this.damage = 15;
         this.invulnerabilityFrame = 0.8;
 
+        this.width = 47;
+        this.height = 60;
         this.game.player = this;
-        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, 47, 60, 4, 0.5);
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/player/ship.png"), 0, 0, this.width, this.height, 4, 0.5);
 
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-        this.x = 0;
-        this.y = 0;
+
+
         this.speed = 0;
         this.lastDT = Date.now();
         this.dead = false;
@@ -38,6 +40,7 @@ class Ship {
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
 
+        // this.visualRadius = 50;
         
     };
 
@@ -136,11 +139,23 @@ class Ship {
         this.game.addEntity(new Harpoon(this.game, this.x + 40, this.y + 50, this.angle));
     }
 
+    buyDamage() {
+
+    };
+
+    buyHealth() {
+
+    };
+
+    buySpeed() {
+
+    };
+
 
 
     update() {
 
-        const MOVE = 1;
+        const MOVE = 300;
 
         const TICK = this.game.clockTick
 
@@ -175,6 +190,7 @@ class Ship {
             this.y -= 2;
             this.fireattack;
             this.cannonattack;
+            this.y -= MOVE * TICK;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
@@ -182,6 +198,7 @@ class Ship {
             this.y += 2;
             this.fireattack;
             this.cannonattack;
+            this.y += MOVE * TICK;
         }
 
         //determine horizontal
@@ -191,6 +208,7 @@ class Ship {
             this.x -= 2;
             this.fireattack;
             this.cannonattack;
+            this.x -= MOVE * TICK;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
@@ -198,6 +216,7 @@ class Ship {
             this.x += 2;
             this.fireattack;
             this.cannonattack;
+            this.x += MOVE * TICK;
         }
         
 
@@ -208,9 +227,8 @@ class Ship {
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
-                if(entity instanceof Rock) {
+                if(entity instanceof Rock || entity instanceof WorldObject || entity instanceof Shop) {
                     if(that.BB.collide(entity.BB)) {
-                        console.log("collided with rock");  
                          if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
                             that.x -= that.lastBB.right - entity.BB.left;
                         } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
@@ -228,15 +246,17 @@ class Ship {
                     if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
                         this.lastDT = Date.now();
                         that.health -= entity.damage;
-                        console.log(that.health);
+                        if(that.health <= 0) {
+                            this.game.camera.loadGameover();
+                        }
                     }
                 }
                 if(entity instanceof Coin) {
                     that.game.camera.gold += entity.value;
-                    console.log(that.game.camera.gold);
                 }
             }
         });
+
 
         this.game.playerLocation.x = this.x;
         this.game.playerLocation.y = this.y;
@@ -248,7 +268,8 @@ class Ship {
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
-        
+           
+            //Visual Radius
             ctx.beginPath();
             ctx.strokeStyle = 'Green';
             ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);

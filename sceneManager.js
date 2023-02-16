@@ -2,6 +2,7 @@ class SceneManager {
     constructor(game) {
         this.game = game;
         this.game.camera = this;
+        this.game.stage;
 
         this.x = 0;
         this.y = 0;
@@ -14,19 +15,78 @@ class SceneManager {
         this.gameOver = false;
 
         this.ship = new Ship(this.game, this.x, this.y);
-        this.game.addEntity(this.ship);
+        // this.game.addEntity(this.ship);
         
+        this.hud = new Hud(this.game, this.ship, this.x, this.y);
         //Temp entities
-        this.game.addEntity(new Monster1(this.game, -200, -250, this.ship));
-        this.game.addEntity(new Slime(this.game, -100, -250, this.ship));
+        this.rock = new Rock(this.game, 100, 100);
+        // this.game.addEntity(this.rock);
 
-        this.game.addEntity(new Rock(this.game, 100, 100));
+        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
+        this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
+        this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
+        this.shop = new Shop(this.game, -100, 150);
     };
 
     clearEntities() {
         this.game.entities.forEach(entity => {
             entity.removeFromWorld = true;
         });
+    };
+
+    loadTitle() {
+        this.game.stage = "title";
+        this.clearEntities();
+        this.game.addEntity(new Title(this.game));
+
+        this.gold = 0;
+        this.time = 0;
+        this.shop = new Shop(this.game, -100, 150);
+
+        this.ship = new Ship(this.game, 0, 0);
+        // this.game.addEntity(this.ship);
+        
+        this.hud = new Hud(this.game, this.ship, 0, 0);
+        //Temp entities
+        this.rock = new Rock(this.game, 100, 100);
+        // this.game.addEntity(this.rock);
+
+        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
+        this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
+        this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
+        this.shop = new Shop(this.game, -100, 150);
+
+    };
+
+    loadMap() {
+        this.clearEntities();
+        this.game.camera = this;
+        this.gameOver = false;
+
+        this.x = 0;
+        this.y = 0;
+
+        this.game.stage = "map";
+        this.game.addEntity(this.ship);
+        this.game.addEntity(this.hud);
+
+        this.game.addEntity(this.shop);
+        this.game.addEntity(this.rock);
+        this.game.addEntity(this.rock2);
+        this.game.addEntity(this.tile);
+        
+
+        this.update();
+    };
+
+    loadGameover() {
+        this.game.stage = "gameover";
+        this.clearEntities();
+        this.game.addEntity(new GameOver(this.game));
+    };
+
+    loadVictory() {
+        this.game.stage = "victory";
     };
 
     update() {
@@ -84,7 +144,6 @@ class SceneManager {
             }
         } 
         
-
         PARAMS.DEBUG = document.getElementById("debug").checked;
         let xmid = PARAMS.CANVAS_WIDTH / 2 - PARAMS.TILEWIDTH * 2;
         let ymid = PARAMS.CANVAS_HEIGHT / 2 - PARAMS.TILEHEIGHT * 2;
@@ -94,17 +153,6 @@ class SceneManager {
     };
 
     draw(ctx) {
-        ctx.font = '50px ""';
-        ctx.fillStyle = "White";
-        ctx.fillText("Gold: " + this.gold, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 6);
-        ctx.fillText("Time: " + this.time, PARAMS.TILEWIDTH * 51, PARAMS.TILEHEIGHT * 3)
-        ctx.fillText("HP: ", PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 3);
-        if(this.ship.health > 0) {
-            let ratio = this.ship.health / this.ship.maxHealth;
-            ctx.strokeStyle = "Black";
-            ctx.fillStyle = ratio < 0.3 ? "Red" : ratio < 0.6 ? "Yellow" : "Green";
-            ctx.fillRect((this.ship.x - this.game.camera.x) / 5, (this.ship.y - this.game.camera.y) / 12.75, this.ship.width * ratio * 5, PARAMS.TILEHEIGHT);
-            ctx.strokeRect((this.ship.x - this.game.camera.x) / 5, (this.ship.y - this.game.camera.y) / 12.75, this.ship.width * 5, PARAMS.TILEHEIGHT);
-        }
+
     };
 }
