@@ -14,10 +14,15 @@ ASSET_MANAGER.queueDownload("./assets/projectiles/harpoon.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/spear.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster1.png");
-
+//music
+ASSET_MANAGER.queueDownload("./assets/Music/pirates8bit.mp3");
+//Sound effect
+ASSET_MANAGER.queueDownload("./assets/Music/Shoot1.mp3")
 
 
 ASSET_MANAGER.downloadAll(() => {
+
+    ASSET_MANAGER.autoRepeat("./assets/Music/pirates8bit.mp3");
 
     const canvas = document.getElementById("gameWorld");
     const ctx = canvas.getContext("2d");
