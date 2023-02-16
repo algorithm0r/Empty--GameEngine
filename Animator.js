@@ -21,6 +21,21 @@ class Animator {
             this.width * 2, this.height * 2);
     };
 
+    drawSmallFrame(tick, ctx, x, y) {
+        this.elapsedTime += tick;
+
+        if (this.elapsedTime > this.totalTime) this.elapsedTime -= this.totalTime;
+
+        let frame = this.currentFrame();
+        if(this.reverse) frame = this.frameCount - frame - 1;
+
+        ctx.drawImage(this.spritesheet,
+            this.xStart + this.width * frame, this.yStart,
+            this.width, this.height,
+            x, y,
+            this.width, this.height);
+    };
+
     currentFrame() {
         return Math.floor(this.elapsedTime / this.frameDuration);
     };

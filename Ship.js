@@ -81,7 +81,19 @@ class Ship {
         if(game.keys['2']) {
             this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
         }
-    }
+    };
+
+    buyDamage() {
+
+    };
+
+    buyHealth() {
+
+    };
+
+    buySpeed() {
+
+    };
 
 
 
@@ -94,13 +106,11 @@ class Ship {
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            // this.velocity.y -= MOVE;
             this.y -= MOVE * TICK;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            // this.velocity.y += MOVE;
             this.y += MOVE * TICK;
         }
 
@@ -108,13 +118,11 @@ class Ship {
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            // this.velocity.x -= MOVE;
             this.x -= MOVE * TICK;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            // this.velocity.x += MOVE;
             this.x += MOVE * TICK;
         }
 
@@ -124,9 +132,8 @@ class Ship {
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
-                if(entity instanceof Rock || entity instanceof WorldObject) {
+                if(entity instanceof Rock || entity instanceof WorldObject || entity instanceof Shop) {
                     if(that.BB.collide(entity.BB)) {
-                        console.log("collided with rock");  
                          if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
                             that.x -= that.lastBB.right - entity.BB.left;
                         } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
@@ -140,13 +147,10 @@ class Ship {
                     that.updateBB();
                 }
                 if(entity instanceof EnemyShip) {
-                    console.log("collided with enemy");
                     if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
                         this.lastDT = Date.now();
                         that.health -= entity.damage;
                         if(that.health <= 0) {
-                            // this.dead = true;
-                            // this.game.gameOver = true;
                             this.game.camera.loadGameover();
                         }
                     }
@@ -176,10 +180,5 @@ class Ship {
             ctx.stroke();
             ctx.closePath();
         }
-
-        // if(this.dead === true) {
-        //     this.game.camera.clearEntities();
-        //     this.game.camera.loadGameover();
-        // }
     };
 }

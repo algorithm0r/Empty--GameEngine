@@ -4,7 +4,7 @@ class EnemyShip {
 
         this.health = 50;
         this.maxHealth = 50;
-        this.damage = 10;
+        this.damage = 0;
         this.goldVal = 200;
 
         this.width = 106;
@@ -131,9 +131,8 @@ class EnemyShip {
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
-                if(entity instanceof Rock) {
+                if(entity instanceof Rock || entity instanceof WorldObject || entity instanceof Shop) {
                     if(that.BB.collide(entity.BB)) {
-                        console.log("collided with rock");  
                          if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
                             that.x -= that.lastBB.right - entity.BB.left;
                         } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
