@@ -6,13 +6,34 @@ class GameOver {
     };
 
     update() {
-        
+        if(this.game.mouse != null) {
+            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
+                this.game.camera.loadTitle();
+            }
+        }
     };
 
     draw(ctx) {
-        ctx.strokeStyle = "BLACK";
+        this.drawGameover(ctx);
+    }
+
+    drawGameover(ctx) {
+        ctx.fillStyle = "Black";
+        ctx.fillRect(0, 0, 1024, 768);
+
+        ctx.fillStyle = "WHITE";
         ctx.font = '60px""';
-        ctx.fillText("Play Again?", 200, 200);
+        ctx.fillText("Gameover", 200, 200);
+
+        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px""';
+            ctx.fillText("Play Again?", 200, 400);
+        } else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px""';
+            ctx.fillText("Play Again?", 200, 400);
+        }
     }
 }
 
@@ -39,8 +60,10 @@ class Title {
     };
 
     update() {
-        if(this.game.mouse && (this.game.mouse.x >= 0 && this.game.mouse.x <= 1024) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
-            this.game.camera.loadMap();
+        if(this.game.mouse != null) {
+            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 400) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
+                this.game.camera.loadMap();
+            }
         }
     };
 
@@ -56,7 +79,7 @@ class Title {
         ctx.font = '60px""';
         ctx.fillText("Pirate Game", 200, 200);
 
-        if(this.game.mouse && (this.game.mouse.x >= 0 && this.game.mouse.x <= 1024) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
+        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 320) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
             ctx.fillStyle = "GRAY";
             ctx.font = '60px""';
             ctx.fillText("Start", 200, 400);

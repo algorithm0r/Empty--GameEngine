@@ -8,6 +8,10 @@ class Ship {
         this.damage = 15;
         this.invulnerabilityFrame = 0.8;
 
+        this.speedLevel = 0;
+        this.damageLevel = 0;
+        this.healthLevel = 0;
+
         this.width = 47;
         this.height = 60;
         this.game.player = this;
@@ -18,9 +22,19 @@ class Ship {
 
 
 
-        this.speed = 0;
+        this.speed = 300;
         this.lastDT = Date.now();
         this.dead = false;
+
+        this.chooseattack = null;
+        this.fireattack = false;
+        this.cannonattack = true;
+        this.harpoonattack = false;
+        this.moving = false;
+
+        this.elapsedtime = 0;
+        this.firerate = 1;
+        this.cntr = 0;
 
         this.updateBB();
         
@@ -30,7 +44,7 @@ class Ship {
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
 
-        // this.visualRadius = 50;
+        this.visualRadius = 50;
         
     };
 
@@ -60,6 +74,23 @@ class Ship {
     };
 
     fire() {
+        if (this.fireattack) {
+            this.firefire(); 
+        }
+        if (this.cannonattack) {
+            this.firecannon(); 
+            //this.cntr++;
+            //console.log("cntr " + this.cntr)
+        }
+        if (this.harpoonattack) {
+            this.fireharpoon();
+        }
+        
+        this.chooseattack;
+        
+    }
+
+    firecannon() {
         this.angleOffset = {
             x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
             y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
@@ -70,63 +101,132 @@ class Ship {
             this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
-
-
-           
         }
         
-            this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
-       //this.game.addEntity(new CannonBall(this.game, this.source.x + this.game.camera.x, this.source.y + this.game.camera.y, this.angle));
+        this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle)); //+40 +50 to center into ship
       
-        if(game.keys['2']) {
-            this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
-        }
+      
+        //if(game.keys['2']) {
+            //this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+        //}
     }
+
+    firefire() {
+        this.angleOffset = {
+            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
+            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
+        };
+        if (this.game.mouse != null) {
+
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
+            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
+            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
+        }
+
+        this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+    }
+
+    fireharpoon() {
+        this.angleOffset = {
+            x: this.width * PARAMS.PIXELSCALER * Math.cos(this.angle),
+            y: this.width * PARAMS.PIXELSCALER * Math.sin(this.angle)
+        };
+        if (this.game.mouse != null) {
+
+            this.source = { x: (this.x + 40) - this.game.camera.x, y: (this.y + 50) -this.game.camera.y};
+            this.destination = { x: this.game.mouse.x, y: this.game.mouse.y };
+            this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
+            this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
+        }
+
+        this.game.addEntity(new Harpoon(this.game, this.x + 40, this.y + 50, this.angle));
+    }
+
+    buyDamage() {
+
+    };
+
+    buyHealth() {
+
+    };
+
+    buySpeed() {
+
+    };
 
 
 
     update() {
 
-        const MOVE = 300;
-
         const TICK = this.game.clockTick
+
+        if(!game.keys['1'] && !game.keys['2'] && !game.keys['3'])
+        {
+            //do nothing
+        }
+        
+        else if(game.keys['1'] && !game.keys['2']) {
+            //this.chooseattack = this.firefire();
+            this.fireattack = true;
+            this.cannonattack = false;
+            this.harpoonattack = false;
+        }
+        
+        else if (game.keys['2'] &&  !game.keys['3']) {
+            //this.chooseattack = this.firecannon();
+            this.fireattack = false;
+            this.cannonattack = false;
+            this.harpoonattack = true;
+        }
+        else if (game.keys['3'] && !game.keys['1'] ) {
+            //this.chooseattack = this.firecannon();
+            this.fireattack = false;
+            this.cannonattack = true;
+            this.harpoonattack = false;
+        }
 
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            // this.velocity.y -= MOVE;
-            this.y -= MOVE * TICK;
+            this.fireattack;
+            this.cannonattack;
+            this.y -= this.speed * TICK;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            // this.velocity.y += MOVE;
-            this.y += MOVE * TICK;
+            this.fireattack;
+            this.cannonattack;
+            this.y += this.speed * TICK;
         }
 
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            // this.velocity.x -= MOVE;
-            this.x -= MOVE * TICK;
+            this.fireattack;
+            this.cannonattack;
+            this.x -= this.speed * TICK;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            // this.velocity.x += MOVE;
-            this.x += MOVE * TICK;
+            this.fireattack;
+            this.cannonattack;
+            this.x += this.speed * TICK;
         }
+        
 
+        console.log(this.speed);
         this.updateBB();
 
         //collision
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
-                if(entity instanceof Rock || entity instanceof WorldObject) {
+                if(entity instanceof Rock || entity instanceof WorldObject || entity instanceof Shop) {
                     if(that.BB.collide(entity.BB)) {
-                        console.log("collided with rock");  
                          if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
                             that.x -= that.lastBB.right - entity.BB.left;
                         } else if (that.lastBB.left + PARAMS.TILEWIDTH >= entity.BB.right) { //ship left side collides with entity right
@@ -139,17 +239,18 @@ class Ship {
                     }
                     that.updateBB();
                 }
-                if(entity instanceof EnemyShip) {
-                    console.log("collided with enemy");
+                if(entity instanceof Monster1 || entity instanceof Slime) {
+                    console.log("collided with monster");
                     if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
                         this.lastDT = Date.now();
                         that.health -= entity.damage;
-                        console.log(that.health);
+                        if(that.health <= 0) {
+                            this.game.camera.loadGameover();
+                        }
                     }
                 }
                 if(entity instanceof Coin) {
                     that.game.camera.gold += entity.value;
-                    console.log(that.game.camera.gold);
                 }
             }
         });
@@ -172,11 +273,6 @@ class Ship {
             ctx.arc(this.x - this.game.camera.x, this.y - this.game.camera.y, this.visualRadius, 0, Math.PI * 2, false);
             ctx.stroke();
             ctx.closePath();
-        }
-
-        if(this.dead === true) {
-            this.game.camera.clearEntities();
-            this.game.addEntity(new GameOver(this.game));
         }
     };
 }
