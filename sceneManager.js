@@ -1,3 +1,4 @@
+
 class SceneManager {
     constructor(game) {
         this.game = game;
@@ -24,6 +25,8 @@ class SceneManager {
         let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
         this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
         this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
+        this.world = new WorldStuff(this.game,this.x,this.y);
+        
     };
 
     clearEntities() {
@@ -48,12 +51,13 @@ class SceneManager {
         this.game.stage = "map";
         this.game.addEntity(this.ship);
         this.game.addEntity(this.hud);
+        
 
         this.game.addEntity(this.rock);
         this.game.addEntity(this.rock2);
         this.game.addEntity(this.tile);
         
-
+        this.world.drawMap();
         this.update();
     };
 
