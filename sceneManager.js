@@ -25,7 +25,7 @@ class SceneManager {
         let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
         this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
         this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
-        this.shop = new Shop(this.game, -100, 150);
+        this.shop = new Shop(this.game, -400, -100);
     };
 
     clearEntities() {
@@ -41,8 +41,6 @@ class SceneManager {
 
         this.gold = 0;
         this.time = 0;
-        this.shop = new Shop(this.game, -100, 150);
-
         this.ship = new Ship(this.game, 0, 0);
         // this.game.addEntity(this.ship);
         
@@ -54,7 +52,7 @@ class SceneManager {
         let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
         this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
         this.tile = new WorldObject(this.game,"./assets/background/1 Tiles/Map_tile_01.png",-400,-200,true,2);
-        this.shop = new Shop(this.game, -100, 150);
+        this.shop = new Shop(this.game, -400, -100);
 
     };
 

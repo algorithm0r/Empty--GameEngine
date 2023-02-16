@@ -8,6 +8,10 @@ class Ship {
         this.damage = 15;
         this.invulnerabilityFrame = 0.8;
 
+        this.speedLevel = 0;
+        this.damageLevel = 0;
+        this.healthLevel = 0;
+
         this.width = 47;
         this.height = 60;
         this.game.player = this;
@@ -18,7 +22,7 @@ class Ship {
 
 
 
-        this.speed = 0;
+        this.speed = 300;
         this.lastDT = Date.now();
         this.dead = false;
 
@@ -40,7 +44,7 @@ class Ship {
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
 
-        // this.visualRadius = 50;
+        this.visualRadius = 50;
         
     };
 
@@ -155,8 +159,6 @@ class Ship {
 
     update() {
 
-        const MOVE = 300;
-
         const TICK = this.game.clockTick
 
         if(!game.keys['1'] && !game.keys['2'] && !game.keys['3'])
@@ -187,40 +189,36 @@ class Ship {
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
             this.state = 0;
-            this.y -= 2;
             this.fireattack;
             this.cannonattack;
-            this.y -= MOVE * TICK;
+            this.y -= this.speed * TICK;
         }
         else if (game.keys['s'] && !game.keys['w'] && !game.keys[' ']) {
             this.facing = 0;
             this.state = 0;
-            this.y += 2;
             this.fireattack;
             this.cannonattack;
-            this.y += MOVE * TICK;
+            this.y += this.speed * TICK;
         }
 
         //determine horizontal
         if (game.keys['a'] && !game.keys['d'] && !game.keys[' ']) {
             this.facing = 1;
             this.state = 0;
-            this.x -= 2;
             this.fireattack;
             this.cannonattack;
-            this.x -= MOVE * TICK;
+            this.x -= this.speed * TICK;
         }
         else if (game.keys['d'] && !game.keys['a'] && !game.keys[' ']) {
             this.facing = 2;
             this.state = 0;
-            this.x += 2;
             this.fireattack;
             this.cannonattack;
-            this.x += MOVE * TICK;
+            this.x += this.speed * TICK;
         }
         
 
-
+        console.log(this.speed);
         this.updateBB();
 
         //collision
