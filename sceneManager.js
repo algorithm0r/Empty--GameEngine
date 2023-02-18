@@ -10,6 +10,7 @@ class SceneManager {
 
         this.spawntimer = 0;
         this.slimetimer = 0;
+        this.spawnchance = null;
 
         this.gameOver = false;
 
@@ -21,6 +22,8 @@ class SceneManager {
         this.game.addEntity(new Slime(this.game, -100, -250, this.ship));
 
         this.game.addEntity(new Rock(this.game, 100, 100));
+        this.shop = new Shop(this.game, -400, -100);
+        this.game.addEntity(this.shop);
     };
 
     clearEntities() {
@@ -43,19 +46,23 @@ class SceneManager {
 
         this.spawntimer += this.game.clockTick;
         this.slimetimer += this.game.clockTick;
-        if(this.time) { 
+        /*if(this.time) { //keep spawning slimes
             if(this.slimetimer >= 2) {
                 this.spawnx = getRandomInt(500, -500);
                 this.spawny = getRandomInt(500, -500);
                 this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.ship));
                 this.slimetimer = 0;
             }
-        }   
+        }   */
         if(this.time > 10 && this.time < 120) {
             if(this.spawntimer >= 4) {
-                this.spawnx = getRandomInt(500, -500);
-                this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
+                this.spawnchance = getRandomInt(0,100)
+                console.log("spawn chance = " + this.spawnchance);
+                if(this.spawnchance >= 50) {
+                    this.spawnx = getRandomInt(500, -500);
+                    this.spawny = getRandomInt(500, -500);
+                    this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
+                }
                 this.spawntimer = 0;
             }
         }

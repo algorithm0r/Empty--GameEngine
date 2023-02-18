@@ -66,7 +66,7 @@ class Monster1 {
             this.x -= dx * this.speed * TICK;
             this.y -= dy * this.speed * TICK;
         }
-        console.log(this.speed);
+        //console.log(this.speed);
         this.updateBB();
 
         this.diffX = Math.abs(this.x - this.game.player.x); 
@@ -256,7 +256,7 @@ class Slime {
             this.x -= dx * this.speed * TICK;
             this.y -= dy * this.speed * TICK;
         }
-        console.log(this.speed);
+        //console.log(this.speed);
         this.updateBB();
 
         this.diffX = Math.abs(this.x - this.game.player.x); 

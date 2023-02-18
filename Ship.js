@@ -26,6 +26,9 @@ class Ship {
         this.harpoonattack = false;
         this.moving = false;
 
+        this.maxfireballs = 20;
+        this.fireballs = 5;
+
         this.elapsedtime = 0;
         this.firerate = 1;
         this.cntr = 0;
@@ -116,8 +119,12 @@ class Ship {
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
         }
-
-        this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+        if(this.fireballs > 0) {
+            this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
+            this.fireballs--;
+            console.log("number of fireballs remaining = " + this.fireballs);
+        }
+        
     }
 
     fireharpoon() {

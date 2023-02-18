@@ -13,6 +13,7 @@ ASSET_MANAGER.queueDownload("./assets/projectiles/harpoon.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/spear.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster1.png");
+ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Houses/shop.png");
 
 
 ASSET_MANAGER.downloadAll(() => {
