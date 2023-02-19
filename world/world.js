@@ -13,34 +13,35 @@ class WorldStuff {
 
     drawMap() {
         let array = this.jsonMap.map_1;
-       let startingX =0;
-       let startingY =0;
+       let startingX =-1500;
+       let startingY =-1500;
 
         for (let row = 0; row < array.length; row++) {
             for (let column = 0; column < array.length; column++) {
                 this.drawSquare(array[row][column],startingX,startingY);
-                startingX+=500
+                startingX+=250
             }
-            startingY+=500
+            startingX =-1500
+            startingY+=250
            
         }
     };
 
     drawSquare(theNum,xCord,yCord){
-        for(let i = 0;i < 500;i+=50){
-            for(let j =0; j < 500; j+=50){
+        for(let i = 0;i < 250;i+=50){
+            for(let j =0; j < 250; j+=50){
 
                 switch (theNum) {
                     case 0:
                         let water = new WorldObject(this.game, "./assets/background/1 Tiles/Map_tile_01.png", xCord+i, yCord+j, false, 2)
-                        console.log("spawned water at x"+(xCord+i)+" y"+(yCord+j));
+                       
                         this.game.addEntity(water);
                         break;
                     case 1:
                         break;
                     case 9:
                         let rock = new WorldObject(this.game, "./assets/background/2 Objects/Rocks/rocksprite.png", xCord+i, yCord+j, true, 2)
-                        console.log("spawned rock at x"+(xCord+i)+" y"+(yCord+j));
+                        
                         this.game.addEntity(rock);
                         break;
                 }
@@ -58,4 +59,4 @@ class WorldStuff {
 
 
 
-const jsonStuff = '{"tiles": [{"oceanTile":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_01.png"}},{"grassTile":{"type": "grass","value": 0,"path": "./assets/background/1 Tiles/Map_tile_54.png"}},{ "rockTile":{"type": "rock","value": 0,"path": "./assets/background/2 Objects/Rocks/rocksprite.png"}}],"map_1": [[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]]}';
+const jsonStuff = '{"tiles": [{"oceanTile":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_01.png"}},{"grassTile":{"type": "grass","value": 0,"path": "./assets/background/1 Tiles/Map_tile_54.png"}},{ "rockTile":{"type": "rock","value": 0,"path": "./assets/background/2 Objects/Rocks/rocksprite.png"}}],"map_1": [[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]]}';
