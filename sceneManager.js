@@ -84,6 +84,7 @@ class SceneManager {
 
     loadGameover() {
         this.game.stage = "gameover";
+        this.gameOver = true;
         this.clearEntities();
         this.game.addEntity(new GameOver(this.game));
     };
@@ -104,8 +105,11 @@ class SceneManager {
             this.time += 1;
             this.timer = undefined;
         }
+        if(this.gameOver === false) {
+            this.spawnmob.spawnEnemies();
+        } else {
 
-        this.spawnmob.spawnEnemies();
+        }
 
 
         console.log(this.time);

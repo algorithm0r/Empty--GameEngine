@@ -16,7 +16,7 @@ class SpawnMobs {
             if(this.game.camera.slimetimer >= 2) {
                 this.spawnx = getRandomInt(500, -500);
                 this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.ship));
+                this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
                 this.game.camera.slimetimer = 0;
             }
         }   
@@ -24,7 +24,7 @@ class SpawnMobs {
             if(this.game.camera.spawntimer >= 4) {
                 this.spawnx = getRandomInt(500, -500);
                 this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
+                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 this.game.camera.spawntimer = 0;
             }
         }
@@ -32,7 +32,7 @@ class SpawnMobs {
             if(this.game.camera.spawntimer >= 3) {
                 this.spawnx = getRandomInt(500, -500);
                 this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
+                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 this.game.camera.spawntimer = 0;
             }
         }
@@ -40,7 +40,7 @@ class SpawnMobs {
             if(this.game.camera.spawntimer >= 2) {
                 this.spawnx = getRandomInt(500, -500);
                 this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
+                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 this.game.camera.spawntimer = 0;
             }
         }
@@ -48,7 +48,7 @@ class SpawnMobs {
             if(this.game.camera.spawntimer >= 1) {
                 this.spawnx = getRandomInt(500, -500);
                 this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
+                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 this.game.camera.spawntimer = 0;
             }
         };
