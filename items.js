@@ -25,11 +25,11 @@ class Coin {
 
         const TICK = this.game.clockTick;
 
-        let playerX = this.game.playerLocation.x;
-        let playerY = this.game.playerLocation.y;
+        let playerX = this.game.playerLocation.x + (PARAMS.TILEWIDTH * 3);
+        let playerY = this.game.playerLocation.y + (PARAMS.TILEHEIGHT * 3.5);
 
-        let dx = this.x - playerX;
-        let dy = this.y - playerY;
+        let dx = (this.x + 20) - playerX;
+        let dy = (this.y + 20) - playerY;
 
         let distance = Math.sqrt(dx * dx + dy * dy);
 
