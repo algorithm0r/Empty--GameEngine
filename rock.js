@@ -26,18 +26,6 @@ class Rock {
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
-            
-            // ctx.strokeStyle = 'Blue';
-            // ctx.strokeRect(this.leftBB.x  - this.game.camera.x, this.leftBB.y - this.game.camera.y, this.leftBB.width, this.leftBB.height);
-
-            // ctx.strokeStyle = 'Green';
-            // ctx.strokeRect(this.rightBB.x  - this.game.camera.x, this.rightBB.y - this.game.camera.y, this.rightBB.width, this.rightBB.height);
-
-            // ctx.strokeStyle = 'Purple';
-            // ctx.strokeRect(this.topBB.x  - this.game.camera.x, this.topBB.y - this.game.camera.y, this.topBB.width, this.topBB.height);
-
-            // ctx.strokeStyle = 'Black';
-            // ctx.strokeRect(this.bottomBB.x  - this.game.camera.x, this.bottomBB.y - this.game.camera.y, this.bottomBB.width, this.bottomBB.height);
         }
     };
 }

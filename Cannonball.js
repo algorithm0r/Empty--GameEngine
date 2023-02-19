@@ -1,12 +1,12 @@
 class CannonBall {
-    constructor(game, x, y, angle) {
-        Object.assign(this, { game, x, y, angle});
+    constructor(game, x, y, angle, damage) {
+        Object.assign(this, { game, x, y, angle, damage});
         this.spritesheet = ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png");
 
         //var dist = distance(this, this.target);
         this.maxSpeed = 5;
         this.SPEED = 2.5;
-        this.damage = 10;
+        this.damage = damage;
 
         this.game.projectile = this;
        
@@ -55,15 +55,14 @@ class CannonBall {
         if (this.positionx < 0 || this.positiony < 0 || this.positionx > PARAMS.CANVAS_WIDTH || this.positiony > PARAMS.CANVAS_HEIGHT) {
             this.removeFromWorld = true;
         }
-
+        this.damage;
         this.updateBB();
         
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity instanceof Monster1 || entity instanceof Slime) {
                 if(that.BB.collide(entity.BB)) {
-                    console.log("cannonball hit enemy");
-                    entity.health -= that.damage;
+                    entity.health -= this.damage;
                     console.log(entity.health);
                     that.removeFromWorld = true;
                     if(entity.health <= 0) {

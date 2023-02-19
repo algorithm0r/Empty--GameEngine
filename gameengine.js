@@ -28,6 +28,8 @@ class GameEngine {
         this.player = null;
         this.projectile = null;
         this.playerLocation = {x: PARAMS.CANVAS_WIDTH / 2, y: PARAMS.CANVAS_HEIGHT / 2};
+        this.stage;
+        this.shopOpen = false;
 
         // Options and the Details
         this.options = options || {
@@ -161,6 +163,8 @@ class GameEngine {
         this.clockTick = this.timer.tick();
         this.update();
         this.draw();
+
+        this.click = null;
     };
 
 };

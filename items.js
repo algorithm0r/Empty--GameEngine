@@ -18,15 +18,15 @@ class Coin {
     };
 
     updateBB() {
-        this.BB = new BoundingBox(this.x + 13, this.y + 12, PARAMS.TILEWIDTH / 2, PARAMS.TILEHEIGHT / 2);
+        this.BB = new BoundingBox(this.x + PARAMS.TILEWIDTH/2, this.y + PARAMS.TILEHEIGHT/2, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
     };
 
     update() {
 
         const TICK = this.game.clockTick;
 
-        let playerX = this.game.playerLocation.x;
-        let playerY = this.game.playerLocation.y;
+        let playerX = this.game.playerLocation.x + (PARAMS.TILEWIDTH * 3);
+        let playerY = this.game.playerLocation.y + (PARAMS.TILEHEIGHT * 3.5);
 
         let dx = this.x - playerX;
         let dy = this.y - playerY;
@@ -49,6 +49,7 @@ class Coin {
             if(entity instanceof Ship) {
                 if(that.BB.collide(entity.BB)) {
                     that.removeFromWorld = true;
+                    that.game.camera.gold += this.value;
                 }
             }
         });

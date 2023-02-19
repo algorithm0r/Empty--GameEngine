@@ -60,7 +60,7 @@ class Harpoon {
                     console.log("Harpoon hit enemy");
                     entity.health -= (that.damage * 2);
                     console.log(entity.health);
-                    that.removeFromWorld = true;
+                    that.removeFromWorld = false;
                     if(entity.health <= 0) {
                         entity.dead = true;
                     }
