@@ -108,11 +108,9 @@ class SceneManager {
         if(this.gameOver === false) {
             this.spawnmob.spawnEnemies();
         } else {
-
+            this.time = 0;
+            this.gold = 0;
         }
-
-
-        console.log(this.time);
         
         PARAMS.DEBUG = document.getElementById("debug").checked;
         let xmid = PARAMS.CANVAS_WIDTH / 2 - PARAMS.TILEWIDTH * 2;
