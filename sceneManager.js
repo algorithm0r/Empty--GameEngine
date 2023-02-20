@@ -1,3 +1,4 @@
+
 class SceneManager {
     constructor(game) {
         this.game = game;
@@ -27,6 +28,8 @@ class SceneManager {
         // this.game.addEntity(this.rock);
 
         this.spawnmob = new SpawnMobs(this.game, this.x, this.y);
+        this.world = new WorldStuff(this.game,this.x,this.y);
+        
         this.shop = new Shop(this.game, -400, -100);
         this.ship = new Ship(this.game, this.x, this.y);
         this.hud = new Hud(this.game, this.ship, this.x, this.y);
@@ -71,7 +74,7 @@ class SceneManager {
 
         this.game.stage = "map";
 
-
+        this.world.drawMap();
         this.game.addEntity(this.rock);
         this.game.addEntity(this.rock2);
         this.game.addEntity(this.tile);
@@ -80,6 +83,7 @@ class SceneManager {
         this.game.addEntity(this.ship);
         this.game.addEntity(this.hud);
 
+        
         this.update();
     };
 
