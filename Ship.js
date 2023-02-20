@@ -52,7 +52,7 @@ class Ship {
         this.translate = { x: 17 * PARAMS.PIXELSCALER, y: 17 * PARAMS.PIXELSCALER };
         this.canvasOffset = { x: 14 * PARAMS.PIXELSCALER, y: 6 * PARAMS.PIXELSCALER };
 
-        this.visualRadius = 50;
+        this.visualRadius = 100;
         
     };
 
@@ -246,8 +246,6 @@ class Ship {
             this.x += this.speed * TICK;
         }
         
-
-        //console.log(this.speed);
         this.updateBB();
 
         //collision
@@ -270,7 +268,6 @@ class Ship {
                 }
                 
                 if(entity instanceof Monster1 || entity instanceof Slime) {
-                    console.log("collided with monster");
                     if(timeCount(this.lastDT, Date.now()) >= this.invulnerabilityFrame) {
                         this.lastDT = Date.now();
                         that.health -= entity.damage;
