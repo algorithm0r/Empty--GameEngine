@@ -13,7 +13,7 @@ class SceneManager {
         this.slimetimer = 0;
         this.spawnchance = null;
 
-        this.gameOver = false;
+        this.gameOver = true;
 
         let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
         this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
@@ -110,6 +110,7 @@ class SceneManager {
         }
         if(this.gameOver === false) {
             this.spawnmob.spawnEnemies();
+            console.log(this.gameOver);
         } else {
             this.time = 0;
             this.gold = 0;

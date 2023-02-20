@@ -186,7 +186,7 @@ class Ship {
     update() {
 
         const TICK = this.game.clockTick;
-        this.elapsedtime += .1;
+        this.elapsedtime += .05;
         //this.firecannon();
 
         if(!game.keys['1'] && !game.keys['2'] && !game.keys['3'])
