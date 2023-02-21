@@ -25,72 +25,68 @@ class SpawnMobs {
             }
         }
         if(this.game.camera.spawntimer >= 4) {
-            if(this.game.camera.time > 10 && this.game.camera.time < 120) {
+            if(this.game.camera.time > 30 && this.game.camera.time < 120) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
-                console.log("spawn chance = " + this.game.camera.spawnchance);
+                console.log("Monster1 spawn chance = " + this.game.camera.spawnchance);
                 if(this.game.camera.spawnchance >= 50) {
                     this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
                     this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
+                } 
+                if(this.game.camera.spawnchance >= 98) {
+                    this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
+                    this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
+                    this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
                 }
                 this.game.camera.spawntimer = 0;
             }
             else if(this.game.camera.time > 120 && this.game.camera.time < 180) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
-                console.log("spawn chance = " + this.game.camera.spawnchance);
+                console.log("Monster1 spawn chance = " + this.game.camera.spawnchance);
                 if(this.game.camera.spawnchance >= 40) {
                     this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
                     this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
-                    this.game.camera.spawntimer = 0;
+                } 
+                if(this.game.camera.spawnchance >= 93) {
+                    this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
+                    this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
+                    this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
                 }
+                this.game.camera.spawntimer = 0;
             }
             else if(this.game.camera.time > 180 && this.game.camera.time < 240) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
-                console.log("spawn chance = " + this.spawnchance);
+                console.log("Monster1 spawn chance = " + this.spawnchance);
                 if(this.game.camera.spawnchance >= 30) {
                     this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
                     this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
-                    this.game.camera.spawntimer = 0;
+                } 
+                if(this.game.camera.spawnchance >= 90) {
+                    this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
+                    this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
+                    this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
                 }
+                this.game.camera.spawntimer = 0;
             }
-            else if(this.game.camera.time > 240) {
+            else if(this.game.camera.time >= 240) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
-                console.log("spawn chance = " + this.spawnchance);
+                console.log("Monster1 spawn chance = " + this.spawnchance);
                 if(this.game.camera.spawnchance >= 20) {
                     this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
                     this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                     this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
-                    this.game.camera.spawntimer = 0;
+                } 
+                if(this.game.camera.spawnchance >= 85) {
+                    this.spawnx = getRandomInt(this.game.camera.ship.x + 500, this.game.camera.ship.x - 500);
+                    this.spawny = getRandomInt(this.game.camera.ship.y + 500, this.game.camera.ship.y - 500);
+                    this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
                 }
-            }
-        } /*
-        else if(this.time > 120 && this.time < 180) {
-            if(this.spawntimer >= 3) {
-                this.spawnx = getRandomInt(500, -500);
-                this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
-                this.spawntimer = 0;
-            }
-        }
-        else if(this.time > 180 && this.time < 240) {
-            if(this.spawntimer >= 2) {
-                this.spawnx = getRandomInt(500, -500);
-                this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
-                this.spawntimer = 0;
-            }
-        }
-        else if(this.time > 240) {
-            if(this.spawntimer >= 1) {
-                this.spawnx = getRandomInt(500, -500);
-                this.spawny = getRandomInt(500, -500);
-                this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.ship));
-                this.spawntimer = 0;
-            }
-        } */
+                this.game.camera.spawntimer = 0;
+            } 
+        } 
     };
 
     draw(ctx) {

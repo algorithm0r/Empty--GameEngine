@@ -47,10 +47,6 @@ class Harpoon {
         this.positionx = this.x - this.game.camera.x;
         this.positiony = this.y - this.game.camera.y;
 
-       
-        if (this.positionx < 0 || this.positiony < 0 || this.positionx > PARAMS.CANVAS_WIDTH || this.positiony > PARAMS.CANVAS_HEIGHT) {
-            this.removeFromWorld = true;
-        }
         this.updateBB();
 
         var that = this;
@@ -61,6 +57,17 @@ class Harpoon {
                     entity.health -= (that.damage * 2);
                     console.log(entity.health);
                     that.removeFromWorld = false;
+                    if(entity.health <= 0) {
+                        entity.dead = true;
+                    }
+                }
+            }
+            if(entity instanceof EnemyShip) {
+                if(that.BB.collide(entity.BB)) {
+                    console.log("Harpoon hit enemy");
+                    entity.health -= (that.damage * .5);
+                    console.log(entity.health);
+                    that.removeFromWorld = true;
                     if(entity.health <= 0) {
                         entity.dead = true;
                     }

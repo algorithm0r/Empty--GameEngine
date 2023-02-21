@@ -34,6 +34,7 @@ class SceneManager {
         this.ship = new Ship(this.game, this.x, this.y);
         this.hud = new Hud(this.game, this.ship, this.x, this.y);
 
+
     };
 
     clearEntities() {
@@ -96,6 +97,7 @@ class SceneManager {
 
     loadVictory() {
         this.game.stage = "victory";
+        this.gameOver = true;
         this.clearEntities();
         this.game.addEntity(new Victory(this.game));
     };

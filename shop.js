@@ -84,30 +84,31 @@ class ShopUI {
     };
 
     buyfireball() {
-        if(this.game.player.fireballs < 20 && this.game.camera.gold >= 100) {
+        if(this.game.player.fireballs < 20 && this.game.camera.gold >= 20) {
             this.game.player.fireballs++;
-            this.game.camera.gold -= 100;
+            this.game.camera.gold -= 20;
         }
     }
 
     buyharpoon() {
-        if(this.game.player.harpoons < 20 && this.game.camera.gold >= 100) {
+        if(this.game.player.harpoons < 20 && this.game.camera.gold >= 20) {
             this.game.player.harpoons++;
-            this.game.camera.gold -= 100;
+            this.game.camera.gold -= 20;
         }
     }
 
     buyhealth() {
         if(this.game.player.health < this.game.player.maxHealth && this.game.camera.gold >= 250) {
             this.game.player.health += 10;
-            this.game.camera.gold -= 250;
+            this.game.camera.gold -= 150;
         }
     }
 
     basedamageincrease() {
         this.cntr = 1;
         if(this.game.camera.gold >= this.game.player.moneyupgrade) {
-            this.game.player.damage += 2;
+            this.game.player.damage += 3;
+            this.game.player.number += .02;
             this.game.camera.gold -= this.game.player.moneyupgrade;
             this.game.player.moneyupgrade *= 2;
             this.cntr++;
@@ -132,7 +133,7 @@ class ShopUI {
             //upgrade speed
             ctx.font ="20px '"
             ctx.fillText("Buy fireball", PARAMS.CANVAS_WIDTH / 2 - 425, 260);
-            ctx.fillText("Cost = 100 gold", PARAMS.CANVAS_WIDTH / 2 - 365, 285);
+            ctx.fillText("Current inventory: " + this.game.player.fireballs, PARAMS.CANVAS_WIDTH / 2 - 365, 285);
             ctx.strokeStyle = "white";
 
             //buy item 1
@@ -146,7 +147,7 @@ class ShopUI {
                     ctx.fillStyle = "white"
                     ctx.font = "18px '";
                     ctx.fillStyle = "red";
-                    ctx.fillText("100gold" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
+                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 245, 75, 35);
                     ctx.fillStyle = "gray";
@@ -155,7 +156,7 @@ class ShopUI {
                     ctx.fillStyle = "white"
                     ctx.font = "18px '";
                     ctx.fillStyle = "white";
-                    ctx.fillText("100gold" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
+                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
                 }
             }
 
@@ -171,7 +172,7 @@ class ShopUI {
             //upgrade damage
             ctx.font ="20px '"
             ctx.fillText("Buy Harpoon", PARAMS.CANVAS_WIDTH / 2 - 425, 370);
-            ctx.fillText("Cost = 100 gold", PARAMS.CANVAS_WIDTH / 2 - 345, 395);
+            ctx.fillText("Current inventory: " + this.game.player.harpoons, PARAMS.CANVAS_WIDTH / 2 - 365, 395);
             ctx.strokeStyle = "white";
 
             //buy item 2
@@ -186,7 +187,7 @@ class ShopUI {
 
                     ctx.font = "18px '";
                     ctx.fillStyle = "red";
-                    ctx.fillText("100gold" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
+                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 355, 75, 35);
                     ctx.fillStyle = "gray";
@@ -196,7 +197,7 @@ class ShopUI {
 
                     ctx.font = "18px '";
                     ctx.fillStyle = "white";
-                    ctx.fillText("100gold" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
+                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
                 }
             }
 
@@ -226,7 +227,7 @@ class ShopUI {
 
                     ctx.font = "18px '";
                     ctx.fillStyle = "red";
-                    ctx.fillText("250gold" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
+                    ctx.fillText("Cost: 150" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 465, 75, 35);
                     ctx.fillStyle = "gray";
@@ -236,7 +237,7 @@ class ShopUI {
 
                     ctx.font = "18px '";
                     ctx.fillStyle = "white";
-                    ctx.fillText("250gold" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
+                    ctx.fillText("Cost: 150" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
                 }
             }
 
@@ -252,7 +253,8 @@ class ShopUI {
             //upgrade max health
             ctx.font ="20px '"
             ctx.fillText("Cannonball: ", PARAMS.CANVAS_WIDTH / 2 - 425, 590);
-            ctx.fillText("Damage up by 5", PARAMS.CANVAS_WIDTH / 2 - 360, 615);
+            ctx.fillText("Damage up by 3", PARAMS.CANVAS_WIDTH / 2 - 360, 615);
+            ctx.fillText("Firerate up by .2", PARAMS.CANVAS_WIDTH / 2 - 360, 640);
             ctx.strokeStyle = "white";
 
             //buy item 4
