@@ -508,7 +508,7 @@ class Slime {
         var that = this;
         this.game.entities.forEach(entity => {
             if(entity.BB && that.BB.collide(entity.BB)) {
-                if(entity instanceof Rock) {
+                if(entity instanceof Rock || entity instanceof Shop || entity instanceof WorldObject) {
                     if(that.BB.collide(entity.BB)) {
                          if (that.lastBB.right - PARAMS.TILEWIDTH <= entity.BB.left) { //ship right side collides with entity left
                             that.x -= that.lastBB.right - entity.BB.left;

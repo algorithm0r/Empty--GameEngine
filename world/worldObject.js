@@ -26,7 +26,7 @@ class WorldObject {
     draw(ctx) {
         this.WorldObject.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, 1);
 
-        if (PARAMS.DEBUG) {
+        if (PARAMS.DEBUG && this.collideable) {
             ctx.strokeStyle = 'Red';
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
         }
