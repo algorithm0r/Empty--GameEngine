@@ -29,6 +29,7 @@ class Shop {
             
         } else {
             this.shopOpen = false;
+            
         }
 
     };

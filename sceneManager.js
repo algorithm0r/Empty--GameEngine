@@ -74,8 +74,8 @@ class SceneManager {
         this.game.addEntity(this.rock);
         this.game.addEntity(this.rock2);
         this.game.addEntity(this.tile);
-        //this.game.addEntity(new Monster2(this.game, 500, 500, this.ship));
-        //this.game.addEntity(new Monster1(this.game, 500, 500, this.ship));
+        this.game.addEntity(new Monster2(this.game, 500, 500, this.ship));
+        this.game.addEntity(new Monster1(this.game, 500, 500, this.ship));
         
 
         this.update();
@@ -107,7 +107,7 @@ class SceneManager {
 
         this.spawntimer += this.game.clockTick;
         this.slimetimer += this.game.clockTick;
-        if(this.time) { //keep spawning slimes
+        /*if(this.time) { //keep spawning slimes
             if(this.slimetimer >= 1) {
                 this.spawnx = getRandomInt(this.ship.x + 500, this.ship.x - 500);
                 this.spawny = getRandomInt(this.ship.y + 500, this.ship.y - 500);
