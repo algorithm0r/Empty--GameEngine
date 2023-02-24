@@ -169,20 +169,6 @@ class Ship {
         
     }
 
-    buyDamage() {
-
-    };
-
-    buyHealth() {
-
-    };
-
-    buySpeed() {
-
-    };
-
-
-
     update() {
 
         const TICK = this.game.clockTick;

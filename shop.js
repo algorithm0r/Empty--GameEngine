@@ -49,7 +49,20 @@ class ShopUI {
     constructor(game, shop) {
         Object.assign(this, {game, shop});
         this.game.shopOpen = true;
+        this.damagesprite = ASSET_MANAGER.getAsset("./assets/items/cannonicon.png");
+        this.healthsprite = ASSET_MANAGER.getAsset("./assets/items/healthboosticon.png");
+        this.fireballsprite = ASSET_MANAGER.getAsset("./assets/projectiles/fireball.png");
+        this.harpoonsprite = ASSET_MANAGER.getAsset("./assets/projectiles/spear.png");
+
+
+        // this.fireballicon = 
+        // this.harpoonicon =
         
+        this.cannonart = new Animator(this.damagesprite, 0, 0, 460, 500, 1, 1);
+        this.healthart = new Animator(this.healthsprite, 0, 0, 600, 350, 1, 1);
+        this.fireballart = new Animator(this.fireballsprite, 0, 0, 17, 17, 1, 1);
+        this.harpoonart = new Animator(this.harpoonsprite, 0, 0, 40, 34, 1, 1);
+
     }
     
 
@@ -128,9 +141,11 @@ class ShopUI {
             ctx.globalAlpha = 1;
             ctx.fillStyle = "white";
             
+            this.fireballart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 480, 250, PARAMS.SCALE);
+
             //upgrade speed
             ctx.font ="20px '"
-            ctx.fillText("Buy fireball", PARAMS.CANVAS_WIDTH / 2 - 425, 260);
+            ctx.fillText("Buy Fireball", PARAMS.CANVAS_WIDTH / 2 - 425, 260);
             ctx.fillText("Cost = 100 gold", PARAMS.CANVAS_WIDTH / 2 - 365, 285);
             ctx.strokeStyle = "white";
 
@@ -166,6 +181,8 @@ class ShopUI {
             ctx.fillRect(PARAMS.CANVAS_WIDTH / 2 - 500, 320, 400, 110);
             ctx.globalAlpha = 1;
             ctx.fillStyle = "white";
+
+            this.harpoonart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 500, 340, PARAMS.SCALE);
 
             //upgrade damage
             ctx.font ="20px '"
@@ -208,11 +225,15 @@ class ShopUI {
             ctx.globalAlpha = 1;
             ctx.fillStyle = "white";
 
+            this.healthart.drawSmallIcon(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 515, 460, PARAMS.SCALE);
+
+
             //upgrade health
             ctx.font ="20px '"
-            ctx.fillText("Health: repair", PARAMS.CANVAS_WIDTH / 2 - 425, 480);
+            ctx.fillText("Health: Repair", PARAMS.CANVAS_WIDTH / 2 - 425, 480);
             ctx.fillText("Health By 10", PARAMS.CANVAS_WIDTH / 2 - 360, 505);
             ctx.strokeStyle = "white";
+            
 
             //buy item 3
             if(this.game.mouse != null) {
@@ -248,7 +269,9 @@ class ShopUI {
             ctx.globalAlpha = 1;
             ctx.fillStyle = "white";
 
-            //upgrade max health
+            this.cannonart.drawSmallIcon(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 500, 550, PARAMS.SCALE);
+
+            //upgrade cannon damage
             ctx.font ="20px '"
             ctx.fillText("Cannonball: ", PARAMS.CANVAS_WIDTH / 2 - 425, 590);
             ctx.fillText("Damage up by 5", PARAMS.CANVAS_WIDTH / 2 - 360, 615);
@@ -278,6 +301,7 @@ class ShopUI {
                     ctx.fillText("gold: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
                 }
             }
+
             
         } else {
             this.game.shopOpen = false;

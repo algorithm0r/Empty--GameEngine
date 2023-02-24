@@ -78,7 +78,8 @@ class Victory {
 class Title {
     constructor(game) {
         Object.assign(this, {game});
-
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/background/pirategametitle.png");
+        this.title = new Animator(this.spritesheet, 0, 0, 1920, 1080, 1, 1);
     };
 
     update() {
@@ -94,9 +95,10 @@ class Title {
     };
 
     drawTitle(ctx) {
-        ctx.fillStyle = "Black";
-        ctx.fillRect(0, 0, 1024, 768);
+        // ctx.fillStyle = "Black";
+        // ctx.fillRect(0, 0, 1024, 768);
 
+        this.title.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
         ctx.fillStyle = "WHITE";
         ctx.font = '60px""';
         ctx.fillText("Pirate Game", 200, 200);
