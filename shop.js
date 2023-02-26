@@ -69,26 +69,26 @@ class ShopUI {
     update() {
         //fireball
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 245 && this.game.mouse.y <= 285) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 245 && this.game.mouse.y <= 285) && this.game.click) {
                 //this.upgradeSpeed();
                 this.buyfireball();
             }
         }
         //harpoon
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 355 && this.game.mouse.y <= 395) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 355 && this.game.mouse.y <= 395) && this.game.click) {
                 this.buyharpoon();
             }
         }
         //health
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 465 && this.game.mouse.y <= 505) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 465 && this.game.mouse.y <= 505) && this.game.click) {
                 this.buyhealth();
             }
         }
         //base damage increase
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 575 && this.game.mouse.y <= 615) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 575 && this.game.mouse.y <= 615) && this.game.click) {
                
                 this.basedamageincrease();
             }
@@ -152,7 +152,7 @@ class ShopUI {
             //buy item 1
 
             if(this.game.mouse != null) {
-                if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 245 && this.game.mouse.y <= 285)) {
+                if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 245 && this.game.mouse.y <= 285)) {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 245, 75, 35);
                     ctx.fillStyle = "green";
                     ctx.fillRect(PARAMS.CANVAS_WIDTH / 2 - 180, 245, 75, 35);
@@ -193,7 +193,7 @@ class ShopUI {
             //buy item 2
 
             if(this.game.mouse != null) {
-                if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 355 && this.game.mouse.y <= 395)) {
+                if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 355 && this.game.mouse.y <= 395)) {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 355, 75, 35);
                     ctx.fillStyle = "green";
                     ctx.fillRect(PARAMS.CANVAS_WIDTH / 2 - 180, 355, 75, 35);
@@ -237,7 +237,7 @@ class ShopUI {
 
             //buy item 3
             if(this.game.mouse != null) {
-                if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 465 && this.game.mouse.y <= 505)) {
+                if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 465 && this.game.mouse.y <= 505)) {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 465, 75, 35);
                     ctx.fillStyle = "green";
                     ctx.fillRect(PARAMS.CANVAS_WIDTH / 2 - 180, 465, 75, 35);
@@ -279,7 +279,7 @@ class ShopUI {
 
             //buy item 4
             if(this.game.mouse != null) {
-                if(this.game.mouse && (this.game.mouse.x >= 332 && this.game.mouse.x <= 405) && (this.game.mouse.y >= 575 && this.game.mouse.y <= 615)) {
+                if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 575 && this.game.mouse.y <= 615)) {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 575, 75, 35);
                     ctx.fillStyle = "green";
                     ctx.fillRect(PARAMS.CANVAS_WIDTH / 2 - 180, 575, 75, 35);

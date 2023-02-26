@@ -2,6 +2,7 @@
 
 const ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("./assets/background/pirategametitle.png");
+ASSET_MANAGER.queueDownload("./assets/background/piratedeathscreen.png");
 ASSET_MANAGER.queueDownload("./assets/background/1 Tiles/Map_tile_01.png");
 ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Houses/shop.png");
 ASSET_MANAGER.queueDownload("./assets/background/1 Tiles/Map_tile_54.png");

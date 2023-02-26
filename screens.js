@@ -1,8 +1,10 @@
 class GameOver {
     constructor(game) {
         Object.assign(this, {game});
-
         this.game = game;
+
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/background/piratedeathscreen.png");
+        this.gameover = new Animator(this.spritesheet, 0, 0, 1920, 1080, 1, 1);
     };
 
     update() {
@@ -18,8 +20,7 @@ class GameOver {
     }
 
     drawGameover(ctx) {
-        ctx.fillStyle = "Black";
-        ctx.fillRect(0, 0, 1024, 768);
+        this.gameover.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
 
         ctx.fillStyle = "WHITE";
         ctx.font = '60px""';
@@ -40,7 +41,6 @@ class GameOver {
 class Victory {
     constructor(game) {
         Object.assign(this, {game});
-
         this.game = game;
     };
 
@@ -53,7 +53,7 @@ class Victory {
     };
     drawWin(ctx) {
         ctx.fillStyle = "Black";
-        ctx.fillRect(0, 0, 1024, 768);
+        ctx.fillRect(0, 0, 1920, 1080);
 
         ctx.fillStyle = "WHITE";
         ctx.font = '60px""';
@@ -95,10 +95,8 @@ class Title {
     };
 
     drawTitle(ctx) {
-        // ctx.fillStyle = "Black";
-        // ctx.fillRect(0, 0, 1024, 768);
-
         this.title.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
+
         ctx.fillStyle = "WHITE";
         ctx.font = '60px""';
         ctx.fillText("Pirate Game", 200, 200);
