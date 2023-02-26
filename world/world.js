@@ -38,6 +38,9 @@ class WorldStuff {
                         this.game.addEntity(water);
                         break;
                     case 1:
+                        let grass = new WorldObject(this.game, "./assets/background/1 Tiles/Map_tile_54.png", xCord+i, yCord+j, false, 2)
+                       
+                        this.game.addEntity(grass);
                         break;
                     case 9:
                         let rock = new WorldObject(this.game, "./assets/background/2 Objects/Rocks/rocksprite.png", xCord+i, yCord+j, true, 2)
