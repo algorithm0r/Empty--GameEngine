@@ -30,7 +30,7 @@ class Ship {
         
         //for inventory
         this.maxfireballs = 20;
-        this.fireballs = 5;
+        this.fireballs = 10;
         this.maxharpoons = 20;
         this.harpoons = 5;
 

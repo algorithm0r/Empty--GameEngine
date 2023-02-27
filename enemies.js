@@ -564,6 +564,9 @@ class EnemyShip {
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
+        this.isburning = false;
+        this.cntr = 0;
+
         this.makesmall = true;
 
         this.updateBB();
@@ -596,6 +599,28 @@ class EnemyShip {
 
     update() {
         const TICK = this.game.clockTick;
+
+        if (this.isburning) {
+            if (this.resettime === undefined) {
+                this.resettime = 0;
+            } else {
+                this.resettime += this.game.clockTick;
+            }
+            //if(this.game.player.burntime > 0) {
+            if(this.resettime >= 1) {
+                this.health -= 10;
+                this.resettime = undefined;
+                this.cntr++;
+            }
+            if(this.cntr >= 10) {
+                this.isburning = false;
+                this.cntr = 0;
+                //break;
+            }
+            if(this.health <= 0) {
+                this.dead = true;
+            }
+        }
 
         let playerX = this.game.playerLocation.x + (PARAMS.TILEWIDTH * 3);
         let playerY = this.game.playerLocation.y + (PARAMS.TILEHEIGHT * 3.5);
@@ -693,6 +718,27 @@ class EnemyShip {
                     that.updateBB();
                 }
             }
+
+            if(entity instanceof Fireball) {
+                if(that.BB.collide(entity.BB)) { 
+                    that.isburning = true;
+
+                    console.log("fireball hit enemy");
+                    that.health -= (entity.damage * 2);
+
+                    console.log("isburnig :" + this.isburning);
+
+                    //this.burning();
+
+                    console.log("Enemy ship health: " + that.health);
+                    entity.removeFromWorld = true;
+                    if(that.health <= 0) {
+                        that.dead = true;
+                    }
+                }
+
+            }
+
         });
     };
 

@@ -268,7 +268,7 @@ class ShopUI {
 
                     ctx.font = "18px '";
                     ctx.fillStyle = "red";
-                    ctx.fillText("gold: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
+                    ctx.fillText("Cost: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 575, 75, 35);
                     ctx.fillStyle = "gray";
@@ -278,7 +278,7 @@ class ShopUI {
 
                     ctx.font = "18px '";
                     ctx.fillStyle = "white";
-                    ctx.fillText("gold: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
+                    ctx.fillText("Cost: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
                 }
             }
             

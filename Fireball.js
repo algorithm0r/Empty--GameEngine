@@ -69,18 +69,7 @@ class Fireball {
                     }
                 }
             }
-            if(entity instanceof EnemyShip) {
-                if(that.BB.collide(entity.BB)) {
-                    console.log("fireball hit enemy");
-                    entity.health -= (that.damage * 2);
-                    
-                    console.log(entity.health);
-                    that.removeFromWorld = true;
-                    if(entity.health <= 0) {
-                        entity.dead = true;
-                    }
-                }
-            }
+            
         })
 
     };
