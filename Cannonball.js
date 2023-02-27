@@ -60,7 +60,7 @@ class CannonBall {
         
         var that = this;
         this.game.entities.forEach(entity => {
-            if(entity instanceof Monster1 || entity instanceof Slime) {
+            if(entity instanceof Monster1  || entity instanceof Slime || entity instanceof EnemyShip) {
                 if(that.BB.collide(entity.BB)) {
                     entity.health -= this.damage;
                     console.log(entity.health);
@@ -82,4 +82,4 @@ class CannonBall {
         }
     }
 
- }
+}

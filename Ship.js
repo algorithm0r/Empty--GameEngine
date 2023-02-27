@@ -20,24 +20,22 @@ class Ship {
         this.facing = 0;//0 = down, 1 = left, 2 = right, 3 = up
         this.state = 0;//0 = normal, 1 = fast 
 
-
-
         this.speed = 300;
         this.lastDT = Date.now();
         this.dead = false;
 
-        this.chooseattack = null;
         this.fireattack = false;
         this.cannonattack = true;
         this.harpoonattack = false;
-        this.moving = false;
-
+        
+        //for inventory
         this.maxfireballs = 20;
-        this.fireballs = 5;
+        this.fireballs = 10;
         this.maxharpoons = 20;
         this.harpoons = 5;
 
-        this.elapsedtime = 0;
+        this.elapsedtime = 0; //adds this.number to itself to check when to shoot next
+        this.number = .05; //used to upgrade firerate in shop
         this.firerate = 2;
 
         this.damage = 10; //used to upgrade in shop
@@ -93,8 +91,6 @@ class Ship {
         if (this.harpoonattack) {
             this.fireharpoon();
         }
-        
-        this.chooseattack;
         
     }
 
@@ -172,10 +168,9 @@ class Ship {
     update() {
 
         const TICK = this.game.clockTick;
-        this.elapsedtime += .05;
-        //this.firecannon();
+        this.elapsedtime += this.number;
 
-        if(!game.keys['1'] && !game.keys['2'] && !game.keys['3'])
+        if(game.keys['1'] && !game.keys['2'] && !game.keys['3'])
         {
             //do nothing
         }

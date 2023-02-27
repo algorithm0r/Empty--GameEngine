@@ -61,14 +61,15 @@ class Fireball {
             if(entity instanceof Monster1 || entity instanceof Slime) {
                 if(that.BB.collide(entity.BB)) {
                     console.log("fireball hit enemy");
-                    entity.health -= (that.damage * .5);
+                    entity.health -= (that.damage * .02);
                     console.log(entity.health);
-                    that.removeFromWorld = true;
+                    that.removeFromWorld = false;
                     if(entity.health <= 0) {
                         entity.dead = true;
                     }
                 }
             }
+            
         })
 
     };
