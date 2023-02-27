@@ -42,6 +42,9 @@ class Victory {
     constructor(game) {
         Object.assign(this, {game});
         this.game = game;
+
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/background/victoryscreen.png");
+        this.victory = new Animator(this.spritesheet, 0, 0, 1920, 1080, 1, 1);
     };
 
     update() {
@@ -52,8 +55,7 @@ class Victory {
         }
     };
     drawWin(ctx) {
-        ctx.fillStyle = "Black";
-        ctx.fillRect(0, 0, 1920, 1080);
+        this.victory.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
 
         ctx.fillStyle = "WHITE";
         ctx.font = '60px""';

@@ -269,7 +269,7 @@ class Ship {
         this.game.playerLocation.x = this.x;
         this.game.playerLocation.y = this.y;
 
-        if(this.game.camera.gold >= 10000) {
+        if(this.game.camera.gold >= 20) {
             this.game.camera.loadVictory();
         }
     };
