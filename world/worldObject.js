@@ -31,4 +31,12 @@ class WorldObject {
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
         }
     };
+
+    setCustomHeightWidth(height,width){
+        this.height = height;
+        this.width = width;
+        if (this.collideable) {
+            this.BB = new BoundingBox(this.x, this.y,this.width, this.height );
+        }
+    }
 }

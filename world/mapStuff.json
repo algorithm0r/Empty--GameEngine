@@ -1,9 +1,9 @@
 { 
-        "tiles": [
-            {"oceanTile":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_01.png"}},
-            {"grassTile":{"type": "grass","value": 0,"path": "./assets/background/1 Tiles/Map_tile_54.png"}},
-            { "rockTile":{"type": "rock","value": 0,"path": "./assets/background/2 Objects/Rocks/rocksprite.png"}}
-        ]
+        "tiles": {
+            "oceanTile":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_01.png","collidable": false},
+            "grassTile":{"type": "grass","value": 0,"path": "./assets/background/1 Tiles/Map_tile_22.png","collidable": true},
+             "rockTile":{"type": "rock","value": 0,"path": "./assets/background/2 Objects/Rocks/3.png","collidable": true}
+        }
         ,
         "map_1": [
             [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
@@ -20,7 +20,7 @@
             [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
             [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
             [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
-            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,9],
             [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
             [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
             [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
