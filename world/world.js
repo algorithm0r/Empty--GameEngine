@@ -39,7 +39,7 @@ class WorldStuff {
     drawSquare(theNum,xCord,yCord){
         for(let i = 0;i < 250;i+=50){
             for(let j =0; j < 250; j+=50){
-
+                
                 switch (theNum) {
                     case 0:
                         let water = new WorldObject(this.game, this.jsonMap.tiles.oceanTile.path, xCord+i, yCord+j, this.jsonMap.tiles.oceanTile.collidable, 2)
@@ -48,12 +48,12 @@ class WorldStuff {
                         break;
                     case 1:
                         let grass = new WorldObject(this.game, this.jsonMap.tiles.grassTile.path, xCord+i, yCord+j, this.jsonMap.tiles.grassTile.collidable, 2)
-                       
+                       grass.setCustomHeightWidth(50,50);
                         this.game.addEntity(grass);
                         break;
                     case 9:
                         let rock = new WorldObject(this.game, this.jsonMap.tiles.rockTile.path, xCord+i, yCord+j, this.jsonMap.tiles.rockTile.collidable, 2)
-                        
+                        rock.setCustomHeightWidth(50,50);
                         this.game.addEntity(rock);
                         break;
                 }
