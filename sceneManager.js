@@ -64,8 +64,7 @@ class SceneManager {
         this.ship = new Ship(this.game, 0, 0);        
         this.hud = new Hud(this.game, this.ship, 0, 0);
         this.shop = new Shop(this.game, -400, -100);
-        ASSET_MANAGER.pauseBackgroundMusic();
-        ASSET_MANAGER.playAsset("./assets/Music/pirates8bit.mp3");
+
     };
 
     loadMap() {
@@ -87,7 +86,7 @@ class SceneManager {
         this.game.addEntity(this.ship);
         this.game.addEntity(this.hud);
 
-        
+        ASSET_MANAGER.playAsset("./assets/Music/pirates8bit.mp3");
         this.update();
     };
 
@@ -95,6 +94,7 @@ class SceneManager {
         this.game.stage = "gameover";
         this.gameOver = true;
         this.clearEntities();
+        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new GameOver(this.game));
     };
 
