@@ -63,6 +63,9 @@ class SceneManager {
         this.shop = new Shop(this.game, -400, -100);
         this.ship = new Ship(this.game, 0, 0);        
         this.hud = new Hud(this.game, this.ship, 0, 0);
+        this.shop = new Shop(this.game, -400, -100);
+        ASSET_MANAGER.pauseBackgroundMusic();
+        ASSET_MANAGER.playAsset("./assets/Music/pirates8bit.mp3");
     };
 
     loadMap() {
