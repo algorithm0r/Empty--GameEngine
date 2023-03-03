@@ -23,16 +23,16 @@ class GameOver {
         this.gameover.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
 
         ctx.fillStyle = "WHITE";
-        ctx.font = '60px""';
+        ctx.font = '60px Pirate';
         ctx.fillText("Gameover", 200, 200);
 
         if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
             ctx.fillStyle = "GRAY";
-            ctx.font = '60px""';
+            ctx.font = '60px Pirate';
             ctx.fillText("Play Again?", 200, 400);
         } else {
             ctx.fillStyle = "WHITE";
-            ctx.font = '60px""';
+            ctx.font = '60px Pirate';
             ctx.fillText("Play Again?", 200, 400);
         }
     }
@@ -49,7 +49,7 @@ class Victory {
 
     update() {
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 1200 && this.game.mouse.x <= 1500) && (this.game.mouse.y >= 350 && this.game.mouse.y <= 400) && this.game.click) {
                 this.game.camera.loadTitle();
             }
         }
@@ -58,17 +58,17 @@ class Victory {
         this.victory.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
 
         ctx.fillStyle = "WHITE";
-        ctx.font = '60px""';
-        ctx.fillText("You win", 200, 200);
+        ctx.font = '60px Pirate';
+        ctx.fillText("You escape with the gold", 1100, 200);
 
-        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
+        if(this.game.mouse && (this.game.mouse.x >= 1200 && this.game.mouse.x <= 1500) && (this.game.mouse.y >= 350 && this.game.mouse.y <= 400)) {
             ctx.fillStyle = "GRAY";
-            ctx.font = '60px""';
-            ctx.fillText("Play Again?", 200, 400);
+            ctx.font = '60px Pirate';
+            ctx.fillText("Play Again?", 1200, 400);
         } else {
             ctx.fillStyle = "WHITE";
-            ctx.font = '60px""';
-            ctx.fillText("Play Again?", 200, 400);
+            ctx.font = '60px Pirate';
+            ctx.fillText("Play Again?", 1200, 400);
         }
     }
 
@@ -86,8 +86,11 @@ class Title {
 
     update() {
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 400) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 340) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800) && this.game.click) {
                 this.game.camera.loadMap();
+            }
+            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 320) && (this.game.mouse.y >= 850 && this.game.mouse.y <= 900) && this.game.click) {
+                this.game.camera.loadHelper();
             }
         }
     };
@@ -100,17 +103,77 @@ class Title {
         this.title.drawSmallFrame(this.game.clockTick, ctx, 0, 0, PARAMS.SCALE);
 
         ctx.fillStyle = "WHITE";
-        ctx.font = '60px""';
+        ctx.font = '60px Pirate';
         ctx.fillText("Pirate Game", 200, 200);
 
-        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 320) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
+        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 340) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800)) {
             ctx.fillStyle = "GRAY";
-            ctx.font = '60px""';
-            ctx.fillText("Start", 200, 400);
+            ctx.font = '60px Pirate';
+            ctx.fillText("Start", 200, 800);
         } else {
             ctx.fillStyle = "WHITE";
-            ctx.font = '60px""';
-            ctx.fillText("Start", 200, 400);
+            ctx.font = '60px Pirate';
+            ctx.fillText("Start", 200, 800);
+        }
+
+        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 320) && (this.game.mouse.y >= 850 && this.game.mouse.y <= 900)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Help", 200, 900);
+        } else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Help", 200, 900);
         }
     };
 };
+
+class Helper {
+    constructor(game) {
+        Object.assign(this, {game});
+
+    };
+
+    update() {
+        if(this.game.mouse != null) {
+            if(this.game.mouse && (this.game.mouse.x >= 1600 && this.game.mouse.x <= 1780) && (this.game.mouse.y >= 950 && this.game.mouse.y <= 1010) && this.game.click) {
+                this.game.camera.loadTitle();
+            }
+        }
+    };
+
+    draw(ctx) {
+        this.drawHelper(ctx);
+    };
+
+    drawHelper(ctx) {
+        ctx.fillStyle = "Black";
+        ctx.fillRect(0, 0, 1920, 1080);
+
+        ctx.fillStyle = "BISQUE";
+        ctx.font = '60px Pirate';
+        ctx.fillText("INSTRUCTIONS", 100, 100);
+
+        ctx.beginPath();
+        ctx.fillStyle = "BISQUE";
+        ctx.font = '45px Pirate';
+        ctx.fillText("- W, A, S, D to move", 150, 200);
+        ctx.fillText("- Press 1-3 for Cannonball, Fireball, Harpoon", 150, 300);
+        ctx.fillText("- Press E next to Kames House to open the shop", 150, 400);
+        ctx.fillText("- Fireballs pierce Slimes and Monsters, burns Enemy Ships", 150, 500);
+        ctx.fillText("- Harpoons do heavy damage and pierce Slimes and Monster, break against Enemy Ships", 150, 700);
+        ctx.fillText("- Collect 10,000 dubloons to win", 150, 600);
+
+        ctx.closePath();
+
+        if(this.game.mouse && (this.game.mouse.x >= 1600 && this.game.mouse.x <= 1780) && (this.game.mouse.y >= 950 && this.game.mouse.y <= 1010)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Return", 1600, 1000);
+        } else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Return", 1600, 1000);
+        }
+    }
+}

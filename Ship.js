@@ -85,8 +85,6 @@ class Ship {
         }
         if (this.cannonattack) {
             this.firecannon(); 
-            //this.cntr++;
-            //console.log("cntr " + this.cntr)
         }
         if (this.harpoonattack) {
             this.fireharpoon();
@@ -194,7 +192,6 @@ class Ship {
         else if(this.cannonattack == true) {
             this.firecannon();
         }
-        //console.log("elapsed time= " + this.elapsedtime);
 
         if (game.keys['w'] && !game.keys['s'] && !game.keys[' ']) {
             this.facing = 3;
@@ -256,11 +253,6 @@ class Ship {
                             this.game.camera.loadGameover();
                         }
                     }
-                }
-                
-
-                if(entity instanceof Coin) {
-                    //that.game.camera.gold += entity.value;
                 }
             }
         });
