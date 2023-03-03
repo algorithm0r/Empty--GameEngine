@@ -31,7 +31,7 @@ class Harpoon {
     }
 
     updateBB() {
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
+        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH*3, PARAMS.TILEHEIGHT*2);
     };
     
     update() {

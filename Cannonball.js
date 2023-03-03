@@ -83,3 +83,83 @@ class CannonBall {
     }
 
 }
+
+class enemyCannonBall {
+    constructor(game, x, y, player) {
+        Object.assign(this, { game, x, y, player});
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png");
+
+        //var dist = distance(this, this.target);
+        this.maxSpeed = 3;
+        this.SPEED = 1.5;
+        this.damage = 5;
+       
+        this.height = this.RADIUS * 2;
+        this.width = this.RADIUS * 2;
+
+        // animation stats
+        this.imagescale = .5;
+        this.scale = 2;
+        this.RADIUS = 8.5 * this.scale;
+        this.frameWidth = 17;
+        this.frameHeight = 17;
+
+        this.positionx = this.x - this.game.camera.x;
+        this.positiony = this.y - this.game.camera.y;
+
+        var dist = getDistance(this, this.player);
+        this.velocity = { x: (this.player.x + 40 - this.x) / dist * this.maxSpeed, y: (this.player.y + 50 - this.y) / dist * this.maxSpeed };
+
+        const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
+
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png"), 0, 0, 17, 17, 1, 1, 0);
+
+        this.updateBB();
+    }
+
+    updateBB() {
+        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
+    };
+    
+    update() {
+
+        const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
+
+        this.x += this.velocity.x * TICKSCALE;
+        this.y += this.velocity.y * TICKSCALE;
+
+        this.positionx = this.x - this.game.camera.x;
+        this.positiony = this.y - this.game.camera.y;
+
+       
+        if (this.positionx < 0 || this.positiony < 0 || this.positionx > PARAMS.CANVAS_WIDTH || this.positiony > PARAMS.CANVAS_HEIGHT) {
+            this.removeFromWorld = true;
+        }
+        this.damage;
+        this.updateBB();
+        
+        var that = this;
+        this.game.entities.forEach(entity => {
+            if(entity instanceof Ship) {
+                if(that.BB.collide(entity.BB)) {
+                    entity.health -= this.damage;
+                    console.log(entity.health);
+                    that.removeFromWorld = true;
+                    if(entity.health <= 0) {
+                        this.game.camera.loadGameover();
+                    }
+                }
+            }
+        })
+    };
+
+    draw(ctx) {
+        ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
+
+        if(PARAMS.DEBUG) {
+            ctx.strokeStyle = 'Red';
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
+        }
+    }
+
+}
