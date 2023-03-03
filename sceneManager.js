@@ -18,12 +18,9 @@ class SceneManager {
 
         let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
         this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
-        
-        // this.game.addEntity(this.ship);
-        
+                
         //Temp entities
         this.rock = new Rock(this.game, 100, 100);
-        // this.game.addEntity(this.rock);
 
         this.spawnmob = new SpawnMobs(this.game, this.x, this.y);
         this.world = new WorldStuff(this.game,this.x,this.y);
@@ -51,7 +48,6 @@ class SceneManager {
 
         //Temp entities
         this.rock = new Rock(this.game, 100, 100);
-        // this.game.addEntity(this.rock);
 
         let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
         this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);

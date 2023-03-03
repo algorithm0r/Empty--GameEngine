@@ -8,12 +8,6 @@ class Rock {
         this.rock = new Animator(this.spritesheet, 1, 1, this.width, this.height, 1, 1);
 
         this.BB = new BoundingBox(this.x + 20, this.y + 15, PARAMS.TILEWIDTH * 9, PARAMS.TILEHEIGHT * 7);
-
-        // this.leftBB = new BoundingBox(this.x + 20, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
-        // this.rightBB = new BoundingBox(this.x + 164, this.y + 15, 0, PARAMS.TILEHEIGHT * 7);
-        // this.topBB = new BoundingBox(this.x + 20, this.y + 13, PARAMS.TILEWIDTH * 9, 0);
-        // this.bottomBB = new BoundingBox(this.x + 20, this.y + 127,PARAMS.TILEWIDTH * 9, 0);
-
     };
 
     update() {

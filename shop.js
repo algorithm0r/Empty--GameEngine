@@ -54,10 +54,6 @@ class ShopUI {
         this.healthsprite = ASSET_MANAGER.getAsset("./assets/items/healthboosticon.png");
         this.fireballsprite = ASSET_MANAGER.getAsset("./assets/projectiles/fireball.png");
         this.harpoonsprite = ASSET_MANAGER.getAsset("./assets/projectiles/spear.png");
-
-
-        // this.fireballicon = 
-        // this.harpoonicon =
         
         this.cannonart = new Animator(this.damagesprite, 0, 0, 460, 500, 1, 1);
         this.healthart = new Animator(this.healthsprite, 0, 0, 600, 350, 1, 1);
@@ -142,7 +138,6 @@ class ShopUI {
             
             this.fireballart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 480, 250, PARAMS.SCALE);
 
-            //upgrade speed
             ctx.font ="20px Pirate"
             ctx.fillText("Buy Fireball:", PARAMS.CANVAS_WIDTH / 2 - 425, 260);
             ctx.fillText("Current inventory: " + this.game.player.fireballs, PARAMS.CANVAS_WIDTH / 2 - 390, 285);
@@ -183,7 +178,6 @@ class ShopUI {
 
             this.harpoonart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 500, 340, PARAMS.SCALE);
 
-            //upgrade damage
             ctx.font ="20px Pirate"
             ctx.fillText("Buy Harpoon:", PARAMS.CANVAS_WIDTH / 2 - 425, 370);
             ctx.fillText("Current inventory: " + this.game.player.harpoons, PARAMS.CANVAS_WIDTH / 2 - 390, 395);
@@ -227,7 +221,6 @@ class ShopUI {
             this.healthart.drawSmallIcon(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH / 2 - 515, 460, PARAMS.SCALE);
 
 
-            //upgrade health
             ctx.font ="20px Pirate"
             ctx.fillText("Health Repair:", PARAMS.CANVAS_WIDTH / 2 - 425, 480);
             ctx.fillText("Heal 10 HP", PARAMS.CANVAS_WIDTH / 2 - 390, 505);
