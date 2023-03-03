@@ -27,12 +27,12 @@ ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Houses/shop.png");
 //music
 ASSET_MANAGER.queueDownload("./assets/Music/pirates8bit.mp3");
 //Sound effect
-//ASSET_MANAGER.queueDownload("./assets/Music/Shoot1.mp3")
+ASSET_MANAGER.queueDownload("./assets/Music/Shoot1.mp3")
 
 
 ASSET_MANAGER.downloadAll(() => {
 
-    //ASSET_MANAGER.autoRepeat("./assets/Music/pirates8bit.mp3");
+    ASSET_MANAGER.autoRepeat("./assets/Music/pirates8bit.mp3");
 
     const canvas = document.getElementById("gameWorld");
     const ctx = canvas.getContext("2d");

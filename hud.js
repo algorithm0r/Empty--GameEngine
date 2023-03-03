@@ -20,7 +20,7 @@ class Hud {
 
     draw(ctx) {
         ctx.lineWidth = 2;
-        ctx.font = '50px ""';
+        ctx.font = '50px Pirate';
         ctx.fillStyle = "White";
         ctx.fillText("Gold: " + this.game.camera.gold, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 6);
         ctx.fillText("Time: " + this.game.camera.time, PARAMS.TILEWIDTH * 105, PARAMS.TILEHEIGHT * 3)
@@ -61,6 +61,8 @@ class Hud {
         ctx.globalAlpha = 1;
         ctx.fillStyle = "white";
 
+        ctx.font = "20px '";
+        ctx.fillText("∞", PARAMS.CANVAS_WIDTH - 185, 1070)
         this.cannonart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH - 220, 1020, PARAMS.SCALE);
 
 
@@ -83,7 +85,7 @@ class Hud {
         ctx.globalAlpha = 1;
         ctx.fillStyle = "white";
 
-        ctx.font = "20px '";
+        ctx.font = "20px Pirate";
         ctx.fillText(this.game.player.fireballs, PARAMS.CANVAS_WIDTH - 105, 1070);
 
         this.fireballart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH - 140, 1020, PARAMS.SCALE);
@@ -108,7 +110,7 @@ class Hud {
         ctx.globalAlpha = 1;
         ctx.fillStyle = "white";
 
-        ctx.font = "20px '";
+        ctx.font = "20px Pirate";
         ctx.fillText(this.game.player.harpoons, PARAMS.CANVAS_WIDTH - 25, 1070);
 
         this.harpoonart.drawFrame(this.game.clockTick, ctx, PARAMS.CANVAS_WIDTH - 80, 1000, PARAMS.SCALE);
