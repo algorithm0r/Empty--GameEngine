@@ -612,7 +612,7 @@ class EnemyShip {
             }
             //if(this.game.player.burntime > 0) {
             if(this.resettime >= 1) {
-                this.health -= 2;
+                this.health -= 5;
                 this.resettime = undefined;
                 this.cntr++;
             }

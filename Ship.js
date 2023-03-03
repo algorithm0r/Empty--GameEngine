@@ -104,7 +104,7 @@ class Ship {
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
         }
-        if(this.elapsedtime > this.firerate) { 
+        if(this.elapsedtime > this.firerate && !this.game.shopOpen) { 
         this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle, this.damage)); //+40 +50 to center into ship
         this.elapsedtime = 0;
         }
