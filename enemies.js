@@ -566,6 +566,8 @@ class EnemyShip {
 
         this.isburning = false;
         this.cntr = 0;
+        this.firerate = 2;
+        this.elapsedtime = 0;
 
         this.makesmall = true;
 
@@ -599,6 +601,8 @@ class EnemyShip {
 
     update() {
         const TICK = this.game.clockTick;
+        this.elapsedtime += this.game.clockTick;
+        console.log(this.elapsedtime)
 
         if (this.isburning) {
             if (this.resettime === undefined) {
@@ -630,12 +634,30 @@ class EnemyShip {
 
         let distance = Math.sqrt(dx * dx + dy * dy);
 
-        if(distance != 0) {
+        if(distance > 300) {
             dx /= distance;
             dy /= distance;
 
             this.x -= dx * this.speed * TICK;
             this.y -= dy * this.speed * TICK;
+        }
+        if(distance < 600) {
+            if(this.elapsedtime > this.firerate) { 
+                if(this.facing == 0 || this.facing == 3) {
+                    this.game.addEntity(new enemyCannonBall(this.game, this.x + this.height, this.y + this.width, this.game.player)); 
+                    this.game.addEntity(new enemyCannonBall(this.game, this.x + this.height, this.y + this.width*2, this.game.player)); 
+                }
+                else if(this.facing == 1) {
+                    this.game.addEntity(new enemyCannonBall(this.game, this.x + 186, this.y + this.width*2, this.game.player)); 
+                    this.game.addEntity(new enemyCannonBall(this.game, this.x + 124, this.y + this.width*2, this.game.player));  
+                }
+                else if(this.facing == 2) {
+                    this.game.addEntity(new enemyCannonBall(this.game, this.x + 62, this.y + this.width*2, this.game.player)); 
+                    this.game.addEntity(new enemyCannonBall(this.game, this.x + 124, this.y + this.width*2, this.game.player));  
+                }
+                this.elapsedtime = 0;
+                
+            }
         }
 
         this.updateBB();
@@ -695,9 +717,6 @@ class EnemyShip {
         if(this.greatY && this.lessX && this.diffX > this.diffY) {
             this.facing = 2;
         }
-
-       
-        
 
         //enemy collision
         var that = this;
