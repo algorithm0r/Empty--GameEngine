@@ -76,7 +76,7 @@ class Ship {
 
     updateBB() {
         this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x + 20, this.y + 20,  PARAMS.TILEWIDTH * 3, PARAMS.TILEHEIGHT * 4);
+        this.BB = new BoundingBox(this.x, this.y,  PARAMS.TILEWIDTH * 6, PARAMS.TILEHEIGHT * 7);
     };
 
     fire() {
@@ -269,7 +269,7 @@ class Ship {
         this.game.playerLocation.x = this.x;
         this.game.playerLocation.y = this.y;
 
-        if(this.game.camera.gold >= 20) {
+        if(this.game.camera.gold >= 10000) {
             this.game.camera.loadVictory();
         }
     };
