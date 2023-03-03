@@ -37,7 +37,7 @@ class SpawnMobs {
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 } 
-                if(this.game.camera.spawnchance >= 98) {
+                if(this.game.camera.spawnchance >= 95) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
@@ -52,7 +52,7 @@ class SpawnMobs {
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 } 
-                if(this.game.camera.spawnchance >= 93) {
+                if(this.game.camera.spawnchance >= 90) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
@@ -67,7 +67,7 @@ class SpawnMobs {
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 } 
-                if(this.game.camera.spawnchance >= 90) {
+                if(this.game.camera.spawnchance >= 85) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));
@@ -83,7 +83,7 @@ class SpawnMobs {
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                     this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
                 } 
-                if(this.game.camera.spawnchance >= 85) {
+                if(this.game.camera.spawnchance >= 75) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new EnemyShip(this.game, this.spawnx, this.spawny, this.game.player));

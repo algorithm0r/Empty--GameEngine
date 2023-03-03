@@ -21,14 +21,16 @@ class Shop {
         if(this.shopArea.collide(ship.BB)) {
             if(this.game.keys['e'] && !this.shopOpen) {
                 this.shopOpen = true;
+                this.game.shopOpen = true;
                 ship.fireattack = false;
-                ship.cannonattack = false;
+                //ship.cannonattack = false;
                 ship.harpoonattack = false;
                 this.game.addEntity(new ShopUI(this.game, this));
             } 
             
         } else {
             this.shopOpen = false;
+            this.game.shopOpen = false;
             
         }
 
