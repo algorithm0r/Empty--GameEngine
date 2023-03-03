@@ -44,7 +44,6 @@ class SceneManager {
     loadTitle() {
         this.game.stage = "title";
         this.clearEntities();
-        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new Title(this.game));
 
         this.gold = 0;
@@ -107,6 +106,7 @@ class SceneManager {
         this.game.stage = "victory";
         this.gameOver = true;
         this.clearEntities();
+        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new Victory(this.game));
     };
 

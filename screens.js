@@ -49,7 +49,7 @@ class Victory {
 
     update() {
         if(this.game.mouse != null) {
-            if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
+            if(this.game.mouse && (this.game.mouse.x >= 1200 && this.game.mouse.x <= 1500) && (this.game.mouse.y >= 350 && this.game.mouse.y <= 400) && this.game.click) {
                 this.game.camera.loadTitle();
             }
         }
@@ -59,16 +59,16 @@ class Victory {
 
         ctx.fillStyle = "WHITE";
         ctx.font = '60px Pirate';
-        ctx.fillText("You win", 200, 200);
+        ctx.fillText("You escape with the gold", 1100, 200);
 
-        if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
+        if(this.game.mouse && (this.game.mouse.x >= 1200 && this.game.mouse.x <= 1500) && (this.game.mouse.y >= 350 && this.game.mouse.y <= 400)) {
             ctx.fillStyle = "GRAY";
             ctx.font = '60px Pirate';
-            ctx.fillText("Play Again?", 200, 400);
+            ctx.fillText("Play Again?", 1200, 400);
         } else {
             ctx.fillStyle = "WHITE";
             ctx.font = '60px Pirate';
-            ctx.fillText("Play Again?", 200, 400);
+            ctx.fillText("Play Again?", 1200, 400);
         }
     }
 
