@@ -160,7 +160,7 @@ class Helper {
         ctx.fillText("- W, A, S, D to move", 150, 200);
         ctx.fillText("- Press 1-3 for Cannonball, Fireball, Harpoon", 150, 300);
         ctx.fillText("- Press E next to Kames House to open the shop", 150, 400);
-        ctx.fillText("- Fireballs pierce Slimes and Monsters, burns Enemy Ships", 150, 500);
+        ctx.fillText("- Fireballs pierce Slimes and Monsters but are ineffective, burns Enemy Ships", 150, 500);
         ctx.fillText("- Harpoons do heavy damage and pierce Slimes and Monster, break against Enemy Ships", 150, 700);
         ctx.fillText("- Collect 10,000 dubloons to win", 150, 600);
 
