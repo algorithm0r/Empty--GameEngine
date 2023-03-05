@@ -174,7 +174,7 @@ class Monster1 {
 
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
+            this.game.addEntity(new Coin(this.game, this.x + this.width/2, this.y + this.height/2, this.player, this.goldVal));
         }
 
         if(PARAMS.DEBUG) {
@@ -530,7 +530,7 @@ class Slime {
         this.animations[this.facing].drawSmallFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, PARAMS.SCALE);
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
+            this.game.addEntity(new Coin(this.game, this.x + this.width/2, this.y + this.height/2, this.player, this.goldVal));
         }
 
         if(PARAMS.DEBUG) {
@@ -599,12 +599,28 @@ class EnemyShip {
         }
     };
 
+    fireeffect() {
+        if(this.facing == 0 || this.facing == 3) {
+            this.game.addEntity(new Fires(this.game, this.x + this.height, this.y + this.width)); 
+            this.game.addEntity(new Fires(this.game, this.x + this.height, this.y + this.width*2)); 
+        }
+        else if(this.facing == 1) {
+            this.game.addEntity(new Fires(this.game, this.x + 186, this.y + this.width*2)); 
+            this.game.addEntity(new Fires(this.game, this.x + 124, this.y + this.width*2));  
+        }
+        else if(this.facing == 2) {
+            this.game.addEntity(new Fires(this.game, this.x + 62, this.y + this.width*2)); 
+            this.game.addEntity(new Fires(this.game, this.x + 124, this.y + this.width*2));  
+        }
+    }
+
     update() {
         const TICK = this.game.clockTick;
         this.elapsedtime += this.game.clockTick;
-        console.log(this.elapsedtime)
+        //console.log(this.elapsedtime)
 
         if (this.isburning) {
+            //this.fireeffect();
             if (this.resettime === undefined) {
                 this.resettime = 0;
             } else {
@@ -612,6 +628,7 @@ class EnemyShip {
             }
             //if(this.game.player.burntime > 0) {
             if(this.resettime >= 1) {
+                this.fireeffect();
                 this.health -= 5;
                 this.resettime = undefined;
                 this.cntr++;

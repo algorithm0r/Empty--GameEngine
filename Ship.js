@@ -122,7 +122,7 @@ class Ship {
             this.angle = Math.atan((this.destination.y - this.source.y) / (this.destination.x - this.source.x))
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
         }
-        if(this.fireballs > 0) {
+        if(this.fireballs > 0 && !this.game.shopOpen) {
             this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
             this.fireballs--;
             console.log("number of fireballs remaining = " + this.fireballs);
@@ -148,7 +148,7 @@ class Ship {
             this.angle = this.game.mouse.x >= this.source.x ? this.angle : this.angle + Math.PI;
         }
 
-        if(this.harpoons > 0) {
+        if(this.harpoons > 0 && !this.game.shopOpen) {
             this.game.addEntity(new Harpoon(this.game, this.x + 40, this.y + 50, this.angle));
             this.harpoons--;
             console.log("number of harpoons remaining = " + this.harpoons);

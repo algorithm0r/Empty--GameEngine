@@ -87,7 +87,7 @@ class CannonBall {
 class enemyCannonBall {
     constructor(game, x, y, player) {
         Object.assign(this, { game, x, y, player});
-        this.spritesheet = ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png");
+        this.spritesheet = ASSET_MANAGER.getAsset("./assets/projectiles/skull.png");
 
         //var dist = distance(this, this.target);
         this.maxSpeed = 3;
@@ -101,8 +101,8 @@ class enemyCannonBall {
         this.imagescale = .5;
         this.scale = 2;
         this.RADIUS = 8.5 * this.scale;
-        this.frameWidth = 17;
-        this.frameHeight = 17;
+        this.frameWidth = 25;
+        this.frameHeight = 18;
 
         this.positionx = this.x - this.game.camera.x;
         this.positiony = this.y - this.game.camera.y;
@@ -112,13 +112,13 @@ class enemyCannonBall {
 
         const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
 
-        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/cannonball.png"), 0, 0, 17, 17, 1, 1, 0);
+        this.animation = new Animator(ASSET_MANAGER.getAsset("./assets/projectiles/skull.png"), 0, 0, 25, 18, 2, .5);
 
         this.updateBB();
     }
 
     updateBB() {
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT);
+        this.BB = new BoundingBox(this.x, this.y, PARAMS.TILEWIDTH*2, PARAMS.TILEHEIGHT*2);
     };
     
     update() {
@@ -154,7 +154,8 @@ class enemyCannonBall {
     };
 
     draw(ctx) {
-        ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
+        this.animation.drawFrame(this.game.clockTick, ctx, this.positionx, this.positiony);
+        //ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
 
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
