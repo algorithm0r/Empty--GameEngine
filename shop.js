@@ -22,9 +22,9 @@ class Shop {
             if(this.game.keys['e'] && !this.shopOpen) {
                 this.shopOpen = true;
                 this.game.shopOpen = true;
-                ship.fireattack = false;
+                //ship.fireattack = false;
                 //ship.cannonattack = false;
-                ship.harpoonattack = false;
+                //ship.harpoonattack = false;
                 this.game.addEntity(new ShopUI(this.game, this));
             } 
             
