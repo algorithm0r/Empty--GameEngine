@@ -37,7 +37,16 @@ class Ship {
         this.firerate = 2;
 
         this.damage = 10; //used to upgrade in shop
-        this.moneyupgrade = 200; //used to upgrade base weapon damage in shop
+
+        //used in screens for difficulty
+        this.easymode = true;
+        this.mediummode = false;
+        this.hardmode = false;
+        this.unlimitedmode = false;
+        this.winmoney;
+        this.weaponupgrade;
+        this.healthupgrade;
+        this.moneyupgrade; //used to upgrade base weapon damage in shop
 
         this.updateBB();
         this.update();
@@ -259,7 +268,7 @@ class Ship {
         this.game.playerLocation.x = this.x;
         this.game.playerLocation.y = this.y;
 
-        if(this.game.camera.gold >= 10000) {
+        if(this.game.camera.gold >= this.winmoney) {
             this.game.camera.loadVictory();
         }
     };

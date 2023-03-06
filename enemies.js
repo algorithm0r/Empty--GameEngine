@@ -174,7 +174,7 @@ class Monster1 {
 
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + this.width/2, this.y + this.height/2, this.player, this.goldVal));
+            this.game.addEntity(new Bag(this.game, this.x + this.width/2, this.y + this.height/2, this.player, this.goldVal));
         }
 
         if(PARAMS.DEBUG) {
@@ -361,7 +361,7 @@ class Monster2 {
 
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
+            this.game.addEntity(new Bag(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
         }
 
         if(PARAMS.DEBUG) {
@@ -782,7 +782,7 @@ class EnemyShip {
         this.animations[this.facing].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, PARAMS.SCALE);
         if(this.dead === true) {
             this.removeFromWorld = true;
-            this.game.addEntity(new Coin(this.game, this.x + 50, this.y + 10, this.player, this.goldVal));
+            this.game.addEntity(new Chest(this.game, this.x + 62, this.y + 124, this.player, this.goldVal));
         }
 
         if(this.health < this.maxHealth) {

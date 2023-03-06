@@ -25,31 +25,33 @@ class Hud {
         ctx.fillText("Gold: " + this.game.camera.gold, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 6);
         ctx.fillText("Time: " + this.game.camera.time, PARAMS.TILEWIDTH * 105, PARAMS.TILEHEIGHT * 3)
         ctx.fillText("HP: " + this.player.health, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 3);
-        ctx.fillText("Gold Hoarded: ", PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 67)
+        ctx.fillText("Gold Hoarded: " + this.game.player.winmoney, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 67)
         if(this.player.health > 0) {
             let ratio = this.player.health / this.player.maxHealth;
             ctx.strokeStyle = "Black";
             ctx.fillStyle = ratio < 0.3 ? "Red" : ratio < 0.6 ? "Yellow" : "Green";
-            ctx.fillRect((this.player.x - this.game.camera.x) / 5, (this.player.y - this.game.camera.y) / 20, this.player.width * ratio * 5, PARAMS.TILEHEIGHT);
-            ctx.strokeRect((this.player.x - this.game.camera.x) / 5, (this.player.y - this.game.camera.y) / 20, this.player.width * 5, PARAMS.TILEHEIGHT);
-            ctx.closePath()
+            ctx.fillRect((this.player.x - this.game.camera.x) / 5, (this.player.y - this.game.camera.y) / 20, this.player.width * ratio * 10, PARAMS.TILEHEIGHT);
+            ctx.strokeRect((this.player.x - this.game.camera.x) / 5, (this.player.y - this.game.camera.y) / 20, this.player.width * 10, PARAMS.TILEHEIGHT);
+            ctx.closePath();
         }
 
         if(this.game.camera.gold >= 0) {
-            let ratio = this.game.camera.gold / 10000;
+            let ratio = this.game.camera.gold / this.game.player.winmoney;
             ctx.strokeStyle = "Black";
-            ctx.fillStyle = "Green";
-            ctx.fillRect((this.player.x - this.game.camera.x) / 2.5, (this.player.y - this.game.camera.y) * 2.07, this.player.width * ratio * 10, PARAMS.TILEHEIGHT);
-            ctx.strokeRect((this.player.x - this.game.camera.x) / 2.5, (this.player.y - this.game.camera.y) * 2.07, this.player.width * 10, PARAMS.TILEHEIGHT);
+            ctx.fillStyle = "Gold";
+            ctx.fillRect((this.player.x - this.game.camera.x) / 2.5, (this.player.y - this.game.camera.y) * 2.07, this.player.width * ratio * 25, PARAMS.TILEHEIGHT);
+            ctx.strokeRect((this.player.x - this.game.camera.x) / 2.5, (this.player.y - this.game.camera.y) * 2.07, this.player.width * 25, PARAMS.TILEHEIGHT);
+            ctx.closePath();
         }
 
         //box 1
-        if(this.game.keys['1']) {
+        if(this.game.player.cannonattack) {
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.strokeStyle = "yellow";
             ctx.strokeRect(PARAMS.CANVAS_WIDTH - 240, 1000, 75, 75);
             ctx.closePath();
+            ctx.lineWidth = 2;
         } else {
             ctx.strokeStyle = "white";
             ctx.strokeRect(PARAMS.CANVAS_WIDTH - 240, 1000, 75, 75);
@@ -68,12 +70,13 @@ class Hud {
 
 
         //box 2
-        if(this.game.keys['2']) {
+        if(this.game.player.fireattack) {
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.strokeStyle = "yellow";
-            ctx.strokeRect(PARAMS.CANVASWIDTH - 160, 1000, 75, 75);
+            ctx.strokeRect(PARAMS.CANVAS_WIDTH - 160, 1000, 75, 75);
             ctx.closePath();
+            ctx.lineWidth = 2;
         } else {
             ctx.strokeStyle = "white";
             ctx.strokeRect(PARAMS.CANVAS_WIDTH - 160, 1000, 75, 75);
@@ -92,7 +95,7 @@ class Hud {
 
 
         //box 3
-        if(this.game.keys['3']) {
+        if(this.game.player.harpoonattack) {
             ctx.beginPath();
             ctx.lineWidth = 5;
             ctx.strokeStyle = "yellow";
