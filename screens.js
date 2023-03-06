@@ -93,6 +93,47 @@ class Title {
             if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 320) && (this.game.mouse.y >= 850 && this.game.mouse.y <= 900) && this.game.click) {
                 this.game.camera.loadHelper();
             }
+
+            if(this.game.player.easymode || this.game.mouse && (this.game.mouse.x >= 900 && this.game.mouse.x <= 1030) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800) && this.game.click) {
+                this.game.player.winmoney = 10000;
+                this.game.player.weaponupgrade = 10;
+                this.game.player.healthupgrade = 100;
+                this.game.player.moneyupgrade = 150;
+                this.game.player.easymode = true;
+                this.game.player.mediummode = false;
+                this.game.player.hardmode = false;
+                this.game.player.unlimitedmode = false;
+            }
+            if(this.game.mouse && (this.game.mouse.x >= 1050 && this.game.mouse.x <= 1240) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800) && this.game.click) {
+                this.game.player.winmoney = 15000;
+                this.game.player.weaponupgrade = 15;
+                this.game.player.healthupgrade = 125;
+                this.game.player.moneyupgrade = 175;
+                this.game.player.easymode = false;
+                this.game.player.mediummode = true;
+                this.game.player.hardmode = false;
+                this.game.player.unlimitedmode = false;
+            }
+            if(this.game.mouse && (this.game.mouse.x >= 1260 && this.game.mouse.x <= 1390) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800) && this.game.click) {
+                this.game.player.winmoney = 20000;
+                this.game.player.weaponupgrade = 20;
+                this.game.player.healthupgrade = 150;
+                this.game.player.moneyupgrade = 200;
+                this.game.player.easymode = false;
+                this.game.player.mediummode = false;
+                this.game.player.hardmode = true;
+                this.game.player.unlimitedmode = false;
+            }
+            if(this.game.mouse && (this.game.mouse.x >= 1410 && this.game.mouse.x <= 1670) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800) && this.game.click) {
+                this.game.player.winmoney = undefined;
+                this.game.player.weaponupgrade = 10;
+                this.game.player.healthupgrade = 100;
+                this.game.player.moneyupgrade = 150;
+                this.game.player.easymode = false;
+                this.game.player.mediummode = false;
+                this.game.player.hardmode = false;
+                this.game.player.unlimitedmode = true;
+            }
         }
     };
 
@@ -117,6 +158,81 @@ class Title {
             ctx.fillText("Start", 200, 800);
         }
 
+        ctx.fillStyle = "WHITE";
+        ctx.font = '60px Pirate';
+        ctx.fillText("Choose Difficulty: ", 400, 800);
+        ctx.closePath();
+
+        //difficulty stuff
+        //easy
+        if(this.game.mouse && (this.game.mouse.x >= 900 && this.game.mouse.x <= 1030) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Easy", 900, 800);
+        } 
+        else if (this.game.player.easymode) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Easy", 900, 800);
+        }
+        else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Easy", 900, 800);
+        }
+        
+        //medium
+        if(this.game.mouse && (this.game.mouse.x >= 1050 && this.game.mouse.x <= 1240) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Medium", 1050, 800);
+        } 
+        else if (this.game.player.mediummode) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Medium", 1050, 800);
+        }
+        else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Medium", 1050, 800);
+        }
+
+        //hard
+        if(this.game.mouse && (this.game.mouse.x >= 1260 && this.game.mouse.x <= 1390) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Hard", 1260, 800);
+        } 
+        else if (this.game.player.hardmode) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Hard", 1260, 800);
+        }
+        else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Hard", 1260, 800);
+        }
+
+        //unlimited
+        if(this.game.mouse && (this.game.mouse.x >= 1410 && this.game.mouse.x <= 1670) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800)) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Unlimited", 1410, 800);
+        } 
+        else if (this.game.player.unlimitedmode) {
+            ctx.fillStyle = "GRAY";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Unlimited", 1410, 800);
+        }
+        else {
+            ctx.fillStyle = "WHITE";
+            ctx.font = '60px Pirate';
+            ctx.fillText("Unlimited", 1410, 800);
+        } 
+
+        //help page for instructions
         if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 320) && (this.game.mouse.y >= 850 && this.game.mouse.y <= 900)) {
             ctx.fillStyle = "GRAY";
             ctx.font = '60px Pirate';
@@ -126,6 +242,7 @@ class Title {
             ctx.font = '60px Pirate';
             ctx.fillText("Help", 200, 900);
         }
+        ctx.closePath();
     };
 };
 
@@ -159,11 +276,12 @@ class Helper {
         ctx.fillStyle = "BISQUE";
         ctx.font = '45px Pirate';
         ctx.fillText("- W, A, S, D to move", 150, 200);
-        ctx.fillText("- Press 1-3 for Cannonball, Fireball, Harpoon", 150, 300);
-        ctx.fillText("- Press E next to Kames House to open the shop", 150, 400);
-        ctx.fillText("- Fireballs pierce Slimes and Monsters, burns Enemy Ships", 150, 500);
+        ctx.fillText("- Press 1: Cannonball, 2: Fireball, 3: Harpoon", 150, 300);
+        ctx.fillText("- Click to shoot Fireball and Harpoons", 150, 400);
+        ctx.fillText("- Press E next to Kames House to open the shop", 150, 500);
+        ctx.fillText("- Fireballs pierce Slimes and Monsters, burns Enemy Ships", 150, 600);
         ctx.fillText("- Harpoons do heavy damage and pierce Slimes and Monster, break against Enemy Ships", 150, 700);
-        ctx.fillText("- Collect 10,000 dubloons to win", 150, 600);
+        ctx.fillText("- Collect dubloons to win", 150, 900);
 
         ctx.closePath();
 

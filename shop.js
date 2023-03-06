@@ -94,23 +94,23 @@ class ShopUI {
     };
 
     buyfireball() {
-        if(this.game.player.fireballs < 20 && this.game.camera.gold >= 20) {
+        if(this.game.player.fireballs < 20 && this.game.camera.gold >= this.game.player.weaponupgrade) {
             this.game.player.fireballs++;
-            this.game.camera.gold -= 20;
+            this.game.camera.gold -= this.game.player.weaponupgrade;
         }
     }
 
     buyharpoon() {
-        if(this.game.player.harpoons < 20 && this.game.camera.gold >= 20) {
+        if(this.game.player.harpoons < 20 && this.game.camera.gold >= this.game.player.weaponupgrade) {
             this.game.player.harpoons++;
-            this.game.camera.gold -= 20;
+            this.game.camera.gold -= this.game.player.weaponupgrade;
         }
     }
 
     buyhealth() {
-        if(this.game.player.health < this.game.player.maxHealth && this.game.camera.gold >= 250) {
+        if(this.game.player.health < this.game.player.maxHealth && this.game.camera.gold >= this.game.player.healthupgrade) {
             this.game.player.health += 10;
-            this.game.camera.gold -= 150;
+            this.game.camera.gold -= this.game.player.healthupgrade;
         }
     }
 
@@ -120,7 +120,7 @@ class ShopUI {
             this.game.player.damage += 3;
             this.game.player.number += .02;
             this.game.camera.gold -= this.game.player.moneyupgrade;
-            this.game.player.moneyupgrade *= 2;
+            this.game.player.moneyupgrade *= 1.5;
             //this.cntr++;
         }
     }
@@ -156,7 +156,7 @@ class ShopUI {
                     ctx.fillStyle = "white"
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
+                    ctx.fillText(this.game.player.weaponupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 245, 75, 35);
                     ctx.fillStyle = "gray";
@@ -165,7 +165,7 @@ class ShopUI {
                     ctx.fillStyle = "white"
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
+                    ctx.fillText(this.game.player.weaponupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
                 }
             }
 
@@ -197,7 +197,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
+                    ctx.fillText(this.game.player.weaponupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 355, 75, 35);
                     ctx.fillStyle = "gray";
@@ -207,7 +207,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
+                    ctx.fillText(this.game.player.weaponupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
                 }
             }
 
@@ -240,7 +240,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("150G" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
+                    ctx.fillText(this.game.player.healthupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 465, 75, 35);
                     ctx.fillStyle = "gray";
@@ -250,7 +250,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("150G" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
+                    ctx.fillText(this.game.player.healthupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
                 }
             }
 

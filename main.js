@@ -10,6 +10,8 @@ ASSET_MANAGER.queueDownload("./assets/background/1 Tiles/Map_tile_22.png");
 ASSET_MANAGER.queueDownload("./assets/player/mobshipw.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/slime.png");
 ASSET_MANAGER.queueDownload("./assets/items/coin.png");
+ASSET_MANAGER.queueDownload("./assets/items/chest.png");
+ASSET_MANAGER.queueDownload("./assets/items/goldbag.png");
 ASSET_MANAGER.queueDownload("./assets/items/cannonicon.png");
 ASSET_MANAGER.queueDownload("./assets/items/healthboosticon.png");
 ASSET_MANAGER.queueDownload("./assets/background/2 Objects/Rocks/rocksprite.png");
