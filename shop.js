@@ -8,7 +8,6 @@ class Shop {
         this.shop = new Animator(this.spritesheet, 1, 1, this.width, this.height, 1, 1);
         this.shopOpen = false;
         this.upgradeLevels = 4;
-        
 
 
         this.shopArea = new BoundingBox(this.x + 150, this.y + 200, this.width / 2, this.height / 2);
@@ -61,7 +60,7 @@ class ShopUI {
         this.healthart = new Animator(this.healthsprite, 0, 0, 600, 350, 1, 1);
         this.fireballart = new Animator(this.fireballsprite, 0, 0, 17, 17, 1, 1);
         this.harpoonart = new Animator(this.harpoonsprite, 0, 0, 40, 34, 1, 1);
-
+        
     }
     
 
@@ -89,6 +88,7 @@ class ShopUI {
             if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 575 && this.game.mouse.y <= 615) && this.game.click) {
                
                 this.basedamageincrease();
+                this.game.player.damageLevel++;
             }
         }
     };
@@ -115,13 +115,13 @@ class ShopUI {
     }
 
     basedamageincrease() {
-        this.cntr = 1;
-        if(this.game.camera.gold >= this.game.player.moneyupgrade) {
+        //this.cntr = 0;
+        if(this.game.camera.gold >= this.game.player.moneyupgrade && this.game.player.damageLevel <= 5) {
             this.game.player.damage += 3;
             this.game.player.number += .02;
             this.game.camera.gold -= this.game.player.moneyupgrade;
             this.game.player.moneyupgrade *= 2;
-            this.cntr++;
+            //this.cntr++;
         }
     }
 
@@ -156,7 +156,7 @@ class ShopUI {
                     ctx.fillStyle = "white"
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
+                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 245, 75, 35);
                     ctx.fillStyle = "gray";
@@ -165,7 +165,7 @@ class ShopUI {
                     ctx.fillStyle = "white"
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
+                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 270);
                 }
             }
 
@@ -197,7 +197,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
+                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 355, 75, 35);
                     ctx.fillStyle = "gray";
@@ -207,7 +207,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("Cost: 20" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
+                    ctx.fillText("20G" , PARAMS.CANVAS_WIDTH / 2 - 175, 380);
                 }
             }
 
@@ -240,7 +240,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("Cost: 150" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
+                    ctx.fillText("150G" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 465, 75, 35);
                     ctx.fillStyle = "gray";
@@ -250,7 +250,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("Cost: 150" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
+                    ctx.fillText("150G" , PARAMS.CANVAS_WIDTH / 2 - 175, 490);
                 }
             }
 
@@ -283,7 +283,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "red";
-                    ctx.fillText("Cost: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
+                    ctx.fillText(this.game.player.moneyupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
                 } else {
                     ctx.strokeRect(PARAMS.CANVAS_WIDTH / 2 - 180, 575, 75, 35);
                     ctx.fillStyle = "gray";
@@ -293,7 +293,7 @@ class ShopUI {
 
                     ctx.font = "18px'";
                     ctx.fillStyle = "white";
-                    ctx.fillText("Cost: " + this.game.player.moneyupgrade , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
+                    ctx.fillText(this.game.player.moneyupgrade + "G" , PARAMS.CANVAS_WIDTH / 2 - 175, 600);
                 }
             }
 

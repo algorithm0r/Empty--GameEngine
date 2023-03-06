@@ -5,7 +5,7 @@ class Monster1 {
         this.health = 50;
         this.maxHealth = 50;
         this.damage = 10;
-        this.goldVal = 200;
+        this.goldVal = 150;
 
         this.width = 106;
         this.height = 80;
