@@ -25,6 +25,9 @@ class SpawnMobs {
                 this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                 this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                 this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
+                if(this.game.camera.time > 120) {
+                    this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
+                }
                 this.game.camera.slimetimer = 0;
             }
         }
@@ -32,7 +35,7 @@ class SpawnMobs {
             if(this.game.camera.time > 30 && this.game.camera.time < 120) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
                 console.log("Monster1 spawn chance = " + this.game.camera.spawnchance);
-                if(this.game.camera.spawnchance >= 50) {
+                if(this.game.camera.spawnchance >= 25) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
@@ -47,7 +50,7 @@ class SpawnMobs {
             else if(this.game.camera.time > 120 && this.game.camera.time < 180) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
                 console.log("Monster1 spawn chance = " + this.game.camera.spawnchance);
-                if(this.game.camera.spawnchance >= 40) {
+                if(this.game.camera.spawnchance >= 20) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
@@ -62,9 +65,10 @@ class SpawnMobs {
             else if(this.game.camera.time > 180 && this.game.camera.time < 240) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
                 console.log("Monster1 spawn chance = " + this.spawnchance);
-                if(this.game.camera.spawnchance >= 30) {
+                if(this.game.camera.spawnchance >= 10) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
+                    this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
                 } 
                 if(this.game.camera.spawnchance >= 85) {
@@ -77,11 +81,12 @@ class SpawnMobs {
             else if(this.game.camera.time >= 240) {
                 this.game.camera.spawnchance = getRandomInt(0,100)
                 console.log("Monster1 spawn chance = " + this.spawnchance);
-                if(this.game.camera.spawnchance >= 20) {
+                if(this.game.camera.spawnchance >= 5) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
                     this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
                     this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
-                    this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
+                    this.game.addEntity(new Monster1(this.game, this.spawnx, this.spawny, this.game.player));
+                    //this.game.addEntity(new Slime(this.game, this.spawnx, this.spawny, this.game.player));
                 } 
                 if(this.game.camera.spawnchance >= 75) {
                     this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);

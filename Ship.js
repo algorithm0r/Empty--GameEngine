@@ -8,9 +8,7 @@ class Ship {
         this.damage = 15;
         this.invulnerabilityFrame = 0.8;
 
-        this.speedLevel = 0;
         this.damageLevel = 0;
-        this.healthLevel = 0;
 
         this.width = 47;
         this.height = 60;
@@ -32,10 +30,10 @@ class Ship {
         this.maxfireballs = 20;
         this.fireballs = 10;
         this.maxharpoons = 20;
-        this.harpoons = 5;
+        this.harpoons = 10;
 
         this.elapsedtime = 0; //adds this.number to itself to check when to shoot next
-        this.number = .05; //used to upgrade firerate in shop
+        this.number = 0.06; //used to upgrade firerate in shop is .05
         this.firerate = 2;
 
         this.damage = 10; //used to upgrade in shop

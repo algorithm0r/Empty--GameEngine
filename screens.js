@@ -2,6 +2,7 @@ class GameOver {
     constructor(game) {
         Object.assign(this, {game});
         this.game = game;
+        this.gold = this.game.camera.gold;
 
         this.spritesheet = ASSET_MANAGER.getAsset("./assets/background/piratedeathscreen.png");
         this.gameover = new Animator(this.spritesheet, 0, 0, 1920, 1080, 1, 1);
@@ -24,7 +25,7 @@ class GameOver {
 
         ctx.fillStyle = "WHITE";
         ctx.font = '60px Pirate';
-        ctx.fillText("Gameover", 200, 200);
+        ctx.fillText("Gameover: You collected " + this.gold + " gold", 200, 200);
 
         if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500)) {
             ctx.fillStyle = "GRAY";
