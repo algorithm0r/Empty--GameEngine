@@ -25,7 +25,7 @@ class Hud {
         ctx.fillText("Gold: " + this.game.camera.gold, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 6);
         ctx.fillText("Time: " + this.game.camera.time, PARAMS.TILEWIDTH * 105, PARAMS.TILEHEIGHT * 3)
         ctx.fillText("HP: " + this.player.health, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 3);
-        ctx.fillText("Gold Hoarded: " + this.game.player.winmoney, PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 67)
+        ctx.fillText("Gold Hoarded: ", PARAMS.TILEWIDTH, PARAMS.TILEHEIGHT * 67)
         if(this.player.health > 0) {
             let ratio = this.player.health / this.player.maxHealth;
             ctx.strokeStyle = "Black";
