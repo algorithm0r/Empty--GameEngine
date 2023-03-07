@@ -48,6 +48,10 @@ class Ship {
         this.healthupgrade;
         this.moneyupgrade; //used to upgrade base weapon damage in shop
 
+        //item drops 
+        this.hasmagnet = false;
+        this.hascannon = false;
+
         this.updateBB();
         this.update();
         
@@ -83,7 +87,7 @@ class Ship {
 
     updateBB() {
         this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x, this.y,  PARAMS.TILEWIDTH * 6, PARAMS.TILEHEIGHT * 7);
+        this.BB = new BoundingBox(this.x + 25, this.y + 20,  PARAMS.TILEWIDTH * 3, PARAMS.TILEHEIGHT * 4);
     };
 
     fire() {
@@ -174,6 +178,34 @@ class Ship {
 
         const TICK = this.game.clockTick;
         this.elapsedtime += this.number;
+
+        if(this.game.player.hasmagnet) {
+            if (this.magnettime === undefined) {
+                this.magnettime = 0;
+            } else {
+                this.magnettime += this.game.clockTick;
+            }
+            if(this.magnettime >= 20) {
+                this.game.player.hasmagnet = false;
+                this.magnettime = 0;
+            }
+        }
+        if(this.hascannon) {
+            if (this.cannontime === undefined) {
+                this.cannontime = 0;
+            } else {
+                this.cannontime += this.game.clockTick;
+            }
+            console.log(this.cannontime)
+            if(this.cannontime >= 20) {
+                this.hascannon = false;
+                this.cannontime = 0;
+                this.firerate = 2;
+            }
+            else {
+                this.firerate = .5;
+            }
+        }
 
         if(game.keys['1'] && !game.keys['2'] && !game.keys['3'])
         {

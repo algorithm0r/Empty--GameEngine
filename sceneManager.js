@@ -79,8 +79,9 @@ class SceneManager {
         this.game.stage = "map";
 
         this.world.drawMap();
-        this.game.addEntity(this.rock);
-        this.game.addEntity(this.rock2);
+        this.spawnmob.spawnRocks();
+        //this.game.addEntity(this.rock);
+        //this.game.addEntity(this.rock2);
         this.game.addEntity(this.shop);
 
         this.game.addEntity(this.ship);
@@ -129,7 +130,7 @@ class SceneManager {
         }
         if(this.gameOver === false) {
             this.spawnmob.spawnEnemies();
-            console.log(this.gameOver);
+            //console.log(this.gameOver);
         } else {
             this.time = 0;
             this.gold = 0;

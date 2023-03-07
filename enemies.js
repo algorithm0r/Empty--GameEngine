@@ -175,6 +175,15 @@ class Monster1 {
         if(this.dead === true) {
             this.removeFromWorld = true;
             this.game.addEntity(new Bag(this.game, this.x + this.width/2, this.y + this.height/2, this.player, this.goldVal));
+            this.spawncannon = getRandomInt(0,100);
+            if(this.spawncannon >= 97) {
+                this.game.addEntity(new Cannon(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
+            }
+            this.spawnmagnet = getRandomInt(0,100);
+            //console.log("magnet spawn chance: " + this.spawnmagnet)
+            if(this.spawnmagnet >= 95) {
+                this.game.addEntity(new Magnet(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
+            }
         }
 
         if(PARAMS.DEBUG) {
@@ -531,6 +540,14 @@ class Slime {
         if(this.dead === true) {
             this.removeFromWorld = true;
             this.game.addEntity(new Coin(this.game, this.x + this.width/2, this.y + this.height/2, this.player, this.goldVal));
+            this.spawncannon = getRandomInt(0,100);
+            if(this.spawncannon >= 99) {
+                this.game.addEntity(new Cannon(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
+            }
+            this.spawnmagnet = getRandomInt(0,100);
+            if(this.spawnmagnet >= 99) {
+                this.game.addEntity(new Magnet(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
+            }
         }
 
         if(PARAMS.DEBUG) {
@@ -783,6 +800,15 @@ class EnemyShip {
         if(this.dead === true) {
             this.removeFromWorld = true;
             this.game.addEntity(new Chest(this.game, this.x + 62, this.y + 124, this.player, this.goldVal));
+            this.spawncannon = getRandomInt(0,100);
+            if(this.spawncannon >= 50) {
+                this.game.addEntity(new Cannon(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
+            }
+            this.spawnmagnet = getRandomInt(0,100);
+            //console.log("magnet spawn chance: " + this.spawnmagnet)
+            if(this.spawnmagnet >= 98) {
+                this.game.addEntity(new Magnet(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
+            }
         }
 
         if(this.health < this.maxHealth) {
