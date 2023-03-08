@@ -98,7 +98,7 @@ class Title {
                 this.game.player.winmoney = 10000;
                 this.game.player.weaponupgrade = 10;
                 this.game.player.healthupgrade = 100;
-                this.game.player.moneyupgrade = 140;
+                this.game.player.moneyupgrade = 150;
                 this.game.player.easymode = true;
                 this.game.player.mediummode = false;
                 this.game.player.hardmode = false;
@@ -108,7 +108,7 @@ class Title {
                 this.game.player.winmoney = 12000;
                 this.game.player.weaponupgrade = 15;
                 this.game.player.healthupgrade = 125;
-                this.game.player.moneyupgrade = 160;
+                this.game.player.moneyupgrade = 175;
                 this.game.player.easymode = false;
                 this.game.player.mediummode = true;
                 this.game.player.hardmode = false;
