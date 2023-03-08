@@ -116,7 +116,7 @@ class SceneManager {
         }
         if(this.gameOver === false) {
             this.spawnmob.spawnEnemies();
-            console.log(this.gameOver);
+            //console.log(this.gameOver);
         } else {
             this.time = 0;
             this.gold = 0;

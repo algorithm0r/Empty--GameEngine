@@ -11,6 +11,18 @@ class SpawnMobs {
     update() {
 
     };
+    spawnRocks() {
+        this.xrandomMax = this.game.camera.ship.x + 3000;
+        this.xrandomMin = this.game.camera.ship.x - 1200;
+        this.yrandomMax = this.game.camera.ship.y + 3000;
+        this.yrandomMin = this.game.camera.ship.y - 1200;
+
+        for(var i = 0; i <= 50; i++) {
+            this.spawnx = getRandomInt(this.xrandomMax, this.xrandomMin);
+            this.spawny = getRandomInt(this.yrandomMax, this.yrandomMin);
+            this.game.addEntity(new Rock(this.game, this.spawnx, this.spawny))
+        }
+    } 
 
     spawnRocks() {
         this.xrandomMax = this.game.camera.ship.x + 3000;
