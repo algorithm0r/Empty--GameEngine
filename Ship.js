@@ -32,8 +32,8 @@ class Ship {
         this.maxharpoons = 20;
         this.harpoons = 10;
 
-        this.elapsedtime = 0; //adds this.number to itself to check when to shoot next
-        this.number = 0.06; //used to upgrade firerate in shop is .05
+        this.elapsedtime; //adds this.number to itself to check when to shoot next
+        this.number = 0; //used to upgrade firerate in shop is .05
         this.firerate = 2;
 
         this.damage = 10; //used to upgrade in shop
@@ -177,7 +177,12 @@ class Ship {
     update() {
 
         const TICK = this.game.clockTick;
-        this.elapsedtime += this.number;
+        if (this.elapsedtime === undefined) {
+            this.elapsedtime = 0;
+        } else {
+            this.elapsedtime += this.game.clockTick*3 + this.number;
+        }
+        //this.elapsedtime += this.number;
 
         if(this.game.player.hasmagnet) {
             if (this.magnettime === undefined) {

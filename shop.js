@@ -116,11 +116,11 @@ class ShopUI {
 
     basedamageincrease() {
         //this.cntr = 0;
-        if(this.game.camera.gold >= this.game.player.moneyupgrade && this.game.player.damageLevel <= 5) {
+        if(this.game.camera.gold >= this.game.player.moneyupgrade && this.game.player.damageLevel <= 10) {
             this.game.player.damage += 3;
             this.game.player.number += .02;
             this.game.camera.gold -= this.game.player.moneyupgrade;
-            this.game.player.moneyupgrade *= 1.5;
+            this.game.player.moneyupgrade *= 2;
             //this.cntr++;
         }
     }
