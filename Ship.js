@@ -202,7 +202,7 @@ class Ship {
                 this.cannontime += this.game.clockTick;
             }
             console.log(this.cannontime)
-            if(this.cannontime >= 20) {
+            if(this.cannontime >= 15) {
                 this.hascannon = false;
                 this.cannontime = 0;
                 this.firerate = 2;
