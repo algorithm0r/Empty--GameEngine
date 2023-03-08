@@ -34,6 +34,8 @@ class SceneManager {
 
     loadTitle() {
         this.game.stage = "title";
+        //ASSET_MANAGER.pauseBackgroundMusic();
+        //this.updateAudio();
         this.clearEntities();
         this.game.addEntity(new Title(this.game));
 
@@ -45,6 +47,7 @@ class SceneManager {
         this.ship = new Ship(this.game, 0, 0);        
         this.hud = new Hud(this.game, this.ship, 0, 0);
         this.shop = new Shop(this.game, -400, -100);
+        ASSET_MANAGER.playAsset("./assets/Music/StartMenu.wav");
     };
 
     loadHelper() {
@@ -73,16 +76,20 @@ class SceneManager {
         this.game.addEntity(this.ship);
         this.game.addEntity(this.hud);
 
+        ASSET_MANAGER.pauseBackgroundMusic();
         ASSET_MANAGER.playAsset("./assets/Music/pirates8bit.mp3");
         this.update();
     };
 
     loadGameover() {
+        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.stage = "gameover";
         this.gameOver = true;
         this.clearEntities();
-        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new GameOver(this.game));
+        this.update();
+
+        ASSET_MANAGER.playAsset("./assets/Music/EndScreen.mp3");
     };
 
     loadVictory() {
@@ -91,6 +98,9 @@ class SceneManager {
         this.clearEntities();
         ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new Victory(this.game));
+        this.update();
+
+        ASSET_MANAGER.playAsset("./assets/Music/victory.mp3");
     };
 
     updateAudio() {

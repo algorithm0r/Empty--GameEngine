@@ -118,6 +118,7 @@ class Ship {
         if(this.elapsedtime > this.firerate && !this.game.shopOpen) { 
         this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle, this.damage)); //+40 +50 to center into ship
         this.elapsedtime = 0;
+        ASSET_MANAGER.playAsset("./assets/Music/Shoot2.mp3");
         }
     }
 
@@ -137,6 +138,8 @@ class Ship {
             this.game.addEntity(new Fireball(this.game, this.x + 40, this.y + 50, this.angle));
             this.fireballs--;
             console.log("number of fireballs remaining = " + this.fireballs);
+            ASSET_MANAGER.playAsset("./assets/Music/fire-woosh.wav");
+
         }
         else if(this.fireballs == 0) {
             this.fireattack = false;
@@ -163,6 +166,8 @@ class Ship {
             this.game.addEntity(new Harpoon(this.game, this.x + 40, this.y + 50, this.angle));
             this.harpoons--;
             console.log("number of harpoons remaining = " + this.harpoons);
+            ASSET_MANAGER.playAsset("./assets/Music/Shoot1.mp3");
+
         }
         else if(this.harpoons == 0) {
             this.harpoonattack = false;
