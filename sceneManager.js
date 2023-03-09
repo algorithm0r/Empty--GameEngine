@@ -23,7 +23,6 @@ class SceneManager {
         this.ship = new Ship(this.game, this.x, this.y);
         this.hud = new Hud(this.game, this.ship, this.x, this.y);
 
-
     };
 
     clearEntities() {
@@ -34,11 +33,8 @@ class SceneManager {
 
     loadTitle() {
         this.game.stage = "title";
-        //ASSET_MANAGER.pauseBackgroundMusic();
-        //this.updateAudio();
         this.clearEntities();
         this.game.addEntity(new Title(this.game));
-
         this.gold = 0;
         this.time = 0;
 
@@ -47,8 +43,9 @@ class SceneManager {
         this.ship = new Ship(this.game, 0, 0);        
         this.hud = new Hud(this.game, this.ship, 0, 0);
         this.shop = new Shop(this.game, -400, -100);
-        ASSET_MANAGER.playAsset("./assets/Music/StartMenu.wav");
     };
+
+
 
     loadHelper() {
         this.game.stage = "helper";
@@ -112,6 +109,10 @@ class SceneManager {
 
     };
 
+    playTitleMusic() {
+        ASSET_MANAGER.playAsset("./assets/Music/StartMenu.wav");
+    };
+
     update() {
 
         if (this.timer === undefined) {
@@ -126,7 +127,6 @@ class SceneManager {
         }
         if(this.gameOver === false) {
             this.spawnmob.spawnEnemies();
-            //console.log(this.gameOver);
         } else {
             this.time = 0;
             this.gold = 0;

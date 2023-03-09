@@ -13,7 +13,6 @@ class GameOver {
             if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 500) && (this.game.mouse.y >= 300 && this.game.mouse.y <= 500) && this.game.click) {
                 ASSET_MANAGER.pauseBackgroundMusic();
                 this.game.camera.loadTitle();
-               // ASSET_MANAGER.pauseBackgroundMusic();
 
             }
         }
@@ -91,6 +90,7 @@ class Title {
     };
 
     update() {
+        
         if(this.game.mouse != null) {
             if(this.game.mouse && (this.game.mouse.x >= 200 && this.game.mouse.x <= 340) && (this.game.mouse.y >= 750 && this.game.mouse.y <= 800) && this.game.click) {
                 this.game.camera.loadMap();

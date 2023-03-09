@@ -212,7 +212,7 @@ class Monster2 {
         this.animations = [];
         
 
-        this.speed = getRandomInt(10, 100);
+        this.speed = getRandomInt(50, 100);
         this.dead = false;
         //this.healthbar = new Healthbar(this);
 
@@ -399,7 +399,7 @@ class Slime {
         this.animations = [];
         
 
-        this.speed = getRandomInt(10, 100);
+        this.speed = getRandomInt(50, 100);
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
@@ -577,7 +577,7 @@ class EnemyShip {
         this.animations = [];
         
 
-        this.speed = getRandomInt(10, 100);
+        this.speed = getRandomInt(50, 100);
         this.dead = false;
         this.healthbar = new Healthbar(this);
 
