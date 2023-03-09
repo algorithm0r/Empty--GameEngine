@@ -16,19 +16,12 @@ class SceneManager {
 
         this.gameOver = true;
 
-        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
-        this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
-                
-        //Temp entities
-        this.rock = new Rock(this.game, 100, 100);
-
         this.spawnmob = new SpawnMobs(this.game, this.x, this.y);
         this.world = new WorldStuff(this.game,this.x,this.y);
         
         this.shop = new Shop(this.game, -400, -100);
         this.ship = new Ship(this.game, this.x, this.y);
         this.hud = new Hud(this.game, this.ship, this.x, this.y);
-
 
     };
 
@@ -42,15 +35,8 @@ class SceneManager {
         this.game.stage = "title";
         this.clearEntities();
         this.game.addEntity(new Title(this.game));
-
         this.gold = 0;
         this.time = 0;
-
-        //Temp entities
-        this.rock = new Rock(this.game, 100, 100);
-
-        let path ="./assets/background/2 Objects/Rocks/rocksprite.png";
-        this.rock2 = new WorldObject(this.game, path, -200, -200, true, 2);
 
         this.spawnmob = new SpawnMobs(this.game, this.x, this.y);
         this.shop = new Shop(this.game, -400, -100);
@@ -58,6 +44,8 @@ class SceneManager {
         this.hud = new Hud(this.game, this.ship, 0, 0);
         this.shop = new Shop(this.game, -400, -100);
     };
+
+
 
     loadHelper() {
         this.game.stage = "helper";
@@ -80,23 +68,25 @@ class SceneManager {
 
         this.world.drawMap();
         this.spawnmob.spawnRocks();
-        //this.game.addEntity(this.rock);
-        //this.game.addEntity(this.rock2);
         this.game.addEntity(this.shop);
 
         this.game.addEntity(this.ship);
         this.game.addEntity(this.hud);
 
+        ASSET_MANAGER.pauseBackgroundMusic();
         ASSET_MANAGER.playAsset("./assets/Music/pirates8bit.mp3");
         this.update();
     };
 
     loadGameover() {
+        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.stage = "gameover";
         this.gameOver = true;
         this.clearEntities();
-        ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new GameOver(this.game));
+        this.update();
+
+        ASSET_MANAGER.playAsset("./assets/Music/EndScreen.mp3");
     };
 
     loadVictory() {
@@ -105,6 +95,9 @@ class SceneManager {
         this.clearEntities();
         ASSET_MANAGER.pauseBackgroundMusic();
         this.game.addEntity(new Victory(this.game));
+        this.update();
+
+        ASSET_MANAGER.playAsset("./assets/Music/victory.mp3");
     };
 
     updateAudio() {
@@ -114,6 +107,10 @@ class SceneManager {
         ASSET_MANAGER.muteAudio(mute);
         ASSET_MANAGER.adjustVolume(volume);
 
+    };
+
+    playTitleMusic() {
+        ASSET_MANAGER.playAsset("./assets/Music/StartMenu.wav");
     };
 
     update() {
@@ -130,7 +127,6 @@ class SceneManager {
         }
         if(this.gameOver === false) {
             this.spawnmob.spawnEnemies();
-            //console.log(this.gameOver);
         } else {
             this.time = 0;
             this.gold = 0;
