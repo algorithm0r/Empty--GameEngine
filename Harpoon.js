@@ -26,8 +26,22 @@ class Harpoon {
         this.positiony = this.y - this.game.camera.y;
 
         const TICKSCALE = this.game.clockTick * PARAMS.TIMESCALE;
-
+        this.animation = [];
+        this.facing = 0;
+        this.loadanimations();
         this.updateBB();
+    }
+
+    loadanimations() {
+        this.animation[0] = ASSET_MANAGER.getAsset("./assets/projectiles/spear N.png");
+        this.animation[1] = ASSET_MANAGER.getAsset("./assets/projectiles/spear NE.png");
+        this.animation[2] = ASSET_MANAGER.getAsset("./assets/projectiles/spear E.png");
+        this.animation[3] = ASSET_MANAGER.getAsset("./assets/projectiles/spear SE.png");
+
+        this.animation[4] = ASSET_MANAGER.getAsset("./assets/projectiles/spear S.png");
+        this.animation[5] = ASSET_MANAGER.getAsset("./assets/projectiles/spear SW.png");
+        this.animation[6] = ASSET_MANAGER.getAsset("./assets/projectiles/spear W.png");
+        this.animation[7] = ASSET_MANAGER.getAsset("./assets/projectiles/spear NW.png");
     }
 
     updateBB() {
@@ -46,6 +60,31 @@ class Harpoon {
 
         this.positionx = this.x - this.game.camera.x;
         this.positiony = this.y - this.game.camera.y;
+
+        if (this.angle > 4.2875 && this.angle < -1.1625) {
+            this.facing = 0;
+        }
+        if (this.angle > -1.1625 && this.angle < -.3875) {
+            this.facing = 1;
+        }
+        if (this.angle > -.3875 && this.angle < .3875) {
+            this.facing = 2;
+        }
+        if (this.angle > .3875 && this.angle < 1.1625) {
+            this.facing = 3;
+        }
+        if (this.angle > 1.1625 && this.angle < 1.9375) {
+            this.facing = 4;
+        }
+        if (this.angle > 1.9375 && this.angle < 2.7125) {
+            this.facing = 5;
+        }
+        if (this.angle > 2.7125 && this.angle < 3.4875) {
+            this.facing = 6;
+        }
+        if (this.angle > 3.4875 && this.angle < 4.2875) {
+            this.facing = 7;
+        }
 
         this.updateBB();
 
@@ -78,7 +117,7 @@ class Harpoon {
     };
     draw(ctx) {
 
-        ctx.drawImage(this.spritesheet, 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
+        ctx.drawImage(this.animation[this.facing], 0, 0, this.RADIUS * 2, this.RADIUS * 2, this.positionx, this.positiony, this.RADIUS * 2, this.RADIUS * 2);
         //ctx.drawFrame(this.clockTick, ctx, this.positionx, this.positiony)
         if(PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';

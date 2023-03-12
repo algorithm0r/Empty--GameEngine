@@ -801,7 +801,7 @@ class EnemyShip {
             this.removeFromWorld = true;
             this.game.addEntity(new Chest(this.game, this.x + 62, this.y + 124, this.player, this.goldVal));
             this.spawncannon = getRandomInt(0,100);
-            if(this.spawncannon >= 80) {
+            if(this.spawncannon >= 90) {
                 this.game.addEntity(new Cannon(this.game, this.x + this.width/2, this.y + this.height/2, this.player));
             }
             this.spawnmagnet = getRandomInt(0,100);

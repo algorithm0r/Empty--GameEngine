@@ -30,7 +30,17 @@ ASSET_MANAGER.queueDownload("./assets/player/ship.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/cannonball.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/fireball.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/harpoon.png");
+
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear N.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear NE.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear NW.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear E.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear W.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear S.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear SE.png");
+ASSET_MANAGER.queueDownload("./assets/projectiles/spear SW.png");
 ASSET_MANAGER.queueDownload("./assets/projectiles/spear.png");
+
 ASSET_MANAGER.queueDownload("./assets/projectiles/skull.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster.png");
 ASSET_MANAGER.queueDownload("./assets/enemies/monster1.png");
@@ -43,6 +53,9 @@ ASSET_MANAGER.queueDownload("./assets/Music/pirates8bit.mp3");
 ASSET_MANAGER.queueDownload("./assets/Music/EndScreen.mp3");
 ASSET_MANAGER.queueDownload("./assets/Music/StartMenu.wav");
 ASSET_MANAGER.queueDownload("./assets/Music/victory.mp3");
+ASSET_MANAGER.queueDownload("./assets/Music/overtaken.mp3");
+ASSET_MANAGER.queueDownload("./assets/Music/we are.mp3");
+ASSET_MANAGER.queueDownload("./assets/Music/we go.mp3");
 
 //Sound effect
 ASSET_MANAGER.queueDownload("./assets/Music/Shoot1.mp3");

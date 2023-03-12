@@ -8,8 +8,6 @@ class Ship {
         this.damage = 15;
         this.invulnerabilityFrame = 0.8;
 
-        this.damageLevel = 0;
-
         this.width = 47;
         this.height = 60;
         this.game.player = this;
@@ -33,10 +31,13 @@ class Ship {
         this.harpoons = 10;
 
         this.elapsedtime; //adds this.number to itself to check when to shoot next
+        
+        //shop stuff
         this.number = 0; //used to upgrade firerate in shop is .05
         this.firerate = 2;
-
         this.damage = 10; //used to upgrade in shop
+        this.damageLevel = 0;
+        this.healthLevel = 10;
 
         //used in screens for difficulty
         this.easymode = true;
@@ -118,7 +119,7 @@ class Ship {
         if(this.elapsedtime > this.firerate && !this.game.shopOpen) { 
         this.game.addEntity(new CannonBall(this.game, this.x + 40, this.y + 50, this.angle, this.damage)); //+40 +50 to center into ship
         this.elapsedtime = 0;
-        ASSET_MANAGER.playAsset("./assets/Music/Shoot2.mp3");
+        //ASSET_MANAGER.playAsset("./assets/Music/Shoot2.mp3");
         }
     }
 

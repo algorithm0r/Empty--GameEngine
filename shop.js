@@ -81,6 +81,7 @@ class ShopUI {
         if(this.game.mouse != null) {
             if(this.game.mouse && (this.game.mouse.x >= 780 && this.game.mouse.x <= 856) && (this.game.mouse.y >= 465 && this.game.mouse.y <= 505) && this.game.click) {
                 this.buyhealth();
+                this.game.player.healthLevel--;
             }
         }
         //base damage increase
@@ -108,7 +109,8 @@ class ShopUI {
     }
 
     buyhealth() {
-        if(this.game.player.health < this.game.player.maxHealth && this.game.camera.gold >= this.game.player.healthupgrade) {
+        if(this.game.player.health < this.game.player.maxHealth && 
+            this.game.camera.gold >= this.game.player.healthupgrade && this.game.player.healthLevel != 0) {
             this.game.player.health += 10;
             this.game.camera.gold -= this.game.player.healthupgrade;
         }
@@ -224,8 +226,8 @@ class ShopUI {
 
 
             ctx.font ="20px Pirate"
-            ctx.fillText("Health Repair:", PARAMS.CANVAS_WIDTH / 2 - 425, 480);
-            ctx.fillText("Heal 10 HP", PARAMS.CANVAS_WIDTH / 2 - 390, 505);
+            ctx.fillText("Repair Health by 10 HP:", PARAMS.CANVAS_WIDTH / 2 - 425, 480);
+            ctx.fillText("Upgrade remaining: " + this.game.player.healthLevel, PARAMS.CANVAS_WIDTH / 2 - 390, 505);
             ctx.strokeStyle = "white";
             
 
