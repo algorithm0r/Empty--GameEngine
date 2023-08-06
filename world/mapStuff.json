@@ -1,0 +1,38 @@
+{ 
+        "tiles": {
+            "oceanTile":{"type": "ocean","value": 0,"collidable": false},
+            "oceanTile1":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_02.png","collidable": false},
+            "oceanTile2":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_03.png","collidable": false},
+            "oceanTile3":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_13.png","collidable": false},
+            "oceanTile4":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_14.png","collidable": false},
+            "oceanTile5":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_15.png","collidable": false},
+            "oceanTile6":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_25.png","collidable": false},
+            "oceanTile7":{"type": "ocean","value": 0,"path": "./assets/background/1 Tiles/Map_tile_37.png","collidable": false},
+
+            "grassTile":{"type": "grass","value": 0,"path": "./assets/background/1 Tiles/Map_tile_22.png","collidable": true},
+             "rockTile":{"type": "rock","value": 0,"path": "./assets/background/2 Objects/Rocks/3.png","collidable": true}
+        }
+        ,
+        "map_1": [ 
+            [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],
+            [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+        ]
+}

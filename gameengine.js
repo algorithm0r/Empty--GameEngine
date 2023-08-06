@@ -5,15 +5,31 @@ class GameEngine {
         // What you will use to draw
         // Documentation: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
         this.ctx = null;
-
         // Everything that will be updated and drawn each frame
         this.entities = [];
 
         // Information on the input
-        this.click = null;
+        this.click = false;
         this.mouse = null;
+        this.mousedown = null;
+        this.mouseup = null;
         this.wheel = null;
         this.keys = {};
+
+        this.W = false;
+        this.A = false;
+        this.S = false;
+        this.D = false;
+
+        this.E = false;
+        this.Digit1 = false;
+        this.Digit2 = false;
+
+        this.player = null;
+        this.projectile = null;
+        this.playerLocation = {x: PARAMS.CANVAS_WIDTH / 2, y: PARAMS.CANVAS_HEIGHT / 2};
+        this.stage;
+        this.shopOpen = false;
 
         // Options and the Details
         this.options = options || {
@@ -37,6 +53,7 @@ class GameEngine {
     };
 
     startInput() {
+        var that = this;
         const getXandY = e => ({
             x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
             y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
@@ -46,6 +63,7 @@ class GameEngine {
             if (this.options.debugging) {
                 console.log("MOUSE_MOVE", getXandY(e));
             }
+            //console.log(getXandY(e));
             this.mouse = getXandY(e);
         });
 
@@ -72,8 +90,38 @@ class GameEngine {
             this.rightclick = getXandY(e);
         });
 
+
+        this.ctx.canvas.addEventListener("mousedown", function (e) {
+            //Left mouse button
+            if (e.which == 1) {
+                this.click = true;
+                that.player.fire();
+                
+        //console.log(that.projectile.x + " " + that.projectile.y);
+    
+            }
+            else {
+                //that.interact = true;
+                this.click = true;
+            }
+        }, false);
+
+        this.ctx.canvas.addEventListener("mouseup", function (e) {
+            //Left mouse button
+            if (e.which == 1) {
+                this.click = false;
+            }
+        }, false);
+
+        this.ctx.canvas.addEventListener("keydown", event => this.keys['1'] = true);
+        this.ctx.canvas.addEventListener("keydown", event => this.keys['2'] = true);
+        this.ctx.canvas.addEventListener("keydown", event => this.keys['3'] = true);
+        //this.ctx.canvas.addEventListener("keyup", event => this.keys['1'] = true);
+        //this.ctx.canvas.addEventListener("keyup", event => this.keys['2'] = true);
+
         this.ctx.canvas.addEventListener("keydown", event => this.keys[event.key] = true);
         this.ctx.canvas.addEventListener("keyup", event => this.keys[event.key] = false);
+        
     };
 
     addEntity(entity) {
@@ -85,9 +133,10 @@ class GameEngine {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
         // Draw latest things first
-        for (let i = this.entities.length - 1; i >= 0; i--) {
+        for (let i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(this.ctx, this);
         }
+        this.camera.draw(this.ctx);
     };
 
     update() {
@@ -101,6 +150,8 @@ class GameEngine {
             }
         }
 
+        this.camera.update();
+
         for (let i = this.entities.length - 1; i >= 0; --i) {
             if (this.entities[i].removeFromWorld) {
                 this.entities.splice(i, 1);
@@ -112,6 +163,8 @@ class GameEngine {
         this.clockTick = this.timer.tick();
         this.update();
         this.draw();
+
+        this.click = null;
     };
 
 };

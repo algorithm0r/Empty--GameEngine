@@ -1,17 +1,54 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Game Project Title Goes Here</title>
-  
+    <title>Pirate Game</title>
+    <link rel="shortcut icon" href="#">
+ 
     <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./timer.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
     <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./Animator.js"></script>
+    <script type="text/javascript" src="./world/world.js"></script>
+    <script type="text/javascript" src="./world/worldObject.js"></script> 
+    <script type="text/javascript" src="./rock.js"></script>
+    <script type="text/javascript" src="./playerAttraction.js"></script>
+    <script type="text/javascript" src="./spawnEnemies.js"></script>
+    <script type="text/javascript" src="./enemies.js"></script>
+    <script type="text/javascript" src="./Ship.js"></script>
+    <script type="text/javascript" src="./screens.js"></script>
+    <script type="text/javascript" src="./Cannonball.js"></script>
+    <script type="text/javascript" src="./Fireball.js"></script>
+    <script type="text/javascript" src="./Harpoon.js"></script>
+    <script type="text/javascript" src="./Healthbar.js"></script>
+    <script type="text/javascript" src="./items.js"></script>
+    <script type="text/javascript" src="./hud.js"></script>
+    <script type="text/javascript" src="./shop.js"></script>
+    <script type="text/javascript" src="./sceneManager.js"></script>
+    <script type="text/javascript" src="./boundingbox.js"></script>
     <script type="text/javascript" src="./main.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Pirate';
+            src: url('./assets/fonts/BlackRose-2Onld.ttf');
+        }
+    </style>
 </head>
 <body>
-    <canvas id="gameWorld" width="1024" height="768" style="background: white; border: 1px solid black" tabindex="0" autofocus></canvas>
+    <canvas id="gameWorld" width="1920" height="1080" style="background: skyblue; border: 1px solid black" tabindex="0" autofocus></canvas>
+    <div>
+        <label>W, A, S, D to move</label>
+        <br />
+        <label>Press 1-3 for Cannonball, Fireball, Harpoon</label>
+        <br />
+        <label>Press E next to Kames House to open the shop</label>
+        <br />
+        <label>Collect dubloons to win</label>
+
+        <br />
+        <input type="checkbox" id="debug"> Debug <input type="checkbox" id="mute"> Mute <input type="range" id="volume" min="0" max="1" value="0.05" step="0.05"> Volume
+    </div>
 </body>
 </html>
