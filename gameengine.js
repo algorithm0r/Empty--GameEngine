@@ -19,12 +19,43 @@ class GameEngine {
         this.options = options || {
             debugging: false,
         };
+
+        this.width = 2000;
+        this.height = 1000;
+
+        this.camera = null;
     };
 
     init(ctx) {
         this.ctx = ctx;
         this.startInput();
         this.timer = new Timer();
+
+        const resize = () => {
+
+            const current_aspect_ratio = window.innerWidth / window.innerHeight;
+            const desired_aspect_ratio = this.width / this.height;
+            
+            ctx.resetTransform();
+            
+            if (desired_aspect_ratio > current_aspect_ratio) {
+                this.ctx.canvas.width = window.innerWidth;
+                this.ctx.canvas.height = window.innerWidth / desired_aspect_ratio;
+            } else {
+                this.ctx.canvas.height = window.innerHeight;
+                this.ctx.canvas.width = window.innerHeight * desired_aspect_ratio;
+            }
+            this.x_scale = this.ctx.canvas.width / this.width;
+            this.y_scale = this.ctx.canvas.height / this.height;
+            ctx.scale(this.x_scale, this.y_scale);
+            ctx.translate(this.width/2, this.height/2);
+
+            if (this.camera) {
+                ctx.translate(this.camera.x, this.camera.y);
+            }
+        }
+        window.addEventListener('resize', resize);
+        resize();
     };
 
     start() {
@@ -41,7 +72,7 @@ class GameEngine {
             x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
             y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
         });
-        
+
         this.ctx.canvas.addEventListener("mousemove", e => {
             if (this.options.debugging) {
                 console.log("MOUSE_MOVE", getXandY(e));
@@ -77,16 +108,38 @@ class GameEngine {
     };
 
     addEntity(entity) {
-        this.entities.push(entity);
+        //this.entities.push(entity);
+
+        let start = 0;
+        let end = this.entities.length - 1;
+        const entityOrder = entity.entity_order;
+
+        while (start <= end) {
+            const mid = Math.floor((start + end) / 2);
+
+            if (this.entities[mid].entity_order === entityOrder) {
+                // Found the exact position
+                start = mid;
+                break;
+            }
+
+            if (this.entities[mid].entity_order < entityOrder) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        // Insert the entity at the determined index
+        this.entities.splice(start, 0, entity);
     };
 
     draw() {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
-        // Draw latest things first
-        for (let i = this.entities.length - 1; i >= 0; i--) {
-            this.entities[i].draw(this.ctx, this);
+        for (let i = 0; i < this.entities.length; i++) {
+            this.entities[i].draw(this.ctx);
         }
     };
 
