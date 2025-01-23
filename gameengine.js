@@ -49,10 +49,6 @@ class GameEngine {
             this.y_scale = this.ctx.canvas.height / this.height;
             ctx.scale(this.x_scale, this.y_scale);
             ctx.translate(this.width/2, this.height/2);
-
-            if (this.camera) {
-                ctx.translate(this.camera.x, this.camera.y);
-            }
         }
         window.addEventListener('resize', resize);
         resize();
@@ -69,8 +65,8 @@ class GameEngine {
 
     startInput() {
         const getXandY = e => ({
-            x: e.clientX - this.ctx.canvas.getBoundingClientRect().left,
-            y: e.clientY - this.ctx.canvas.getBoundingClientRect().top
+            x: (e.clientX - this.ctx.canvas.getBoundingClientRect().left) / this.x_scale - this.width/2,
+            y: (e.clientY - this.ctx.canvas.getBoundingClientRect().top) / this.y_scale - this.height/2
         });
 
         this.ctx.canvas.addEventListener("mousemove", e => {
@@ -115,9 +111,9 @@ class GameEngine {
         const entityOrder = entity.entity_order;
 
         while (start <= end) {
-            const mid = Math.floor((start + end) / 2);
+            const mid = start + ((end - start) >>> 1);
 
-            if (this.entities[mid].entity_order === entityOrder) {
+            if (this.entities[mid].entity_order == entityOrder) {
                 // Found the exact position
                 start = mid;
                 break;
@@ -136,7 +132,7 @@ class GameEngine {
 
     draw() {
         // Clear the whole canvas with transparent color (rgba(0, 0, 0, 0))
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect(-this.width/2, -this.height/2, this.width, this.height);
 
         for (let i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(this.ctx);
